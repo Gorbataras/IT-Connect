@@ -1,0 +1,364 @@
+#register h1{
+    text-align: center;
+    padding: 50px;
+}
+
+#register .container{
+    padding-bottom: 200px;
+}
+
+#login h1{
+    text-align: center;
+    padding: 50px;
+}
+
+#login .container{
+    padding-bottom: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+!*Admin Login From*!
+
+!* large desktops and up ----------- *!
+@media screen and (min-width: 1200px) {
+
+
+    .wrapper {
+        margin-top: 150px;
+        margin-bottom: 255px;
+    }
+
+    .form-signin {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: white;
+
+    }
+
+    .row {
+        margin-left: 200px;
+    }
+
+    .form-signin h1{
+        font-size:50px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 20px;
+        color:white;
+        background-color:green;
+    }
+
+    .form-signin .form-control {
+        font-size: 20px;
+        height: auto;
+        padding-top: 20px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    #login-button{
+        font-size: 30px;
+    }
+
+    #login-button:hover{
+        color: green;
+        background-color:white;
+    }
+
+    #reset-password-link {
+        text-decoration: underline;
+    }
+
+    #reset-password-link:hover {
+        color: #009d37;
+        cursor: pointer;
+    }
+
+    #email-error, #login-error {
+        padding: 5px;
+        border-radius: 5px;
+        color: #ffffff;
+        background-color: #E8534E;
+    }
+
+    #reset-alert-success {
+        color: #FFFFFF;
+        background-color: #51B528;
+        border-color: #56A514;
+        font-size: 17px;
+        border-radius: 0px;
+    }
+}
+
+!* tablets/desktops and up ----------- *!
+@media (min-width: 992px) and (max-width: 1199px) {
+
+
+    .wrapper {
+        margin-top: 150px;
+        margin-bottom: 255px;
+    }
+    .form-signin {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: white;
+
+    }
+
+    .form-signin h1{
+        font-size:40px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 20px;
+        color:white;
+        background-color:green;
+    }
+
+    .form-signin .form-control {
+        font-size: 20px;
+        height: auto;
+        padding-top: 20px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    #login-button{
+        font-size: 30px;
+    }
+
+    #login-button:hover{
+        color: green;
+        background-color:white;
+    }
+
+    #reset-password-link {
+        text-decoration: underline;
+    }
+
+    #reset-password-link:hover {
+        color: #009d37;
+        cursor: pointer;
+    }
+
+    #email-error, #login-error {
+        padding: 5px;
+        border-radius: 5px;
+        color: #ffffff;
+        background-color: #E8534E;
+    }
+
+    #reset-alert-success {
+        color: #FFFFFF;
+        background-color: #51B528;
+        border-color: #56A514;
+        font-size: 17px;
+        border-radius: 0px;
+    }
+}
+
+!* Small devices (tablets, 768px and up) *!
+@media (min-width: 700px) and (max-width: 991px){
+
+
+    .wrapper {
+        margin-top: 100px;
+        margin-bottom: 150px;
+    }
+
+    .form-signin {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: white;
+
+    }
+
+    .form-signin h1{
+        font-size:30px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 15px;
+        color:white;
+        background-color:green;
+    }
+
+    .form-signin .form-control {
+        font-size: 20px;
+        height: auto;
+        padding-top: 15px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    #login-button{
+        font-size: 30px;
+    }
+
+    #login-button:hover{
+        color: green;
+        background-color:white;
+    }
+
+    #reset-password-link {
+        text-decoration: underline;
+    }
+
+    #reset-password-link:hover {
+        color: #009d37;
+        cursor: pointer;
+    }
+
+    #email-error, #login-error {
+        font-size: 15px;
+        padding: 5px;
+        border-radius: 5px;
+        color: #ffffff;
+        background-color: #E8534E;
+    }
+
+    #reset-alert-success {
+        color: #FFFFFF;
+        background-color: #51B528;
+        border-color: #56A514;
+        font-size: 17px;
+        border-radius: 0px;
+    }
+}
+
+!* Extra small devices (phones, up to 699px) *!
+@media screen and (max-width: 699px) {
+
+
+    .wrapper {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .form-signin {
+        max-width: 250px;
+        margin: 0 auto;
+        background-color: white;
+
+    }
+
+    .form-signin h1{
+        font-size:20px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 10px;
+        color:white;
+        background-color:green;
+    }
+
+    .form-signin .form-control {
+        font-size: 18px;
+        height: auto;
+        padding-top: 15px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    #login-button{
+        font-size: 20px;
+    }
+
+    #login-button:hover{
+        color: green;
+        background-color:white;
+    }
+
+    #reset-password-link {
+        text-decoration: underline;
+    }
+
+    #reset-password-link:hover {
+        color: #009d37;
+        cursor: pointer;
+    }
+
+    #email-error, #login-error {
+        font-size: 15px;
+        padding: 5px;
+        border-radius: 5px;
+        color: #ffffff;
+        background-color: #E8534E;
+    }
+
+    #reset-alert-success {
+        color: #FFFFFF;
+        background-color: #51B528;
+        border-color: #56A514;
+        font-size: 15px;
+        border-radius: 0px;
+    }
+}
+
+*/

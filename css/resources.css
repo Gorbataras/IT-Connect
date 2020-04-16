@@ -1,0 +1,38 @@
+body{
+    letter-spacing: 3px;
+}
+
+#resources_body
+{
+    padding: 1.5em;
+    margin: 1em;
+    margin-bottom: 2em;
+    border-radius: 5px;
+}
+
+
+.student-resources h1{
+    font-size: 40px;
+    text-transform: uppercase;
+    color: green;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.student-resources h2{
+    font-size: 30px;
+    text-transform: uppercase;
+    color: green;
+    padding-top: 10px;
+}
+
+.student-resources li
+{
+    font-size: 18px;
+    padding-top: 10px;
+}
+
+/*color for links*/
+.student-resources a{
+    color:#004691;
+}

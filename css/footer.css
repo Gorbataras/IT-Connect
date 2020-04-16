@@ -1,0 +1,38 @@
+/*make footer black*/
+.page-footer{
+    background-color:#1d2023;
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 15px;
+    overflow: hidden;
+}
+
+.page-footer h5{
+    font-size: 18px;
+}
+
+.page-footer p{
+    color:green;
+}
+
+/*make header titles green*/
+.font-weight-bold{
+    color: green;
+}
+
+/*make links white*/
+.page-footer a{
+    color: white;
+    font-size: 12px
+}
+
+/*make links change color on hover*/
+.page-footer a:hover{
+    color: #53ff0c;
+}
+
+/*make heart change color on hover*/
+.page-footer a i:hover{
+    color: red;
+}
