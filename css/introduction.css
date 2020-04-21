@@ -1,0 +1,47 @@
+
+.carousel-inner .carousel-caption h3{
+    font-weight: bold;
+    letter-spacing:10px;
+    text-transform: uppercase;
+}
+
+.carousel-inner .carousel-caption h5{
+    text-transform: uppercase;
+}
+
+.carousel-inner .carousel-caption a{
+    color: white;
+    background:green;
+    padding: 7px;
+    letter-spacing: 7px;
+}
+
+.carousel-inner .carousel-caption a:hover{
+    color: green;
+    background: white;
+    text-decoration:none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+/*large desktop*/
+@media screen and (min-width: 900px) {
+    .carousel-inner .carousel-item {
+        max-height: 85vh;
+    }
+}
+
+/*mobile devices size*/
+@media screen and (max-width: 460px) {
+    .carousel-inner .carousel-caption h3{
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .carousel-inner .carousel-caption h5{
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+}
+

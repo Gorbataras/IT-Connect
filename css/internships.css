@@ -1,0 +1,319 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+/*Important:: Helps internship table display modal to pop up*/
+.fade:not(.show){
+    opacity: unset;
+}
+
+.modal-backdrop{
+    background-color: rgba(255, 255, 255, .15)
+}
+.modal{
+    margin-top: 100px;
+}
+.modal-dialog{
+    max-width: 1000px;
+}
+.modal-body{
+    padding-left: 50px;
+    padding-right: 20px;
+}
+.modal-content{
+     padding-top: 400px;
+     width: auto;
+     height: auto;
+     overflow-y: auto;
+    border-style: solid;
+    border-width: 2px;
+}
+
+/* large desktops and up ----------- */
+@media screen and (min-width: 1200px) {
+
+    .internships-table{
+        color: green;
+        font-size: 20px;
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        padding: 2em 1em;
+    }
+
+    .internships-table .fixed-table-toolbar .search {
+        margin-top: 0px;
+        margin-bottom:15px;
+        float: none !important
+    }
+
+    /*first header*/
+    .internships-table h1{
+        font-size: 60px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: green;
+        letter-spacing: 25px;
+        padding-left: 20px;
+        margin-top: 0px;
+    }
+
+    /*font size for table rows*/
+    #internshipsTable tbody{
+        font-size: 17px;
+    }
+
+    /*table titles*/
+    #internshipsTable h3{
+        font-size: 25px;
+        color: green;
+        margin:3px;
+    }
+
+    /*table body color*/
+    #internshipsTable tbody tr{
+        color: green;
+    }
+
+    /*stripe the table*/
+    #internshipsTable tbody tr:nth-child(even) {
+        background-color: #e5e5e5
+    }
+
+    #internshipsTable tbody tr:nth-child(odd) {
+        background-color: #ffffff
+    }
+
+    /*highlights and pointer for internship entries*/
+    #internshipsTable tbody tr:hover{
+        transition: 0.2s;
+        color: black;
+        background: #53ff0c;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+}
+
+/* tablets/desktops and up ----------- */
+/* tablets/desktops and up ----------- */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+
+    .internships-table{
+        color: green;
+        font-size: 15px;
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        padding: 2em 1em;
+    }
+
+    .internships-table .fixed-table-toolbar .search {
+        margin-top: 0px;
+        margin-bottom:15px;
+        float: none !important
+    }
+
+    /*first header*/
+    .internships-table h1{
+        font-size: 50px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: green;
+        letter-spacing: 20px;
+        padding-left: 10px;
+        margin-top: 0px;
+    }
+
+    /*font size for table rows*/
+    #internshipsTable tbody{
+        font-size: 16px;
+    }
+
+    /*table titles*/
+    #internshipsTable h3{
+        font-size: 20px;
+        color: green;
+        margin:3px;
+    }
+
+    /*table body color*/
+    #internshipsTable tbody tr{
+        color: green;
+    }
+
+    /*stripe the table*/
+    #internshipsTable tbody tr:nth-child(even) {
+        background-color: #e5e5e5
+    }
+
+    #internshipsTable tbody tr:nth-child(odd) {
+        background-color: #ffffff
+    }
+
+    /*highlights and pointer for internship entries*/
+    #internshipsTable tbody tr:hover{
+        transition: 0.2s;
+        color: black;
+        background: #53ff0c;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 700px) and (max-width: 991px){
+
+    .modal-content{
+        padding-top: 400px;
+        width: auto;
+        height: auto;
+        overflow-y: auto;
+    }
+    .internships-table{
+        color: green;
+        font-size: 17px;
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        padding: 2em 1em;
+    }
+    .internships-table .fixed-table-toolbar .search {
+        margin-top: 0px;
+        margin-bottom:15px;
+        float: none !important
+    }
+
+    /*first header*/
+    .internships-table h1{
+        font-size: 40px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: green;
+        letter-spacing: 25px;
+        padding-left: 10px;
+        margin-top: 0px;
+    }
+
+    /*font size for table rows*/
+    #internshipsTable tbody{
+        font-size: 13px;
+    }
+
+    /*table titles*/
+    #internshipsTable h3{
+        font-size: 15px;
+        color: green;
+        margin:3px;
+    }
+
+    /*table body color*/
+    #internshipsTable tbody tr{
+        color: green;
+    }
+
+    /*stripe the table*/
+    #internshipsTable tbody tr:nth-child(even) {
+        background-color: #e5e5e5
+    }
+
+    #internshipsTable tbody tr:nth-child(odd) {
+        background-color: #ffffff
+    }
+
+    /*highlights and pointer for internship entries*/
+    #internshipsTable tbody tr:hover{
+        transition: 0.2s;
+        color: black;
+        background: #53ff0c;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    /*number of pages*/
+    .pagination{
+        font-size: 25px;
+        font-weight:bold;
+        padding-left: 100px;
+    }
+}
+
+
+/* Extra small devices (phones, up to 699px) */
+@media screen and (max-width: 699px) {
+
+    .modal-content{
+        padding-top: 200px;
+        width: 100%;
+        height: 800px;
+        overflow-y: auto;
+    }
+
+    .internships-table{
+        color: green;
+        font-size: 15px;
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+    }
+
+    .internships-table .fixed-table-toolbar .search {
+        margin-top: 0px;
+        margin-bottom:15px;
+        float: none !important
+    }
+
+    /*first header*/
+    .internships-table h1{
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: green;
+        letter-spacing: 10px;
+        padding-left: 10px;
+        margin-top: 0px;
+    }
+
+    /*table titles*/
+    #internshipsTable h3{
+        font-size: 12px;
+        color: green;
+        margin:3px;
+    }
+
+    /*font size for table rows*/
+    #internshipsTable tbody{
+        font-size: 13px;
+        margin:3px;
+    }
+
+    /*table body color*/
+    #internshipsTable tbody tr{
+        color: green;
+    }
+
+    /*stripe the table*/
+    #internshipsTable tbody tr:nth-child(even) {
+        background-color: #e5e5e5
+    }
+
+    #internshipsTable tbody tr:nth-child(odd) {
+        background-color: #ffffff
+    }
+
+    /*highlights and pointer for internship entries*/
+    #internshipsTable tbody tr:hover{
+        transition: 0.2s;
+        color: black;
+        background: #53ff0c;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    /*number of pages*/
+    .pagination{
+        font-size: 25px;
+        font-weight:bold;
+        padding-left: 80px;
+    }
+}

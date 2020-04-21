@@ -1,0 +1,141 @@
+/*Used by mark.js for the searchbar*/
+.mark, mark {
+    background: yellow;
+}
+
+
+/* large desktops and up ----------- */
+@media screen and (min-width: 992px) {
+
+    .navbar{
+        padding: 0;
+        height: 3.5em;
+        padding-left: 10px;
+    }
+
+
+    /* Navbar menu buttons */
+    .navbar-expand-lg .navbar-nav .nav-link{
+        font-size: 18px;
+        color: white;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-link:hover{
+        color: greenyellow;
+    }
+
+
+    #education{
+        font-size:16px;
+        text-align: center;
+        color: green;
+        background: white;
+        padding: 10px;
+        padding-top: 17px;
+        padding-bottom: 15px;
+        text-decoration:none;
+        transition: 0.5s;
+    }
+    #education:hover{
+        color: white;
+        background: green;
+    }
+
+    /*admin login button hidden*/
+    .nav-item h3{
+        visibility: hidden;
+    }
+
+
+}
+
+
+/* tablets & Small devices*/
+@media (min-width: 380px) and (max-width: 991px) {
+
+    /* Navbar menu buttons */
+    .navbar-expand-lg .navbar-nav .nav-link{
+        font-size: 15px;
+        color: white;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-link:hover{
+        color: greenyellow;
+    }
+
+    .nav-item {
+        font-size: 15px;
+        padding: 5px;
+        text-align:left;
+    }
+
+    /*green river bachelor banner*/
+    #education{
+        padding-top: 10px;
+    }
+
+    #education {
+        font-size:14px;
+        text-align: left;
+        color: green;
+        background: white;
+        text-decoration:none;
+        transition: 0.5s;
+    }
+    #education:hover{
+        color: white;
+        background: green;
+    }
+
+    /*admin login button*/
+    .nav-item h3{
+        padding-top: 10px;
+    }
+}
+
+/*Extra small devices*/
+
+@media screen and (max-width: 379px) {
+
+    /* Navbar menu buttons */
+    .navbar-expand-lg .navbar-nav .nav-link{
+        font-size: 15px;
+        padding: 18px;
+        transition: 1s;
+        color: white;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-link:hover{
+        color: greenyellow;
+    }
+
+    .nav-item {
+        font-size: 13px;
+        padding: 5px;
+        text-align:left;
+    }
+
+    /*green river bachelor banner*/
+    #education{
+        padding-top: 10px;
+    }
+
+    #education{
+        font-size:11px;
+        text-align: center;
+        color: green;
+        background: white;
+        padding: 5px;
+        text-decoration:none;
+        transition: 0.5s;
+    }
+    #education:hover{
+        color: white;
+        background: green;
+    }
+
+    /*admin login button*/
+    .nav-item h3{
+        padding-top: 10px;
+    }
+}
