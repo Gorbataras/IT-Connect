@@ -36,58 +36,69 @@ SOFTWARE.
 <include href="views/parts/navbar.php"></include>
 
 <body>
-<div id="navbar">
+<div class="container">
 
-    <!-- Internships -->
-    <div class="card">
-        <div class="card-header text-center">
-            Internships
-        </div>
-        <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-            placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-            consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-            vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-            erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-            orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-            justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-            ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
-        </div>
-    </div>
+    <!-- Site Introduction -->
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
+        placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
+        consequat a ac tortor. Fusce augue sem, convallis et nulla
+    </p>
 
-    <!-- Meetups -->
-    <div class="card">
-        <div class="card-header text-center">
-            Meetups
-        </div>
-        <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-            placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-            consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-            vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-            erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-            orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-            justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-            ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
-        </div>
-    </div>
+    <div class="row">
 
-    <!-- Blogs -->
-    <div class="card">
-        <div class="card-header text-center">
-            Blogs
+        <!-- Internships -->
+        <div class="card col-lg">
+            <div class="card-header text-center">
+                Internships
+            </div>
+            <div class="card-body">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
+                placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
+                consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
+                vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
+                erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
+                orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
+                justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
+                ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
+            </div>
         </div>
-        <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-            placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-            consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-            vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-            erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-            orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-            justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-            ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
+
+        <!-- Meetups -->
+        <div class="card col-lg">
+            <div class="card-header text-center">
+                Meetups
+            </div>
+            <div class="card-body">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
+                placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
+                consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
+                vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
+                erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
+                orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
+                justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
+                ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
+            </div>
         </div>
-    </div>
+
+        <!-- Blogs -->
+        <div class="card col-lg">
+            <div class="card-header text-center">
+                Blogs
+            </div>
+            <div class="card-body">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
+                placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
+                consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
+                vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
+                erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
+                orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
+                justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
+                ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
+            </div>
+        </div>
+
+    </div><!-- row -->
 </div>
 </body>
 
