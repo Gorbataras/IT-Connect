@@ -35,7 +35,7 @@ SOFTWARE.
 <include href="views/parts/navbar.php"></include>
 
 <body>
-<div id="site-container">
+<div>
     <div class="student-resources">
         <!--body is generated here-->
         <div id="resources_body"></div>

@@ -53,7 +53,7 @@ SOFTWARE.
     </div>
 </nav>
 
-<div id="site-container">
+<div>
     <form method="post" name="register" class="main-form">
         <h1>Admin Registration</h1>
         <div class="container">
