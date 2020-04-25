@@ -45,7 +45,7 @@ SOFTWARE.
         consequat a ac tortor. Fusce augue sem, convallis et nulla
     </p>
 
-    <div class="row">
+    <div class="row justify-content-around">
 
         <!-- Internships -->
         <div class="card col-lg">
