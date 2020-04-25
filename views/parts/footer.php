@@ -94,6 +94,22 @@ SOFTWARE.
 
             <hr class="clearfix w-100 d-md-none">
 
+            <!-- Grid column -->
+<!--            <div class="col-md-3 mx-auto">-->
+<!--                <div class="container">-->
+                <!-- Links -->
+<!--                    <h5 class="font-weight-bold text-uppercase mt1 mb-2">Earn Your Bachelor's Degree in:</h5>-->
+<!---->
+<!--                <ul class="list-unstyled">-->
+<!--                    <li>-->
+<!--                        <a  href="https://www.greenriver.edu/students/academics/degrees-programs/bachelor-of-applied-science/bachelors-in-software-development/">-->
+<!--                            Software Development</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+            <!-- Grid column -->
+
         </div>
         <!-- Grid row -->
 
