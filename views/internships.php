@@ -35,7 +35,7 @@ SOFTWARE.
 <include href="views/parts/navbar.php"></include>
 
 <body>
-<div id="site-container">
+<div>
     <div>
         <div class="internships-table">
             <h1>Internships</h1>

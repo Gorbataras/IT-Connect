@@ -43,7 +43,7 @@
 <include href="views/parts/navbar.php"></include>
 
 <body>
-<div id="site-container">
+<div>
 
     <form name="login" class="main-form" method="post">
         <h1>Admin Login</h1>

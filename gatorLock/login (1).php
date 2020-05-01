@@ -38,7 +38,7 @@ SOFTWARE.
 ?>
 
 <body>
-<div id="site-container">
+<div>
 
     <!--header for the page-->
     <include href="views/parts/header.php"></include>

@@ -28,7 +28,7 @@ SOFTWARE.
  */
 ?>
 <body>
-<div id="site-container">
+<div>
     <!--header fot the page-->
     <include href="views/parts/header.php"></include>
         <div id="reset-alert-success" role="alert" class="alert hide">

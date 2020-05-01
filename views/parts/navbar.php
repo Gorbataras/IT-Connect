@@ -17,8 +17,8 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <!--<a class="nav-link" href="/"><i class="fas fa-home"></i> ITConnect<span class="sr-only">(current)</span></a>-->
-              <!--  <a class="nav-link" href="/"><img src="http://itconnect.greenrivertech.net/assets/img/grtech.jpg" class="img-responsive" style="height: 50px; width: 50px;"> ITConnect<span class="sr-only">(current)</span></a>
-           -->
+                <!--  <a class="nav-link" href="/"><img src="http://itconnect.greenrivertech.net/assets/img/grtech.jpg" class="img-responsive" style="height: 50px; width: 50px;"> ITConnect<span class="sr-only">(current)</span></a>
+             -->
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="internships"><i class="fas fa-search"></i> Internships<span class="sr-only">(current)</span></a>
@@ -31,10 +31,12 @@
             </li>
         </ul>
         <ul class="navbar-nav navbar-right">
-                <li class="nav-item">
-                     <a class="nav-link" id="education" href="http://www.greenriver.edu/software" target="_blank">
-    Earn your Bachelor’s at Green River </a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" id="education"
+                   href="https://www.greenriver.edu/students/academics/degrees-programs/bachelor-of-applied-science/bachelors-in-software-development/"
+                   target="_blank">
+                    Earn your Bachelor’s at Green River </a>
+            </li>
         </ul>
     </div>
 </nav>
