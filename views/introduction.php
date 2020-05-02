@@ -103,7 +103,7 @@ SOFTWARE.
                 </h3>
 
                 <ul id="latest-blogs" class="list-group list-group-flush">
-                    No recent Posts to show
+                    No recent posts to show
                 </ul>
 
             </div><!-- card -->

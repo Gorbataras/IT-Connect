@@ -7,8 +7,54 @@
     margin-bottom: 30px;
 }
 
+#latest-blogs .card-text {
+    text-align: justify;
+}
+
+#latest-blogs li {
+    padding: 0;
+}
+
+#latest-blogs a {
+    color: rgb(33,37,41);
+    text-decoration-color: initial;
+    text-decoration-line: none;
+    text-decoration: none;
+}
+
 #most-recent {
     margin-bottom: 50px;
+}
+
+#most-recent img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+
+    -webkit-filter:brightness(70%);
+    -moz-filter:brightness(70%);
+    filter:brightness(70%);
+}
+
+#most-recent li:hover img {
+    -webkit-filter:brightness(100%);
+    -moz-filter:brightness(100%);
+    filter:brightness(100%);
+}
+
+#most-recent li:hover .photo-header {
+    text-shadow: 0 0 8px black;
+}
+
+.photo-header {
+    position: relative;
+    color: white;
+}
+
+.photo-header .card-title {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
 }
 
 @media (min-width: 1500px) {
