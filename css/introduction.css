@@ -22,6 +22,10 @@
     text-decoration: none;
 }
 
+#latest-blogs .card-text p {
+    margin-bottom: 10px;
+}
+
 #most-recent {
     margin-bottom: 50px;
 }

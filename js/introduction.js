@@ -29,7 +29,7 @@ $.get('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/gree
                         </div>
                         <div class="card-body">
                             <div class="card-text"><p>${intro}... read more</p></div>
-                            <p class="card-subtitle mb-2 text-muted h6">${currPost.author}, ${formattedDate}</p>
+                            <small class="card-subtitle mb-2 text-muted">${currPost.author}, ${formattedDate}</small>
                         </div>
                     </a>
                 </li>`;
