@@ -50,65 +50,67 @@ SOFTWARE.
 
     <div id="most-recent" class="row justify-content-around">
 
-        <!-- Internships -->
-        <div class="col-lg">
-            <div class="card">
+        <div class="accordion" id="home-accordion">
 
-                <h3 class="card-header text-center">
-                    Internships
-                </h3>
+            <!-- Internships -->
+            <div class="col-lg">
+                <div class="card">
 
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-                    placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-                    consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-                    vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-                    erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-                    orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-                    justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-                    ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
-                </div>
+                    <h3 class="card-header text-center">
+                        Internships
+                    </h3>
 
-            </div><!-- card -->
-        </div><!-- col -->
+                    <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
+                        placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
+                        consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
+                        vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
+                        erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
+                        orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
+                        justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
+                        ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
+                    </div>
 
-        <!-- Meetups -->
-        <div class="col-lg">
-            <div class="card">
+                </div><!-- card -->
+            </div><!-- col -->
 
-                <h3 class="card-header text-center">
-                    Meetups
-                </h3>
+            <!-- Meetups -->
+            <div class="col-lg">
+                <div class="card">
 
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-                    placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-                    consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-                    vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-                    erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-                    orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-                    justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-                    ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
-                </div>
+                    <h3 class="card-header text-center">
+                        Meetups
+                    </h3>
 
-            </div><!-- card -->
-        </div><!-- col -->
+                    <div class="card-body">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
+                        placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
+                        consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
+                        vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
+                        erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
+                        orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
+                        justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
+                        ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
+                    </div>
 
-        <!-- Posts -->
-        <div class="col-lg">
-            <div class="card">
+                </div><!-- card -->
+            </div><!-- col -->
 
-                <h3 class="card-header text-center">
-                    Posts
-                </h3>
+            <!-- Posts -->
+            <div class="col-lg">
+                <div class="card">
 
-                <ul id="latest-blogs" class="list-group list-group-flush">
-                    No recent posts to show
-                </ul>
+                    <h3 class="card-header text-center">
+                        Posts
+                    </h3>
 
-            </div><!-- card -->
-        </div><!-- col -->
+                    <ul id="latest-blogs" class="list-group list-group-flush">
+                        No recent posts to show
+                    </ul>
 
+                </div><!-- card -->
+            </div><!-- col -->
+        </div><!-- accordion -->
     </div><!-- row -->
 </div>
 </body>

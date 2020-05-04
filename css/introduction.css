@@ -34,11 +34,17 @@
     width: 100%;
     height: 150px;
     object-fit: cover;
+    object-position: 50% 10%;
 
     -webkit-filter:brightness(70%);
     -moz-filter:brightness(70%);
     filter:brightness(70%);
+
+    transition: filter .27s;
+    transition-timing-function: linear;
 }
+
+
 
 #most-recent li:hover img {
     -webkit-filter:brightness(100%);
@@ -53,12 +59,15 @@
 .photo-header {
     position: relative;
     color: white;
+    transition: text-shadow .27s;
+    transition-timing-function: linear;
 }
 
 .photo-header .card-title {
     position: absolute;
     bottom: 8px;
     left: 16px;
+    padding-right: 16px;
 }
 
 @media (min-width: 1500px) {
