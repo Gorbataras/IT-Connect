@@ -40,7 +40,7 @@ SOFTWARE.
 
     <!-- Site Introduction -->
     <p id="intro">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
+        hi Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
         placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
         consequat a ac tortor. Fusce augue sem, convallis et nulla
     </p>
