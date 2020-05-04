@@ -7,8 +7,110 @@
     margin-bottom: 30px;
 }
 
+#latest-blogs .card-text {
+    text-align: justify;
+}
+
+#latest-blogs .card-text p {
+    margin-bottom: 10px;
+}
+
+#latest-blogs li {
+    padding: 0;
+}
+
+/* Turn off hyperlink decoration for all text */
+#most-recent .no-decoration {
+    color: rgb(33,37,41);
+    text-decoration-color: initial;
+    text-decoration-line: none;
+    text-decoration: none;
+}
+
 #most-recent {
     margin-bottom: 50px;
+}
+
+/* To undo changes from .accordion ie keep bottom border and corners rounded */
+#most-recent .card {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+#most-recent img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    object-position: 50% 10%;
+
+    -webkit-filter:brightness(70%);
+    -moz-filter:brightness(70%);
+    filter:brightness(70%);
+
+    transition: filter .27s;
+    transition-timing-function: linear;
+}
+
+/* To apply correct styling for accordion on the grid */
+#most-recent .col-lg:first-of-type .card {
+    border-bottom: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* To apply correct styling for accordion on the grid */
+#most-recent .col-lg:last-of-type .card {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#most-recent .col-lg:not(:first-of-type):not(:last-of-type)>.card {
+    border-bottom: 0;
+    border-radius: 0;
+}
+
+#most-recent li:hover img {
+    -webkit-filter:brightness(100%);
+    -moz-filter:brightness(100%);
+    filter:brightness(100%);
+}
+
+#most-recent li:hover .photo-header {
+    text-shadow: 0 0 8px black;
+}
+
+.photo-header {
+    position: relative;
+    color: white;
+    transition: text-shadow .27s;
+    transition-timing-function: linear;
+}
+
+.photo-header .card-title {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    padding-right: 16px;
+}
+
+/* Bootstrap Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+    /* Make card title un-clickable when not in accordion */
+    .expand-toggle {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    /* To undo changes from .accordion ie keep bottom border and corners rounded */
+    .container .accordion #most-recent .col-lg>.card {
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+    }
+
+    #most-recent .collapse {
+        display: initial;
+    }
 }
 
 @media (min-width: 1500px) {
