@@ -22,7 +22,7 @@ $.get('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/gree
 
             output +=
                 `<li class="list-group-item">
-                    <a href="${currPost.link}" target="_blank">
+                    <a href="${currPost.link}" target="_blank" class="no-decoration">
                         <div class='photo-header'>
                             <img class="card-img-top" src="${currPost.thumbnail}" alt="thumbnail for the post titled ${currPost.title}">
                             <h4 class="card-title h5">${currPost.title}</h4>
