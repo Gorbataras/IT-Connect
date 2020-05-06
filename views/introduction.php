@@ -46,6 +46,7 @@ SOFTWARE.
     </p>
 
     <h2>Recent Activity</h2>
+    <hr class="mt-0">
     <br>
 
     <div class="accordion" id="home-accordion">

@@ -19,6 +19,12 @@
     padding: 0;
 }
 
+#most-recent {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Turn off hyperlink decoration for all text */
 #most-recent .no-decoration {
     color: rgb(33,37,41);
@@ -51,19 +57,20 @@
     transition-timing-function: linear;
 }
 
-/* To apply correct styling for accordion on the grid */
+/* To make accordion styling compatible with grid */
 #most-recent .col-lg:first-of-type .card {
     border-bottom: 0;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-/* To apply correct styling for accordion on the grid */
+/*  To make accordion styling compatible with grid  */
 #most-recent .col-lg:last-of-type .card {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
 
+/*  To make accordion styling compatible with grid  */
 #most-recent .col-lg:not(:first-of-type):not(:last-of-type)>.card {
     border-bottom: 0;
     border-radius: 0;
@@ -96,6 +103,10 @@
 /* Bootstrap Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 
+    #most-recent {
+        width: initial;
+    }
+
     /* Make card title un-clickable when not in accordion */
     .expand-toggle {
         pointer-events: none;
@@ -113,6 +124,7 @@
     }
 }
 
+/* Extra wide screens */
 @media (min-width: 1500px) {
     .container {
         max-width: 1550px;
