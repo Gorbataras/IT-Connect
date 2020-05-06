@@ -46,63 +46,89 @@ SOFTWARE.
     </p>
 
     <h2>Recent Activity</h2>
+    <hr class="mt-0">
     <br>
 
-    <div id="most-recent" class="row justify-content-around">
+    <div class="accordion" id="home-accordion">
+        <div id="most-recent" class="row justify-content-around">
 
-        <!-- Internships -->
-        <div class="col-lg">
-            <div class="card">
+            <!-- Internships -->
+            <div class="col-lg">
+                <div class="card">
 
-                <h3 class="card-header text-center">
-                    Internships
-                </h3>
+                    <!-- Card heading -->
+                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
+                       role="button" aria-expanded="false" aria-controls="internships-body">
+                        <div class="card-header text-center" id="internships-heading">
+                            <h3>Internships</h3>
+                        </div>
+                    </a>
 
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-                    placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-                    consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-                    vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-                    erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-                    orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-                    justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-                    ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
-                </div>
+                    <div id="internships-body" class="collapse show" aria-labelledby="internships-heading"
+                         data-parent="#home-accordion">
+                        <div class="card-body">
+                           Test
+                        </div>
+                    </div>
 
-            </div><!-- card -->
-        </div><!-- col -->
+                </div><!-- card -->
+            </div><!-- col -->
 
-        <!-- Meetups -->
-        <div class="col-lg">
-            <div class="card">
+            <!-- Meetups -->
+            <div class="col-lg">
+                <div class="card">
 
-                <h3 class="card-header text-center">
-                    Meetups
-                </h3>
+                    <!-- Card heading -->
+                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#meetups-body"
+                       role="button" aria-expanded="false" aria-controls="meetups-body">
+                        <div class="card-header text-center" id="meetups-heading">
+                            <h3>Meetups</h3>
+                        </div>
+                    </a>
 
-                <div class="card-body" id="meetupsCardBody">
-					No upcoming Meetups
-                </div>
+                    <div id="meetups-body" class="collapse" aria-labelledby="meetups-heading"
+                         data-parent="#home-accordion">
+							<ul id="latest-meetups" class="list-group list-group-flush">
+								<F3:repeat group="{{ @array }}" value="{{ @meetup }}">
+									<li class="list-group-item">
+										<a href="{{@meetup->link}}" target="_blank" class="no-decoration">
+												<h5 class="card-title">{{@meetup->name}}</h5>
+												<h6 class="card-subtitle mb-2 text-muted">
+													{{@meetup->local_time}} -> {{@meetup->local_date}}</h6>
+												<h6 class="card-subtitle mb-2 text-muted">
+													{{@meetup->venue->name}}</h6>
+										</a>
+									</li>
+								</F3:repeat>
+							</ul>
+						</div>
 
-            </div><!-- card -->
-        </div><!-- col -->
 
-        <!-- Posts -->
-        <div class="col-lg">
-            <div class="card">
 
-                <h3 class="card-header text-center">
-                    Posts
-                </h3>
+                </div><!-- card -->
+            </div><!-- col -->
 
-                <ul id="latest-blogs" class="list-group list-group-flush">
-                    No recent Posts to show
-                </ul>
+            <!-- Posts -->
+            <div class="col-lg">
+                <div class="card">
 
-            </div><!-- card -->
-        </div><!-- col -->
+                    <!-- Card heading -->
+                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#posts-body"
+                       role="button" aria-expanded="false" aria-controls="posts-body">
+                        <div class="card-header text-center" id="posts-heading">
+                            <h3>Posts</h3>
+                        </div>
+                    </a>
+                    <div id="posts-body" class="collapse" aria-labelledby="posts-heading" data-parent="#home-accordion">
+                        <ul id="latest-blogs" class="list-group list-group-flush">
+                            No recent posts to show
+                        </ul>
+                    </div>
 
-    </div><!-- row -->
+                </div><!-- card -->
+            </div><!-- col -->
+        </div><!-- row -->
+    </div><!-- accordion -->
 </div>
 </body>
 
