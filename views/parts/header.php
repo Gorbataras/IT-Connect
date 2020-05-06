@@ -63,6 +63,7 @@ SOFTWARE.
     <title>IT Connect: A resource for technology students.</title>
 
     <link rel="stylesheet" type="text/css" media="all" href="css/index.css">
+
     <!--header css-->
     <link rel="stylesheet" type="text/css" media="all" href="css/header.css">
     <!--footer css-->

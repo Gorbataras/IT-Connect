@@ -46,6 +46,7 @@ SOFTWARE.
     </p>
 
     <h2>Recent Activity</h2>
+    <hr class="mt-0">
     <br>
 
     <div class="accordion" id="home-accordion">
@@ -55,13 +56,16 @@ SOFTWARE.
             <div class="col-lg">
                 <div class="card">
 
-                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#internships-body" role="button" aria-expanded="false" aria-controls="internships-body">
+                    <!-- Card heading -->
+                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
+                       role="button" aria-expanded="false" aria-controls="internships-body">
                         <div class="card-header text-center" id="internships-heading">
                             <h3>Internships</h3>
                         </div>
                     </a>
 
-                    <div id="internships-body" class="collapse show" aria-labelledby="internships-heading" data-parent="#home-accordion">
+                    <div id="internships-body" class="collapse show" aria-labelledby="internships-heading"
+                         data-parent="#home-accordion">
                         <div class="card-body">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
                             placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
@@ -81,13 +85,16 @@ SOFTWARE.
             <div class="col-lg">
                 <div class="card">
 
-                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#meetups-body" role="button" aria-expanded="false" aria-controls="meetups-body">
+                    <!-- Card heading -->
+                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#meetups-body"
+                       role="button" aria-expanded="false" aria-controls="meetups-body">
                         <div class="card-header text-center" id="meetups-heading">
                             <h3>Meetups</h3>
                         </div>
                     </a>
 
-                    <div id="meetups-body" class="collapse" aria-labelledby="meetups-heading" data-parent="#home-accordion">
+                    <div id="meetups-body" class="collapse" aria-labelledby="meetups-heading"
+                         data-parent="#home-accordion">
                         <div class="card-body">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
                             placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
@@ -107,7 +114,9 @@ SOFTWARE.
             <div class="col-lg">
                 <div class="card">
 
-                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#posts-body" role="button" aria-expanded="false" aria-controls="posts-body">
+                    <!-- Card heading -->
+                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#posts-body"
+                       role="button" aria-expanded="false" aria-controls="posts-body">
                         <div class="card-header text-center" id="posts-heading">
                             <h3>Posts</h3>
                         </div>
