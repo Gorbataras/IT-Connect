@@ -94,22 +94,6 @@ SOFTWARE.
 
             <hr class="clearfix w-100 d-md-none">
 
-            <!-- Grid column -->
-<!--            <div class="col-md-3 mx-auto">-->
-<!--                <div class="container">-->
-                <!-- Links -->
-<!--                    <h5 class="font-weight-bold text-uppercase mt1 mb-2">Earn Your Bachelor's Degree in:</h5>-->
-<!---->
-<!--                <ul class="list-unstyled">-->
-<!--                    <li>-->
-<!--                        <a  href="https://www.greenriver.edu/students/academics/degrees-programs/bachelor-of-applied-science/bachelors-in-software-development/">-->
-<!--                            Software Development</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                </div>-->
-<!--            </div>-->
-            <!-- Grid column -->
-
         </div>
         <!-- Grid row -->
 
@@ -120,7 +104,8 @@ SOFTWARE.
 <!-- Footer -->
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
