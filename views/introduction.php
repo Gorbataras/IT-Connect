@@ -66,14 +66,49 @@ SOFTWARE.
                     <div id="internships-body" class="collapse show" aria-labelledby="internships-heading"
                          data-parent="#home-accordion">
                         <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-                            placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-                            consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-                            vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-                            erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-                            orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-                            justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-                            ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
+                            <ul id="internships" class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="#" target="_blank" class="no-decoration"> <!-- Url column-->
+                                        <h4 class="company-name">Google</h4> <!-- Company column -->
+                                        <h6 class="category">Research Intern</h6> <!-- Title column -->
+                                        <p class="card-subtitle mb-2 text-muted"> <!-- Description column -->
+                                            Participate in cutting edge research to develop solutions for real-world,
+                                            large-scale problems. This is a test! Not actual posting!
+                                            <small class="card-subtitle mb-2 text-muted">
+                                                <br><strong>Apply Now!</strong>
+                                            </small>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#" target="_blank" class="no-decoration">
+                                        <h4 class="company-name">Redfin</h4>
+                                        <h6 class="category">Software Engineer Intern</h6>
+                                        <p class="card-subtitle mb-2 text-muted">
+                                            Redfin is a well-funded technology startup that&rsquo;s revolutionizing
+                                            the $60 billion real estate industry. This is a test! Not actual posting!
+                                            <small class="card-subtitle mb-2 text-muted">
+                                                <br><strong>Apply Now!</strong>
+                                            </small>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#" target="_blank" class="no-decoration">
+                                        <h4 class="company-name">Microsoft</h4>
+                                        <h6 class="category">Technical Account Manager</h6>
+                                        <p class="card-subtitle mb-2 text-muted">
+                                            As services professional, you will be a strategic advisor to Microsoft’s
+                                            enterprise customers and partners helping them optimize their business
+                                            performance and be on the front line dedicated to solving their technical
+                                            challenges.
+                                            <small class="card-subtitle mb-2 text-muted">
+                                                <br><strong>Apply Now!</strong>
+                                            </small>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
