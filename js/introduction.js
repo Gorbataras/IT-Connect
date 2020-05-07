@@ -34,7 +34,6 @@ $.get('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/gree
                     </a>
                 </li>`;
         }
-
         // Put posts on card
         $('#latest-blogs').html(output);
     });

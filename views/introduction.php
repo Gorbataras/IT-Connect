@@ -40,9 +40,8 @@ SOFTWARE.
 
     <!-- Site Introduction -->
     <p id="intro">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-        placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-        consequat a ac tortor. Fusce augue sem, convallis et nulla
+        Thanks for visiting IT Connect. The site where Green River College software development students can find
+        upcoming events, current internships and other student resources.
     </p>
 
     <h2>Recent Activity</h2>
@@ -95,17 +94,20 @@ SOFTWARE.
 
                     <div id="meetups-body" class="collapse" aria-labelledby="meetups-heading"
                          data-parent="#home-accordion">
-                        <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-                            placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-                            consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-                            vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-                            erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-                            orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-                            justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-                            ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
-                        </div>
-                    </div>
+							<ul id="latest-meetups" class="list-group list-group-flush">
+								<F3:repeat group="{{ @array }}" value="{{ @meetup }}">
+									<li class="list-group-item">
+										<a href="{{@meetup->link}}" target="_blank" class="no-decoration">
+												<h5 class="card-title">{{@meetup->name}}</h5>
+												<h6 class="card-subtitle mb-2 text-muted">
+													{{@meetup->local_time}} -> {{@meetup->local_date}}</h6>
+												<h6 class="card-subtitle mb-2 text-muted">
+													{{@meetup->venue->name}}</h6>
+										</a>
+									</li>
+								</F3:repeat>
+							</ul>
+						</div>
 
                 </div><!-- card -->
             </div><!-- col -->
