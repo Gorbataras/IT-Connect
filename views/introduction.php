@@ -36,15 +36,17 @@ SOFTWARE.
 <include href="views/parts/navbar.php"></include>
 
 <body>
+<!-- Site Introduction -->
+<div class="alert success">
+    <span class="closebtn">&times;</span>
+    <strong>Welcome!</strong> to the new IT Connect Page.
+</div>
+
 <div class="container">
-
-    <!-- Site Introduction -->
     <p id="intro">
-        hi Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-        placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-        consequat a ac tortor. Fusce augue sem, convallis et nulla
+        Thanks for visiting IT Connect. The site where Green River College software development students can find
+        upcoming events, current internships and other student resources.
     </p>
-
     <h2>Recent Activity</h2>
     <hr class="mt-0">
     <br>
