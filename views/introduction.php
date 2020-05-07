@@ -66,14 +66,16 @@ SOFTWARE.
                     <div id="internships-body" class="collapse show" aria-labelledby="internships-heading"
                          data-parent="#home-accordion">
                         <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nisi ante, pellentesque sit amet mollis non,
-                            placerat euismod odio. In hac habitasse platea dictumst. Suspendisse quis neque vitae eros imperdiet
-                            consequat a ac tortor. Fusce augue sem, convallis et nulla malesuada, imperdiet molestie est. Pellentesque
-                            vel varius ex, porttitor hendrerit justo. Vivamus nisl lectus, rutrum pulvinar venenatis id, fringilla ac
-                            erat. Quisque venenatis risus turpis. Proin porta commodo libero vitae rhoncus. Mauris vestibulum magna ut
-                            orci porta sollicitudin. Proin non est at sapien elementum cursus. Nulla ac maximus tellus. Vivamus feugiat
-                            justo dolor, eget volutpat augue ullamcorper quis. Duis turpis massa, accumsan sit amet lacus et, commodo
-                            ornare arcu. Vestibulum luctus pretium leo, eu iaculis ipsum pretium eget.
+                            <ul id="internships" class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="#" target="_blank" class="no-decoration">
+                                        <h5 class="company-name">Google</h5>
+                                        <p class="card-subtitle mb-2 text-muted">
+                                            Participate in cutting edge research to develop solutions for real-world,
+                                            large-scale problems. This is a test! Not actual posting!
+                                        </p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
