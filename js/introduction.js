@@ -1,6 +1,6 @@
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-//todo limit query results to only what is needed
+// Get the the most recent posts and format for a card display
 $.get('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/green-river-web-mobile-developers',
     function(result) {
 
@@ -38,35 +38,24 @@ $.get('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/gree
         $('#latest-blogs').html(output);
     });
 
-//MEETUPS
-$.get('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public&page=20', function (result) {
+// Prevent from closing the only showing card on accordion
+$('.expand-toggle').on('click', function(e) {
+   if ($(this).parents('.card').children('.collapse').hasClass('show')) {
+       e.stopPropagation();
+   }
+   e.preventDefault();
+});
 
-	
-	let meetupContent = '';
+// Show regular cursor for unclickable card title
+$('.expand-toggle').mouseenter(function() {
+    if ($(this).parents('.card').children('.collapse').hasClass('show')) {
+        $(this).css('cursor', 'default');
+    }
+});
 
-	let counter = 0;
-
-	for (let currMeetup in result) {
-
-		// let intro = $($.parseHTML('<div>' + currMeetup.description + '</div>')).find('p').first().text();
-		// intro = intro.substring(0, 150);
-
-		meetupContent +=
-			`<li class="list-group-item">
-        	<a href="${currMeetup.link}" target="_blank" class="no-decoration">
-            	<div class='photo-header'>
-                	<img class="card-img-top" src="" alt="thumbnail for the post titled ">
-                    <h4 class="card-title h5">${currMeetup.name}</h4>
-                </div>
-                <div class="card-body">
-                	<div class="card-text"><p>... read more</p></div>
-                </div>
-            </a>
-        </li>`;
-		counter++;
-		if (counter=>3) {
-			break;
-		}
-	}
-	$('#meetupsCardBody').html(meetupContent);
+// Show pointer for clickable card title
+$('.expand-toggle').mouseleave(function() {
+    if ($(this).parents('.card').children('.collapse').hasClass('show')) {
+        $(this).css('cursor', 'pointer');
+    }
 });
