@@ -29,8 +29,11 @@ session_start();
  */
 
 /*redirect to the introduction page*/
-function introduction(){
+function introduction($fatFree){
     // show the introduction page
+	$response=file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
+	$response=json_decode($response);
+	$fatFree->set('array', $response);
     echo Template::instance()->render('views/introduction.php');
 }
 
