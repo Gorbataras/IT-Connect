@@ -39,10 +39,11 @@ SOFTWARE.
 <!--header for the page-->
 <include href="views/parts/header.php"></include>
 
+<body>
+
 <!--navbar-->
 <include href="views/parts/navbar.php"></include>
 
-<body>
 <!-- Site Introduction -->
 <div class="alert success">
     <span class="closebtn">&times;</span>
@@ -170,7 +171,6 @@ SOFTWARE.
                     </a>
                     <div id="posts-body" class="collapse" aria-labelledby="posts-heading" data-parent="#home-accordion">
                         <ul id="latest-blogs" class="list-group list-group-flush">
-                            No recent posts to show
                         </ul>
                     </div>
 
@@ -179,7 +179,6 @@ SOFTWARE.
         </div><!-- row -->
     </div><!-- accordion -->
 </div>
-</body>
 
 <!--footer for the page-->
 <include href="views/parts/footer.php"></include>
