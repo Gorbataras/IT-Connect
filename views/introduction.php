@@ -26,16 +26,24 @@ SOFTWARE.
 /**
  * The website's landing page, allowing the user to decide if they want to view internships
  *      or check out student resources
+ *
+ * @author Chad Drennan
+ * @author Taras Gorbachevskiy
+ * @author Marcos Rivera
+ * @author Rajpreet Dhaliwal
+ * 2020-5-7
+ * @version 1.0
  */
 ?>
 
 <!--header for the page-->
 <include href="views/parts/header.php"></include>
 
+<body>
+
 <!--navbar-->
 <include href="views/parts/navbar.php"></include>
 
-<body>
 <!-- Site Introduction -->
 <div class="alert success">
     <span class="closebtn">&times;</span>
@@ -163,7 +171,6 @@ SOFTWARE.
                     </a>
                     <div id="posts-body" class="collapse" aria-labelledby="posts-heading" data-parent="#home-accordion">
                         <ul id="latest-blogs" class="list-group list-group-flush">
-                            No recent posts to show
                         </ul>
                     </div>
 
@@ -172,7 +179,6 @@ SOFTWARE.
         </div><!-- row -->
     </div><!-- accordion -->
 </div>
-</body>
 
 <!--footer for the page-->
 <include href="views/parts/footer.php"></include>

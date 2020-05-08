@@ -26,6 +26,8 @@ SOFTWARE.
 session_start();
 /**
  * Main controller that redirects to different pages
+ * @author Taras Gorbachevskiy
+ * 2020-5-7
  */
 
 /*redirect to the introduction page*/
