@@ -1,3 +1,11 @@
+/**
+ * Controls features and events of the home page
+ *
+ * @author Chad Drennan
+ * @author Rajpreet Dhaliwal
+ * 2020-5-7
+ */
+
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 // Get the the most recent posts and format for a card display
@@ -60,6 +68,7 @@ $('.expand-toggle').mouseleave(function() {
     }
 });
 
+// Closes the alert box
 var close = document.getElementsByClassName("closebtn");
 var i;
 
