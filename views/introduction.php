@@ -26,6 +26,13 @@ SOFTWARE.
 /**
  * The website's landing page, allowing the user to decide if they want to view internships
  *      or check out student resources
+ *
+ * @author Chad Drennan
+ * @author Taras Gorbachevskiy
+ * @author Marcos Rivera
+ * @author Rajpreet Dhaliwal
+ * 2020-5-7
+ * @version 1.0
  */
 ?>
 

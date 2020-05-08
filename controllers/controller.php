@@ -26,6 +26,7 @@ SOFTWARE.
 session_start();
 /**
  * Main controller that redirects to different pages
+ * @author Taras Gorb
  */
 
 /*redirect to the introduction page*/
