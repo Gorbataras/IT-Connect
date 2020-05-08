@@ -16,8 +16,8 @@ $fatFree->set('ONERROR', function ($fatFree){
 
 //define some routes
 // main page
-$fatFree->route('GET /', function (){
-    introduction();
+$fatFree->route('GET /', function ($fatFree){
+    introduction($fatFree);
 });
 
 //internship page
