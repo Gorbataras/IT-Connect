@@ -28,8 +28,8 @@ SOFTWARE.
  */
 
 return array(
-    "db" => "mysql:host=localhost;dbname=itconnec_kremlin",
-    "username" => "itconnec_putin",
-    "password" => "boggybogbogz123!"
+    "db" => "mysql:dbname=marcosri_ITConnect",
+    "username" => "marcosri_usertest",
+    "password" => "nwagreen01"
 );
 

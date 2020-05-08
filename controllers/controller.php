@@ -1,5 +1,4 @@
 <?php
-
 /**
 MIT License
 
@@ -34,6 +33,10 @@ function introduction($fatFree){
 	$response=file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
 	$response=json_decode($response);
 	$fatFree->set('array', $response);
+    $config = include("db/config.php");
+    $db = new PDO($config["db"], $config["username"], $config["password"]);
+    $posts = new PostingsModel($db);
+    $fatFree->set('posts', $posts->getAllPostings());
     echo Template::instance()->render('views/introduction.php');
 }
 
