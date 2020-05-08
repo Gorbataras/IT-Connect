@@ -78,47 +78,24 @@ SOFTWARE.
                          data-parent="#home-accordion">
                         <div class="card-body">
                             <ul id="internships" class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <a href="#" target="_blank" class="no-decoration"> <!-- Url column-->
-                                        <h4 class="company-name">Google</h4> <!-- Company column -->
-                                        <h6 class="category">Research Intern</h6> <!-- Title column -->
-                                        <p class="card-subtitle mb-2 text-muted"> <!-- Description column -->
-                                            Participate in cutting edge research to develop solutions for real-world,
-                                            large-scale problems. This is a test! Not actual posting!
-                                            <small class="card-subtitle mb-2 text-muted">
-                                                <br><strong>Apply Now!</strong>
-                                            </small>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#" target="_blank" class="no-decoration">
-                                        <h4 class="company-name">Redfin</h4>
-                                        <h6 class="category">Software Engineer Intern</h6>
-                                        <p class="card-subtitle mb-2 text-muted">
-                                            Redfin is a well-funded technology startup that&rsquo;s revolutionizing
-                                            the $60 billion real estate industry. This is a test! Not actual posting!
-                                            <small class="card-subtitle mb-2 text-muted">
-                                                <br><strong>Apply Now!</strong>
-                                            </small>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#" target="_blank" class="no-decoration">
-                                        <h4 class="company-name">Microsoft</h4>
-                                        <h6 class="category">Technical Account Manager</h6>
-                                        <p class="card-subtitle mb-2 text-muted">
-                                            As services professional, you will be a strategic advisor to Microsoft’s
-                                            enterprise customers and partners helping them optimize their business
-                                            performance and be on the front line dedicated to solving their technical
-                                            challenges.
-                                            <small class="card-subtitle mb-2 text-muted">
-                                                <br><strong>Apply Now!</strong>
-                                            </small>
-                                        </p>
-                                    </a>
-                                </li>
+                                <F3:repeat group="{{ @posts }}" value="{{ @post }}">
+                                    <li class="list-group-item">
+                                        <a href="{{@post->url}}" target="_blank" class="no-decoration"> <!-- Url column-->
+                                            <h4 class="company-name">{{@post->company}}</h4> <!-- Company column -->
+                                            <h6 class="category">{{@post->category}}</h6> <!-- Title column -->
+                                            <p class="card-subtitle mb-2 text-muted"> <!-- Description column -->
+                                                <check if="{{empty(@post->description)}}">
+                                                    <true>No description available</true>
+                                                    <false>{{substr(@post->description, 0, 150)}}...</false>
+                                                </check>
+                                                <small class="card-subtitle mb-2 text-muted">
+                                                    <br><strong>Apply Now!</strong>
+                                                </small>
+                                            </p>
+                                        </a>
+                                    </li>
+                                </F3:repeat>
+                                <a href="internships">Show More--></a>
                             </ul>
                         </div>
                     </div>

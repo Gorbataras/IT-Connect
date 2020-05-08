@@ -38,6 +38,7 @@ class PostingsModel
     public function __construct(PDO $db)
     {
         $this->db = $db;
+
     }
 
     /**
@@ -47,10 +48,10 @@ class PostingsModel
      */
     public function getAllPostings()
     {
-        $sql = "SELECT * FROM postings WHERE deleted = false";
+        $sql = "SELECT * FROM postings ORDER BY post_id DESC LIMIT 3";
         $q = $this->db->prepare($sql);
         $q->execute();
-        $rows = $q->fetchAll();
+        $rows = $q->fetchALL();
 
         $result = array();
         foreach ($rows as $row) {

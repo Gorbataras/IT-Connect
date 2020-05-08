@@ -6,6 +6,9 @@ error_reporting(E_ALL);
 //global includes
 require 'controllers/controller.php';
 
+//Require autoload file
+require("vendor/autoload.php");
+
 // load the fat free framework
 $fatFree = require 'vendor/bcosca/fatfree-core/base.php';
 
