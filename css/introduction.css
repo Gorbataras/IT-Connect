@@ -10,7 +10,7 @@
  */
 
 .card {
-    max-width: 450px;
+    max-width: 650px;
 }
 
 #intro {
@@ -31,7 +31,7 @@
 }
 
 #most-recent {
-    max-width: 450px;
+    max-width: 650px;
     margin-left: auto;
     margin-right: auto;
 }
