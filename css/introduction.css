@@ -13,6 +13,10 @@
     max-width: 800px;
 }
 
+.card-header {
+    background-color: rgb(33, 37, 41);
+    color: white;
+}
 
 /* Down arrow when card is showing */
 .card-header h3::before {
@@ -156,6 +160,16 @@
 
     .col-lg {
         padding: 0 15px 0 15px;
+    }
+
+    /* Remove space between cards and container */
+    .col-lg:first-of-type {
+        padding-left: 0;
+    }
+
+    /* Remove space between cards and container */
+    .col-lg:last-of-type {
+        padding-right: 0;
     }
 
     #most-recent {
