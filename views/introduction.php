@@ -67,7 +67,7 @@ SOFTWARE.
                 <div class="card">
 
                     <!-- Card heading -->
-                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
+                    <a class="no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
                        role="button" aria-expanded="false" aria-controls="internships-body">
                         <div class="card-header text-center" id="internships-heading">
                             <h3>Internships</h3>

@@ -66,14 +66,14 @@ function register(){
 
 function adminPage(){
 
-    if ($_SESSION["validUser"] == true){
+    //if ($_SESSION["validUser"] == true){
         echo Template::instance()->render('views/adminPage.php');
 
-    }else{
-        /*redirect to admin Login*/
-        header('Location: https://itconnect.greenrivertech.net/adminLogin');
-        exit;
-    }
+//    }else{
+//        /*redirect to admin Login*/
+//        header('Location: https://itconnect.greenrivertech.net/adminLogin');
+//        exit;
+//    }
 
 }
 

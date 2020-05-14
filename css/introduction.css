@@ -10,7 +10,40 @@
  */
 
 .card {
-    max-width: 650px;
+    max-width: 800px;
+}
+
+
+/* Down arrow when card is showing */
+.card-header h3::before {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-right: .3em;
+    vertical-align: .21em;
+    content: "";
+    border-top: .35em solid;
+    border-right: .23em solid transparent;
+    border-bottom: 0;
+    border-left: .23em solid transparent;
+}
+
+/* Right arrow when card is collapsed */
+.collapsed .card-header h3::before {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .3em;
+    vertical-align: .18em;
+    content: "";
+    border-left: .35em solid;
+    border-bottom: .23em solid transparent;
+    border-right: 0;
+    border-top: .23em solid transparent;
+}
+
+.col-lg {
+    padding: 0;
 }
 
 #intro {
@@ -31,9 +64,10 @@
 }
 
 #most-recent {
-    max-width: 650px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
 }
 
 /* Turn off hyperlink decoration for all text */
@@ -42,10 +76,6 @@
     text-decoration-color: initial;
     text-decoration-line: none;
     text-decoration: none;
-}
-
-#most-recent {
-    margin-bottom: 50px;
 }
 
 /* To undo changes from .accordion ie keep bottom border and corners rounded */
@@ -113,6 +143,20 @@
 
 /* Bootstrap Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+
+    /* Remove down arrow when not in accordion */
+    .card-header h3::before {
+        content: none;
+    }
+
+    /* Remove right arrow when not in accordion */
+    .collapsed .card-header h3::before {
+        content: none;
+    }
+
+    .col-lg {
+        padding: 0 15px 0 15px;
+    }
 
     #most-recent {
         max-width: initial;
