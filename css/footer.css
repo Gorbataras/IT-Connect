@@ -48,5 +48,12 @@ body {
 }
 
 #site-container {
-    padding-bottom: 170px;
+    padding-bottom: 377px;
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+    #site-container {
+        padding-bottom: 170px;
+    }
 }
