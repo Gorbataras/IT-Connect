@@ -67,7 +67,7 @@ SOFTWARE.
                 <div class="card">
 
                     <!-- Card heading -->
-                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
+                    <a class="no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
                        role="button" aria-expanded="false" aria-controls="internships-body">
                         <div class="card-header text-center" id="internships-heading">
                             <h3>Internships</h3>
@@ -81,8 +81,14 @@ SOFTWARE.
                                 <F3:repeat group="{{ @posts }}" value="{{ @post }}">
                                     <li class="list-group-item">
                                         <a href="{{@post->url}}" target="_blank" class="no-decoration"> <!-- Url column-->
-                                            <h4 class="company-name">{{@post->company}}</h4> <!-- Company column -->
-                                            <h6 class="category">{{@post->category}}</h6> <!-- Title column -->
+                                            <span class="company-name h4">{{@post->company}}</span> <!-- Company column -->
+                                            <br>
+                                            <span class="h6">{{@post->title}}</span>
+                                            <br>
+                                            <span>{{@post->location}}</span>
+                                            <br>
+                                            <span>Posted: {{@post->post_date}}</span>
+                                            <br>
                                             <p class="card-subtitle mb-2 text-muted"> <!-- Description column -->
                                                 <check if="{{empty(@post->description)}}">
                                                     <true>No description available</true>
@@ -120,13 +126,20 @@ SOFTWARE.
 							<ul id="latest-meetups" class="list-group list-group-flush">
 								<F3:repeat group="{{ @array }}" value="{{ @meetup }}">
 									<li class="list-group-item">
-										<a href="{{@meetup->link}}" target="_blank" class="no-decoration">
-												<h5 class="card-title">{{@meetup->name}}</h5>
-												<h6 class="card-subtitle mb-2 text-muted">
-													{{@meetup->local_time}} -> {{@meetup->local_date}}</h6>
-												<h6 class="card-subtitle mb-2 text-muted">
-													{{@meetup->venue->name}}</h6>
-										</a>
+                                        <a href="{{@meetup->link}}" target="_blank" class="no-decoration">
+                                            <span class="card-title h5">{{@meetup->name}}</span>
+
+											<br>
+                                            <span class="card-text mb-2 h6">
+													{{@meetup->local_time}} - {{@meetup->local_date}}</span>
+											<br>
+                                            <span class="card-text mb-2">
+													{{@meetup->venue->name}}</span>
+											<br>
+											<span class="card-text mb-2 h6">Hosted By:
+												<div class="text-muted">{{@meetup->group->name}}</div>
+											</span>
+                                        </a>
 									</li>
 								</F3:repeat>
 							</ul>
