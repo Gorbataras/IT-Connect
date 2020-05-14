@@ -51,8 +51,8 @@ body {
     padding-bottom: 377px;
 }
 
-/*Small devices (landscape phones, 576px and up)*/
-@media (min-width: 576px) {
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
     #site-container {
         padding-bottom: 170px;
     }
