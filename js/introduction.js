@@ -46,28 +46,6 @@ $.get('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/gree
         $('#latest-blogs').html(output);
     });
 
-// Prevent from closing the only showing card on accordion
-$('.expand-toggle').on('click', function(e) {
-   if ($(this).parents('.card').children('.collapse').hasClass('show')) {
-       e.stopPropagation();
-   }
-   e.preventDefault();
-});
-
-// Show regular cursor for unclickable card title
-$('.expand-toggle').mouseenter(function() {
-    if ($(this).parents('.card').children('.collapse').hasClass('show')) {
-        $(this).css('cursor', 'default');
-    }
-});
-
-// Show pointer for clickable card title
-$('.expand-toggle').mouseleave(function() {
-    if ($(this).parents('.card').children('.collapse').hasClass('show')) {
-        $(this).css('cursor', 'pointer');
-    }
-});
-
 // Closes the alert box
 var close = document.getElementsByClassName("closebtn");
 var i;
