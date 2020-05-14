@@ -43,15 +43,19 @@
 			<form id="edit-meetups-form">
 				<div class="modal-body">
 
-					<textarea name="meetups_body" id="meetups_body"
-							  class="form-control" rows="50"></textarea>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" >https://meetup.com/</span>
+						</div>
+						<input type="text" class="form-control" id="newMeetup" name="newMeetup">
+					</div>
+
+					<button class="btn btn-success" type="submit">Add</button>
 
 				</div>
 				<div class="modal-footer">
 					<button type="button" data-dismiss="modal" class="btn btn-secondary">
 						Cancel
-					</button>
-					<button type="submit" value="SUBMIT" class="btn btn-success">Update
 					</button>
 				</div>
 			</form>

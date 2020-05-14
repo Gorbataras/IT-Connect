@@ -284,6 +284,9 @@
         padding: 6px;
     }
 
+	#newMeetup {
+		width: 50px;
+	}
 }
 
 
