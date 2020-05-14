@@ -95,6 +95,9 @@ SOFTWARE.
             <li class="nav-item">
                 <a class="nav-link" href="#" id="resources-edit" data-toggle="modal" data-target="#resourcesModal"><i class="fas fa-info-circle"></i> Edit Student Resources<span class="sr-only">(current)</span></a>
             </li>
+			<li class="nav-item">
+                <a class="nav-link" href="#" id="meetups-edit" data-toggle="modal" data-target="#meetupsModal"><i class="fab fa-meetup"></i> Edit Meetups Hosts<span class="sr-only">(current)</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="https://gatorlock.greenrivertech.net/requestForReset" target="_blank"><i class="fab fa-stack-exchange"></i> Change Password<span class="sr-only">(current)</span></a>
             </li>
@@ -127,6 +130,7 @@ SOFTWARE.
     <include href="views/modals/updateModal.php"></include>
     <include href="views/modals/deleteModal.php"></include>
     <include href="views/modals/resourcesModal.php"></include>
+    <include href="views/modals/meetupsModal.php"></include>
 
 
 <!--old bootstrap for page (do not delete. will break table. Used for the alerts)-->
