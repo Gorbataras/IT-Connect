@@ -1,6 +1,17 @@
+
+.card-header {
+    background-color: rgb(33, 37, 41);
+    color: white;
+}
+
 .modal-backdrop {
     background-color: rgba(255, 255, 255, .15) !important;
 }
+
+.tab-pane h2 {
+    text-align: center;
+}
+
 /* large desktops and up ----------- */
 @media screen and (min-width: 1200px) {
 
@@ -70,8 +81,8 @@
     }
 
     .input-group-addon {
-        color: #ffffff;
-        background-color: #5cb85c;
+        /*color: #ffffff;*/
+        /*background-color: #5cb85c;*/
         border-color: #56A514;
     }
 
@@ -138,8 +149,8 @@
     }
 
     .input-group-addon {
-        color: #ffffff;
-        background-color: #5cb85c;
+        /*color: #ffffff;*/
+        /*background-color: #5cb85c;*/
         border-color: #56A514;
     }
 

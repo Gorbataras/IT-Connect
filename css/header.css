@@ -11,7 +11,7 @@
 /* large desktops and up ----------- */
 @media screen and (min-width: 992px) {
 
-    .navbar{
+    .navbar {
         padding: 0;
         height: 3.5em;
         padding-left: 10px;

@@ -33,10 +33,10 @@ SOFTWARE.
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <h2 id="title" class="modal-title">Delete Confirmation</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h2 id="title" class="modal-title">Delete Confirmation</h2>
             </div>
             <div class="modal-body">
                 <div class="row">
