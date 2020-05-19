@@ -79,38 +79,194 @@ SOFTWARE.
 <body>
 
 <!--navigation bar for the admin page only-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <a class="navbar-brand" href="/"><img src="https://itconnect.greenrivertech.net/assets/img/grtech.jpg" class="img-responsive" style="height: 50px; width: 50px;"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="post-submit" data-toggle="modal" data-target="#addModal">Add Internships<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="resources-edit" data-toggle="modal" data-target="#resourcesModal">Edit Student Resources<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://gatorlock.greenrivertech.net/requestForReset" target="_blank">Change Password<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="register">Create User<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <ul class="navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" href="Logout" id="logout">LogOut<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-success">-->
+<!--    <a class="navbar-brand" href="/"><img src="https://itconnect.greenrivertech.net/assets/img/grtech.jpg" class="img-responsive" style="height: 50px; width: 50px;"></a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarText">-->
+<!--        <ul class="navbar-nav mr-auto">-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#" id="post-submit" data-toggle="modal" data-target="#addModal">Add Internships<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#" id="resources-edit" data-toggle="modal" data-target="#resourcesModal">Edit Student Resources<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="https://gatorlock.greenrivertech.net/requestForReset" target="_blank">Change Password<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="register">Create User<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <ul class="navbar-nav navbar-right">-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="Logout" id="logout">LogOut<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--navbar-->
+<include href="views/parts/navbar.php"></include>
+
+<!-- Content Management Tabs -->
+<nav>
+    <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+        <!-- Site Settings -->
+        <a class="nav-item nav-link active" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab"
+           aria-controls="nav-settings" aria-selected="true">Site Settings</a>
+        <!-- Home -->
+        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+           aria-controls="nav-home" aria-selected="false">Home</a>
+        <!-- Internships -->
+        <a class="nav-item nav-link" id="nav-internships-tab" data-toggle="tab" href="#nav-internships" role="tab"
+           aria-controls="nav-internships" aria-selected="false">Internships</a>
+        <!-- Meetups -->
+        <a class="nav-item nav-link" id="nav-meetups-tab" data-toggle="tab" href="#nav-meetups" role="tab"
+           aria-controls="nav-meetups" aria-selected="false">Meetups</a>
+        <!-- Student Resources -->
+        <a class="nav-item nav-link" id="nav-resources-tab" data-toggle="tab" href="#nav-resources" role="tab"
+           aria-controls="nav-resources" aria-selected="false">Student Resources</a>
     </div>
 </nav>
 
 <include href="gatorLock/gatorLockLogin.php"></include>
 
-    <div id="body-content">
+<div class="tab-content container" id="nav-tab-content">
+    <!-- Site Settings -->
+    <div class="tab-pane fade show active" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+        <h2>Site Settings</h2>
+        <h3>Color Theme</h3>
+        <hr>
+        <h3>Add User</h3>
+        <hr>
+    </div>
+    <!-- Home -->
+    <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <h2>Home</h2>
+    </div>
+    <!-- Internships -->
+    <div class="tab-pane fade" id="nav-internships" role="tabpanel" aria-labelledby="nav-internships-tab">
+        <h2>Internships</h2>
+        <div class="card">
+            <div class="card-header">
+                <h3>Add Internship</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Required Information</h4>
+                            <!-- error message here-->
+                            <div id="validation-error"></div>
+                            <!-- post ID-->
+                            <input type="hidden" id="post_id" name="id" value="0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label class="input-group-addon" for="title">Position Title</label>
+                                        <input required="required" type="text" class="form-control"
+                                               id="title" name="title"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label class="input-group-addon" for="company">Company</label>
+                                        <input required="required" type="text" class="form-control"
+                                               id="company" name="company"/>
+                                    </div>
+                                </div>
+
+                                <br><br>
+
+                                <div class="col-md-12">
+                                    <div class="input-group ">
+                                        <label class="input-group-addon" for="Application_Type">Application Type:
+                                            &nbsp
+                                            <input type="radio" name="Application_Type" id="url_checkbox" value="url" checked=""/>&nbsp URL &nbsp
+                                            &nbsp
+                                            <input type="radio" name="Application_Type" id="email_checkbox" value="email"/>&nbsp Email
+                                        </label>
+                                        <input required="required" type="text" id="contact_text" class="form-control" name="Application_Type_Text">
+                                    </div>
+                                </div>
+
+                                <br><br>
+
+                                <div class="col-md-12 for-email-post hidden">
+                                    <div class="input-group">
+                                        <label class="input-group-addon" for="description">Description</label>
+                                        <textarea class="form-control" name="description" id="description"
+                                                  rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  <!-- /.End Internship Information-->
+
+                    <br>
+
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <h4>Additional Information</h4>
+
+                            <div class="row">
+
+                                <!-- <div class="col-md-6">
+                                     <div class="input-group">
+                                         <label class="input-group-addon" for="hours">Hours Per Week</label>
+                                         <input type="number" name="hours" id="hours"
+                                                class="form-control">
+                                     </div>
+                                 </div>-->
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label class="input-group-addon" for="location">Location</label>
+                                        <input type="text" name="location" id="location" class="form-control">
+                                    </div>
+                                </div>
+
+                                <br><br>
+
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label class="input-group-addon" for="category">Category</label>
+                                        <select class="form-control" name="category" id="category">
+                                            <option value="0" disabled="disabled" selected="selected">Select an
+                                                option
+                                            </option>
+                                            <!--<option value="IT Operations">IT Operations</option>-->
+                                            <option value="Software Development">Software Development</option>
+                                            <option value="Networking & Security">Networking & Security</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <br><br>
+
+                                <div class="col-md-12 for-email-post hidden">
+                                    <div class="input-group">
+                                        <label class="input-group-addon" for="qualifications">Qualifications</label>
+                                        <textarea name="qualifications" id="qualifications" rows="4"
+                                                  class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" value="SUBMIT" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+        </div>
+        <br>
+
+        <h3>All Internships</h3>
+        <hr>
+
         <div class="internships-table">
+
             <div id="toolbar">
                 <button id="delete-btn" class="btn btn-danger"><i class="fas fa-minus-circle"></i> Delete Selected Posts</button>
             </div>
@@ -118,16 +274,26 @@ SOFTWARE.
             <table id="adminTable"> </table>
         </div>
     </div>
+    <!-- Meetups -->
+    <div class="tab-pane fade" id="nav-meetups" role="tabpanel" aria-labelledby="nav-meetups-tab">
+        <h2>Meetups</h2>
+    </div>
+    <!-- Student Resources -->
+    <div class="tab-pane fade" id="nav-resources" role="tabpanel" aria-labelledby="nav-resources-tab">
+        <h2>Student Resources</h2>
+    </div>
+</div>
 
-    <!--modals for page-->
-    <include href="views/modals/addModal.php"></include>
-    <include href="views/modals/updateModal.php"></include>
-    <include href="views/modals/deleteModal.php"></include>
-    <include href="views/modals/resourcesModal.php"></include>
+
+<!--modals for page-->
+<include href="views/modals/addModal.php"></include>
+<include href="views/modals/updateModal.php"></include>
+<include href="views/modals/deleteModal.php"></include>
+<include href="views/modals/resourcesModal.php"></include>
 
 
 <!--old bootstrap for page (do not delete. will break table. Used for the alerts)-->
-<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.css">
+<!--<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.css">-->
 <!--needed for table-->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!--Needed for modals-->

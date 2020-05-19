@@ -21,13 +21,13 @@
              -->
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="internships"><i class="fas fa-search"></i> Internships<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="internships">Internships<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="studentResources"><i class="fas fa-info-circle"></i> Student Resources<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="studentResources">Student Resources<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="upcoming-events"><i class="fas fa-info-circle"></i> Upcoming Events<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="upcoming-events">Upcoming Events<span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <ul class="navbar-nav navbar-right">
