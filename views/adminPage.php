@@ -152,7 +152,7 @@ SOFTWARE.
 <include href="views/modals/deleteModal.php"></include>
 <include href="views/modals/resourcesModal.php"></include>
 
-
+<!-- Old bootstrap messes up styling of new bootstrap TODO see if we can get rid of this-->
 <!--old bootstrap for page (do not delete. will break table. Used for the alerts)-->
 <!--<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.css">-->
 <!--needed for table-->
