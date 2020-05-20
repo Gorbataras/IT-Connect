@@ -423,7 +423,7 @@ tinymce.init({
 tinymce.init({
     height: "400",
     selector: '#resources_body',
-    content_css : '../css/index.css, ../css/resources.css',
+    content_css : '../css/resources.css',
     plugins: [
         'advlist autolink lists link print preview searchreplace',
         'insertdatetime table contextmenu paste'
@@ -435,3 +435,21 @@ tinymce.init({
         });
     }
 });
+
+tinymce.init({
+    height: "400",
+    selector: '.wysiwyg',
+    content_css : '../css/resources.css',
+    plugins: [
+        'advlist autolink lists link print preview searchreplace',
+        'insertdatetime table contextmenu paste'
+    ],
+    toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+    setup: function(editor) {
+        editor.on('change', function() {
+            tinymce.triggerSave();
+        });
+    }
+});
+
+

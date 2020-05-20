@@ -64,7 +64,8 @@ SOFTWARE.
     <link rel="shortcut icon" type="image/x-icon" href="https://itconnect.greenrivertech.net/assets/img/grtech.jpg">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!--header css-->
     <link rel="stylesheet" type="text/css" media="all" href="css/header.css">
     <!--admin page css-->
@@ -134,7 +135,7 @@ SOFTWARE.
 
 <div class="tab-content container" id="nav-tab-content">
     <!-- Site Settings -->
-    <include href="views/adminPartials/siteSettingsTabContent"></include>
+    <include href="views/adminPartials/siteSettingsTabContent.php"></include>
     <!-- Home -->
     <include href="views/adminPartials/homeTabContent.php"></include>
     <!-- Internships -->
@@ -158,7 +159,7 @@ SOFTWARE.
 <!--needed for table-->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!--Needed for modals-->
-<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/bootstrap.min.js"></script>-->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
 <!-- Latest compiled and minified JavaScript -->
