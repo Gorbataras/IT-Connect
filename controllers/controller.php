@@ -31,11 +31,15 @@ session_start();
 
 /*redirect to the introduction page*/
 function introduction($fatFree){
+
     // show the introduction page
+	//Meetup integration
 	$response=file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
 	$response=json_decode($response);
 	$fatFree->set('array', $response);
-    $config = include("db/config.php");
+
+	//Internships integration
+    $config = include("/home/nwagreen/config.php");
     $db = new PDO($config["db"], $config["username"], $config["password"]);
     $posts = new PostingsModel($db);
     $fatFree->set('posts', $posts->getAllPostings());
@@ -64,17 +68,42 @@ function register(){
     echo Template::instance()->render('gatorLock/register.php');
 }
 
-function adminPage(){
+function adminPage($fatFree){
+	$meetupGroupsList = file_get_contents('db/meetupSources.json');
+	$meetupGroupsList = json_decode($meetupGroupsList);
+	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 
-    if ($_SESSION["validUser"] == true){
+	//Meetups Control
+	if ($_REQUEST['source-tab'] == 'meetups') {
+		switch($_REQUEST['task']){
+			case 'add':
+				meetupUpdate($meetupGroupsList, $fatFree);
+				break;
+
+		}
+	}
+
+
+    //if ($_SESSION["validUser"] == true){
         echo Template::instance()->render('views/adminPage.php');
 
-    }else{
-        /*redirect to admin Login*/
-        header('Location: https://itconnect.greenrivertech.net/adminLogin');
-        exit;
-    }
+//    }else{
+//        /*redirect to admin Login*/
+//        header('Location: https://itconnect.greenrivertech.net/adminLogin');
+//        exit;
+//    }
 
+}
+
+function meetupUpdate($meetupGroupsList, $fatFree) {
+	if( !in_array($_POST['new-group'], $meetupGroupsList) ) {
+		array_push($meetupGroupsList,$_POST['new-group']);
+		file_put_contents('db/meetupSources.json',
+			json_encode($meetupGroupsList));
+	}
+	$meetupGroupsList = file_get_contents('db/meetupSources.json');
+	$meetupGroupsList = json_decode($meetupGroupsList);
+	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
 function logout(){

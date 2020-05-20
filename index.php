@@ -39,8 +39,8 @@ $fatFree->route('GET|POST /adminLogin', function (){
 });
 
 // admin page
-$fatFree->route('GET|POST /adminPage', function (){
-    adminPage();
+$fatFree->route('GET|POST /adminPage', function ($fatFree){
+    adminPage($fatFree);
 });
 
 // register admin page
