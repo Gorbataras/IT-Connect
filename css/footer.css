@@ -1,4 +1,10 @@
 /*make footer black*/
+
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
 .page-footer{
     background-color:#1d2023;
     padding-top: 15px;
@@ -6,13 +12,17 @@
     padding-right: 10px;
     padding-bottom: 15px;
     overflow: hidden;
+
+    position: absolute;
+    bottom:0;
+    width: 100%;
 }
 
 .page-footer h5{
     font-size: 18px;
 }
 
-.page-footer p{
+.page-footer p {
     color:green;
 }
 
@@ -35,4 +45,15 @@
 /*make heart change color on hover*/
 .page-footer a i:hover{
     color: red;
+}
+
+#site-container {
+    padding-bottom: 377px;
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    #site-container {
+        padding-bottom: 170px;
+    }
 }

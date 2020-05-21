@@ -74,56 +74,77 @@ SOFTWARE.
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-
-    <!-- Fontawesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 
 <body>
 
 <!--navigation bar for the admin page only-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <a class="navbar-brand" href="/"><img src="https://itconnect.greenrivertech.net/assets/img/grtech.jpg" class="img-responsive" style="height: 50px; width: 50px;"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="post-submit" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus-circle"></i> Add Internships<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="resources-edit" data-toggle="modal" data-target="#resourcesModal"><i class="fas fa-info-circle"></i> Edit Student Resources<span class="sr-only">(current)</span></a>
-            </li>
-			<li class="nav-item">
-                <a class="nav-link" href="#" id="meetups-edit" data-toggle="modal" data-target="#meetupsModal"><i class="fab fa-meetup"></i> Edit Meetups Hosts<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://gatorlock.greenrivertech.net/requestForReset" target="_blank"><i class="fab fa-stack-exchange"></i> Change Password<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="register"><i class="fas fa-user-tag"></i> Create User<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <ul class="navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" href="Logout" id="logout"><i class="fas fa-sign-out-alt"></i> LogOut<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-success">-->
+<!--    <a class="navbar-brand" href="/"><img src="https://itconnect.greenrivertech.net/assets/img/grtech.jpg" class="img-responsive" style="height: 50px; width: 50px;"></a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarText">-->
+<!--        <ul class="navbar-nav mr-auto">-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#" id="post-submit" data-toggle="modal" data-target="#addModal">Add Internships<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#" id="resources-edit" data-toggle="modal" data-target="#resourcesModal">Edit Student Resources<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="https://gatorlock.greenrivertech.net/requestForReset" target="_blank">Change Password<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="register">Create User<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <ul class="navbar-nav navbar-right">-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="Logout" id="logout">LogOut<span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--navbar-->
+<include href="views/parts/navbar.php"></include>
+
+<!-- Content Management Tabs -->
+<nav>
+    <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+        <!-- Site Settings -->
+        <a class="nav-item nav-link active" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab"
+           aria-controls="nav-settings" aria-selected="true">Site Settings</a>
+        <!-- Home -->
+        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+           aria-controls="nav-home" aria-selected="false">Home</a>
+        <!-- Internships -->
+        <a class="nav-item nav-link" id="nav-internships-tab" data-toggle="tab" href="#nav-internships" role="tab"
+           aria-controls="nav-internships" aria-selected="false">Internships</a>
+        <!-- Meetups -->
+        <a class="nav-item nav-link" id="nav-meetups-tab" data-toggle="tab" href="#nav-meetups" role="tab"
+           aria-controls="nav-meetups" aria-selected="false">Meetups</a>
+        <!-- Student Resources -->
+        <a class="nav-item nav-link" id="nav-resources-tab" data-toggle="tab" href="#nav-resources" role="tab"
+           aria-controls="nav-resources" aria-selected="false">Student Resources</a>
     </div>
 </nav>
 
 <include href="gatorLock/gatorLockLogin.php"></include>
 
-    <div id="body-content">
-        <div class="internships-table">
-            <div id="toolbar">
-                <button id="delete-btn" class="btn btn-danger"><i class="fas fa-minus-circle"></i> Delete Selected Posts</button>
-            </div>
-            <!--where admin table is generated-->
-            <table id="adminTable"> </table>
-        </div>
-    </div>
+<div class="tab-content container" id="nav-tab-content">
+    <!-- Site Settings -->
+    <include href="views/adminPartials/siteSettingsTabContent"></include>
+    <!-- Home -->
+    <include href="views/adminPartials/homeTabContent.php"></include>
+    <!-- Internships -->
+    <include href="views/adminPartials/internshipsTabContent.php"></include>
+    <!-- Meetups -->
+    <include href="views/adminPartials/meetupsTabContent.php"></include>
+    <!-- Student Resources -->
+    <include href="views/adminPartials/resourcesTabContent.php"></include>
+</div>
+
 
     <!--modals for page-->
     <include href="views/modals/addModal.php"></include>
@@ -134,7 +155,7 @@ SOFTWARE.
 
 
 <!--old bootstrap for page (do not delete. will break table. Used for the alerts)-->
-<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.css">
+<!--<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.css">-->
 <!--needed for table-->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!--Needed for modals-->

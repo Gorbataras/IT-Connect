@@ -32,7 +32,6 @@ session_start();
 /*redirect to the introduction page*/
 function introduction($fatFree){
 
-    // show the introduction page
 	//Meetup integration
 
 	//Retrieve list of sources
@@ -114,6 +113,8 @@ function register(){
 }
 
 function adminPage($fatFree){
+    //if ($_SESSION["validUser"] == true){
+
 	//retrieve the json with list of sources
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
 	$meetupGroupsList = json_decode($meetupGroupsList, 1);
@@ -134,8 +135,6 @@ function adminPage($fatFree){
 		}
 	}
 
-
-	//if ($_SESSION["validUser"] == true){
 	echo Template::instance()->render('views/adminPage.php');
 
 	//    }else{
