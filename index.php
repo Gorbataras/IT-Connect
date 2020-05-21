@@ -48,6 +48,10 @@ $fatFree->route('GET|POST /register', function ($fatFree){
     register($fatFree);
 });
 
+$fatFree->route('GET|POST /upcoming-events', function($fatFree) {
+    upcomingEvents($fatFree);
+});
+
 // logout admin page
 $fatFree->route('GET /Logout', function ($fatFree){
     logout($fatFree);
