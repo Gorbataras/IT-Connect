@@ -57,11 +57,11 @@ SOFTWARE.
     <div class="container">
         <!-- Site Introduction -->
         <check if="{{ @content['intro']['isShown'] == 1 }}">
-        <p id="intro">
-            {{ @content['intro']['html'] }}
-<!--            Thanks for visiting IT Connect. The site where Green River College software development students can find-->
-<!--            upcoming events, current internships and other student resources.-->
-        </p>
+            <p id="intro">
+                {{ @content['intro']['html'] }}
+                <!--            Thanks for visiting IT Connect. The site where Green River College software development students can find-->
+                <!--            upcoming events, current internships and other student resources.-->
+            </p>
         </check>
         <h2>Recent Activity</h2>
         <hr class="mt-0">
@@ -74,49 +74,48 @@ SOFTWARE.
                 <div class="col-lg">
                     <div class="card">
 
-                    <!-- Card heading -->
-                    <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
-                       role="button" aria-expanded="false" aria-controls="internships-body">
-                        <div class="card-header text-center" id="internships-heading">
-                            <h3>Internships</h3>
-                        </div>
-                    </a>
+                        <!-- Card heading -->
+                        <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
+                           role="button" aria-expanded="false" aria-controls="internships-body">
+                            <div class="card-header text-center" id="internships-heading">
+                                <h3>Internships</h3>
+                            </div>
+                        </a>
 
-                    <div id="internships-body" class="collapse show" aria-labelledby="internships-heading"
-                         data-parent="#home-accordion">
-                        <div class="card-body">
-                            <ul id="internships" class="list-group list-group-flush">
-                                <F3:repeat group="{{ @posts }}" value="{{ @post }}">
-                                    <li class="list-group-item">
-                                        <a href="{{@post->url}}" target="_blank" class="no-decoration"> <!-- Url column-->
-                                            <span class="company-name h4">{{@post->company}}</span> <!-- Company column -->
-                                            <br>
-                                            <span class="h6">{{@post->title}}</span>
-                                            <br>
-                                            <span>{{@post->location}}</span>
-                                            <br>
-                                            <span>Posted: {{@post->post_date}}</span>
-                                            <br>
-                                            <p class="card-subtitle mb-2 text-muted"> <!-- Description column -->
-                                                <check if="{{empty(@post->description)}}">
-                                                    <true>No description available</true>
-                                                    <false>{{substr(@post->description, 0, 150)}}...</false>
-                                                </check>
-                                                <small class="card-subtitle mb-2 text-muted">
-                                                    <br><strong>Apply Now!</strong>
-                                                </small>
-                                            </p>
-                                        </a>
-                                    </li>
-                                </F3:repeat>
-                            </ul>
+                        <div id="internships-body" class="collapse show" aria-labelledby="internships-heading"
+                             data-parent="#home-accordion">
+                            <div class="card-body">
+                                <ul id="internships" class="list-group list-group-flush">
+                                    <F3:repeat group="{{ @posts }}" value="{{ @post }}">
+                                        <li class="list-group-item">
+                                            <a href="{{@post->url}}" target="_blank" class="no-decoration"> <!-- Url column-->
+                                                <span class="company-name h4">{{@post->company}}</span> <!-- Company column -->
+                                                <br>
+                                                <span class="h6">{{@post->title}}</span>
+                                                <br>
+                                                <span>{{@post->location}}</span>
+                                                <br>
+                                                <span>Posted: {{@post->post_date}}</span>
+                                                <br>
+                                                <p class="card-subtitle mb-2 text-muted"> <!-- Description column -->
+                                                    <check if="{{empty(@post->description)}}">
+                                                        <true>No description available</true>
+                                                        <false>{{substr(@post->description, 0, 150)}}...</false>
+                                                    </check>
+                                                    <small class="card-subtitle mb-2 text-muted">
+                                                        <br><strong>Apply Now!</strong>
+                                                    </small>
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </F3:repeat>
+                                </ul>
+                            </div>
+                            <!--Show more button -->
+                            <a class="btn container-fluid" href="internships" role="button">
+                                Show More
+                            </a>
                         </div>
-                    </div>
-
-                    <!--Show more button -->
-                    <a class="btn container-fluid" href="internships" role="button">
-                        Show More
-                    </a>
                     </div><!-- card -->
                 </div><!-- col -->
 
@@ -152,11 +151,11 @@ SOFTWARE.
                                     </li>
                                 </F3:repeat>
                             </ul>
+                            <!--Show more button -->
+                            <a class="btn container-fluid"
+                               href="https://www.meetup.com/South-King-Web-Mobile-Developers/events/" role="button"
+                               target="_blank">Show More</a>
                         </div>
-                        <!--Show more button -->
-                        <a class="btn container-fluid"
-                           href="https://www.meetup.com/South-King-Web-Mobile-Developers/events/" role="button"
-                           target="_blank">Show More</a>
                     </div><!-- card -->
                 </div><!-- col -->
 
@@ -174,12 +173,11 @@ SOFTWARE.
                         <div id="posts-body" class="collapse" aria-labelledby="posts-heading" data-parent="#home-accordion">
                             <ul id="latest-blogs" class="list-group list-group-flush">
                             </ul>
+                            <!--Show more button -->
+                            <a class="btn container-fluid"
+                               href="https://medium.com/green-river-web-mobile-developers" role="button"
+                               target="_blank">Show More</a>
                         </div>
-
-                        <!--Show more button -->
-                        <a class="btn container-fluid"
-                           href="https://medium.com/green-river-web-mobile-developers" role="button"
-                           target="_blank">Show More</a>
                     </div><!-- card -->
                 </div><!-- col -->
             </div><!-- row -->
