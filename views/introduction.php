@@ -130,7 +130,7 @@ SOFTWARE.
 							<ul id="latest-meetups" class="list-group list-group-flush">
 								<F3:repeat group="{{ @array }}" value="{{ @meetup }}">
 									<li class="list-group-item">
-                                        <a href="{{@meetup->link}}" target="_blank" class="no-decoration">
+                                        <a href="{{@meetup.link}}" target="_blank" class="no-decoration">
                                             <span class="card-title h5">{{@meetup.name}}</span>
 											<br>
                                             <span class="card-text mb-2 h6">
@@ -150,6 +150,7 @@ SOFTWARE.
 
                 </div><!-- card -->
             </div><!-- col -->
+
 
             <!-- Posts -->
             <div class="col-lg">
