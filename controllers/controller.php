@@ -79,19 +79,21 @@ function adminPage($fatFree){
 			case 'add':
 				meetupUpdate($meetupGroupsList, $fatFree);
 				break;
-
+			case 'delete':
+				meetupDelete($meetupGroupsList, $fatFree);
+				break;
 		}
 	}
 
 
-    //if ($_SESSION["validUser"] == true){
-        echo Template::instance()->render('views/adminPage.php');
+	//if ($_SESSION["validUser"] == true){
+	echo Template::instance()->render('views/adminPage.php');
 
-//    }else{
-//        /*redirect to admin Login*/
-//        header('Location: https://itconnect.greenrivertech.net/adminLogin');
-//        exit;
-//    }
+	//    }else{
+	//        /*redirect to admin Login*/
+	//        header('Location: https://itconnect.greenrivertech.net/adminLogin');
+	//        exit;
+	//    }
 
 }
 
@@ -106,8 +108,20 @@ function meetupUpdate($meetupGroupsList, $fatFree) {
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
+function meetupDelete($meetupsGroupsList, $fatFree) {
+	if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
+		unset($meetupsGroupsList[$key]);
+	}
+	var_dump($meetupsGroupsList);
+	file_put_contents('db/meetupSources.json',
+		json_encode($meetupsGroupsList));
+	$meetupGroupsList = file_get_contents('db/meetupSources.json');
+	$meetupGroupsList = json_decode($meetupGroupsList);
+	$fatFree->set('meetupGroupsList', $meetupGroupsList);
+}
+
 function logout(){
-    //  Log out of page
+	//  Log out of page
     // destroy session
     session_destroy();
 
