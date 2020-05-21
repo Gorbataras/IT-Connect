@@ -35,31 +35,45 @@ function introduction($fatFree){
     // show the introduction page
 	//Meetup integration
 
+	//Retrieve list of sources
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
 	$meetupGroupsList = json_decode($meetupGroupsList,1);
+
+	//link to be manipulated. "placeholder" will be replaced repeatedly with each entry
+	//in the list
 	$link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
 
+	//Store meetups
 	$meetupList = array();
+	//limit 5
 	$counter = 0;
+
+	// Send request for each source
 	foreach ($meetupGroupsList as $source) {
+		// make link for the current source
 		$currSource = str_replace('placeholder', $source, $link);
 
+		//Make request to meetup api
 		$response = file_get_contents($currSource);
 		$response = json_decode($response,1);
+		//Add each event from request to array
 		foreach ($response as $event) {
-
+			//add event to list
 			array_push($meetupList, $event);
 			$counter++;
+			//Check for limit reached
 			if ($counter == 5){
 				break;
 			}
 		}
+		//Check for limit reached
 		if ($counter==5) {
 			break;
 		}
 	}
-
+	//Sort the entries using custom comparison function
 	usort($meetupList, "sortFunction");
+
 	$fatFree->set('array', $meetupList);
 
 
@@ -100,17 +114,21 @@ function register(){
 }
 
 function adminPage($fatFree){
+	//retrieve the json with list of sources
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
 	$meetupGroupsList = json_decode($meetupGroupsList, 1);
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 
 	//Meetups Control
 	if ($_REQUEST['source-tab'] == 'meetups') {
+		//Decide what to do based on what user clicked
 		switch($_REQUEST['task']){
 			case 'add':
+				//Add a new source
 				meetupUpdate($meetupGroupsList, $fatFree);
 				break;
 			case 'delete':
+				//Delete the selected entry from the sources list
 				meetupDelete($meetupGroupsList, $fatFree);
 				break;
 		}
@@ -129,51 +147,65 @@ function adminPage($fatFree){
 }
 
 function meetupUpdate($meetupGroupsList, $fatFree) {
+	//If the entry does not already exist
 	if( !in_array($_POST['new-group'], $meetupGroupsList) ) {
+		//Add entry to list
 		array_push($meetupGroupsList,$_POST['new-group']);
+		//Push the list to json file
 		file_put_contents('db/meetupSources.json',
 			json_encode($meetupGroupsList));
 	}
+	//Update the current sources displayed
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
 	$meetupGroupsList = json_decode($meetupGroupsList,1);
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
 function meetupDelete($meetupsGroupsList, $fatFree) {
+	//Find the requested source in the list
 	if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
+		//Remove the source from the array
 		unset($meetupsGroupsList[$key]);
 	}
 
+	//Write the changes to json
 	file_put_contents('db/meetupSources.json',
 		json_encode($meetupsGroupsList));
+	//Update the current sources displayed
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
 	$meetupGroupsList = json_decode($meetupGroupsList, 1);
-
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
 
 function upcomingEvents($fatFree) {
+	//Retrieve sources from json
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
 	$meetupGroupsList = json_decode($meetupGroupsList,1);
+
+	//Link to be manipulated. "placeholder" will be replaced multiple times in order to do
+	//multiple requests
 	$link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
 
+	//Store single events
 	$meetupList = array();
 
+	//Loop through sources
 	foreach ($meetupGroupsList as $source) {
+		//Create link to be requested from the meetup api
 		$currSource = str_replace('placeholder', $source, $link);
 
+		//Request to meetup api
 		$response = file_get_contents($currSource);
 		$response = json_decode($response,1);
-		foreach ($response as $event) {
-
-			array_push($meetupList, $event);
-
-		}
+		//Add each array item to our meetup list
+		foreach ($response as $event) { array_push($meetupList, $event); }
 
 	}
 
+	//Sort all entries by date using custom comparison function
 	usort($meetupList, "sortFunction");
+	//Add the list to fat free hive
 	$fatFree->set('upcomingEvents', $meetupList);
 
 	echo Template::instance()->render('views/upcomingEvents.php');
