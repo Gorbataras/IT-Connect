@@ -34,9 +34,26 @@ function introduction($fatFree){
 
     // show the introduction page
 	//Meetup integration
-	$response=file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
-	$response=json_decode($response);
-	$fatFree->set('array', $response);
+
+	$meetupGroupsList = file_get_contents('db/meetupSources.json');
+	$meetupGroupsList = json_decode($meetupGroupsList,1);
+	$link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
+
+	$meetupList = array();
+
+	foreach ($meetupGroupsList as $source) {
+		$currSource = str_replace('placeholder', $source, $link);
+
+		$response = file_get_contents($currSource);
+		$response = json_decode($response,1);
+		foreach ($response as $event) {
+			array_push($meetupList, $event);
+		}
+	}
+
+	$fatFree->set('array', $meetupList);
+
+
 
 	//Internships integration
     $config = include("/home/nwagreen/config.php");
@@ -70,7 +87,7 @@ function register(){
 
 function adminPage($fatFree){
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
-	$meetupGroupsList = json_decode($meetupGroupsList);
+	$meetupGroupsList = json_decode($meetupGroupsList, 1);
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 
 	//Meetups Control
@@ -104,7 +121,7 @@ function meetupUpdate($meetupGroupsList, $fatFree) {
 			json_encode($meetupGroupsList));
 	}
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
-	$meetupGroupsList = json_decode($meetupGroupsList);
+	$meetupGroupsList = json_decode($meetupGroupsList,1);
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
@@ -112,11 +129,12 @@ function meetupDelete($meetupsGroupsList, $fatFree) {
 	if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
 		unset($meetupsGroupsList[$key]);
 	}
-	var_dump($meetupsGroupsList);
+
 	file_put_contents('db/meetupSources.json',
 		json_encode($meetupsGroupsList));
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
-	$meetupGroupsList = json_decode($meetupGroupsList);
+	$meetupGroupsList = json_decode($meetupGroupsList, 1);
+
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 

@@ -113,6 +113,7 @@ SOFTWARE.
             <div class="col-lg">
                 <div class="card">
 
+
                     <!-- Card heading -->
                     <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#meetups-body"
                        role="button" aria-expanded="false" aria-controls="meetups-body">
@@ -121,22 +122,23 @@ SOFTWARE.
                         </div>
                     </a>
 
+
                     <div id="meetups-body" class="collapse" aria-labelledby="meetups-heading"
                          data-parent="#home-accordion">
 							<ul id="latest-meetups" class="list-group list-group-flush">
 								<F3:repeat group="{{ @array }}" value="{{ @meetup }}">
 									<li class="list-group-item">
                                         <a href="{{@meetup->link}}" target="_blank" class="no-decoration">
-                                            <span class="card-title h5">{{@meetup->name}}</span>
+                                            <span class="card-title h5">{{@meetup.name}}</span>
 											<br>
                                             <span class="card-text mb-2 h6">
-													{{@meetup->local_time}} - {{@meetup->local_date}}</span>
+													{{@meetup.local_time}} - {{@meetup.local_date}}</span>
 											<br>
                                             <span class="card-text mb-2">
-													{{@meetup->venue->name}}</span>
+													{{@meetup.venue.name}}</span>
 											<br>
 											<span class="card-text mb-2 h6">Hosted By:
-												<div class="text-muted">{{@meetup->group->name}}</div>
+												<div class="text-muted">{{@meetup.group.name}}</div>
 											</span>
                                         </a>
 									</li>
