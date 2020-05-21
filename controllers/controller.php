@@ -40,7 +40,7 @@ function introduction($fatFree){
 	$link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
 
 	$meetupList = array();
-
+	$counter = 0;
 	foreach ($meetupGroupsList as $source) {
 		$currSource = str_replace('placeholder', $source, $link);
 
@@ -50,6 +50,8 @@ function introduction($fatFree){
 			array_push($meetupList, $event);
 		}
 	}
+
+
 
 	usort($meetupList, "sortFunction");
 	$fatFree->set('array', $meetupList);
@@ -64,7 +66,7 @@ function introduction($fatFree){
 }
 
 function sortFunction ($a, $b){
-		return strtotime($a["created_at"]) - strtotime($b["created_at"]);
+		return strtotime($a["local_date"]) - strtotime($b["local_date"]);
 }
 
 

@@ -114,6 +114,7 @@ SOFTWARE.
                 <div class="card">
 
 
+
                     <!-- Card heading -->
                     <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#meetups-body"
                        role="button" aria-expanded="false" aria-controls="meetups-body">
