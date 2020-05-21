@@ -59,8 +59,6 @@ function introduction($fatFree){
 		}
 	}
 
-
-
 	usort($meetupList, "sortFunction");
 	$fatFree->set('array', $meetupList);
 
@@ -152,6 +150,33 @@ function meetupDelete($meetupsGroupsList, $fatFree) {
 	$meetupGroupsList = json_decode($meetupGroupsList, 1);
 
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
+}
+
+
+function upcomingEvents($fatFree) {
+	$meetupGroupsList = file_get_contents('db/meetupSources.json');
+	$meetupGroupsList = json_decode($meetupGroupsList,1);
+	$link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
+
+	$meetupList = array();
+
+	foreach ($meetupGroupsList as $source) {
+		$currSource = str_replace('placeholder', $source, $link);
+
+		$response = file_get_contents($currSource);
+		$response = json_decode($response,1);
+		foreach ($response as $event) {
+
+			array_push($meetupList, $event);
+
+		}
+
+	}
+
+	usort($meetupList, "sortFunction");
+	$fatFree->set('upcomingEvents', $meetupList);
+
+	echo Template::instance()->render('views/upcomingEvents.php');
 }
 
 function logout(){
