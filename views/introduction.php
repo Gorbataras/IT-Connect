@@ -44,17 +44,25 @@ SOFTWARE.
     <!--navbar-->
     <include href="views/parts/navbar.php"></include>
 
-    <!-- Site Introduction -->
-    <div class="alert success">
-        <span class="closebtn">&times;</span>
-        <strong>Welcome!</strong> to the new IT Connect Page.
-    </div>
+    <!-- Alert -->
+    <check if="{{ @content['alert']['isShown'] == 1 }}">
+        <div class="alert success">
+            <span class="closebtn">&times;</span>
+            {{ @content['alert']['html'] }}
+            <!--        <strong>Welcome!</strong> to the new IT Connect Page.-->
+        </div>
+    </check>
+
 
     <div class="container">
+        <!-- Site Introduction -->
+        <check if="{{ @content['intro']['isShown'] == 1 }}">
         <p id="intro">
-            Thanks for visiting IT Connect. The site where Green River College software development students can find
-            upcoming events, current internships and other student resources.
+            {{ @content['intro']['html'] }}
+<!--            Thanks for visiting IT Connect. The site where Green River College software development students can find-->
+<!--            upcoming events, current internships and other student resources.-->
         </p>
+        </check>
         <h2>Recent Activity</h2>
         <hr class="mt-0">
         <br>

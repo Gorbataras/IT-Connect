@@ -31,16 +31,39 @@ session_start();
 
 /*redirect to the introduction page*/
 function introduction($fatFree){
-    // show the introduction page
-	$response=file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
-	$response=json_decode($response);
-	$fatFree->set('array', $response);
+
+    // Get recent Meetups
+	$meetups = file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
+	$meetups = json_decode($meetups);
+
+    // Create PDO
     $config = include("/home/nwagreen/config.php");
     $db = new PDO($config["db"], $config["username"], $config["password"]);
-    $posts = new PostingsModel($db);
-    $fatFree->set('posts', $posts->getAllPostings());
+
+    // Get recent internships
+    $internships = (new PostingsModel($db))->getAllPostings();
+
+    // Get HTML content
+    $content = (new htmlContent($db))->getAllPageContent('home');
+
+    // Set to hive
+    $fatFree->set('array', $meetups);
+    $fatFree->set('posts', $internships);
+    $fatFree->set('content', $content);
+
     echo Template::instance()->render('views/introduction.php');
 }
+
+//function htmlContent($fatFree) {
+//    // Create PDO
+//    $config = include("/home/nwagreen/config.php");
+//    $db = new PDO($config["db"], $config["username"], $config["password"]);
+//
+//    // Get HTML content
+//    $content = (new htmlContent($db))->getAllPageContent('home');
+//
+//    echo $content;
+//}
 
 /*redirect to the internship page*/
 function internship(){
@@ -64,9 +87,19 @@ function register(){
     echo Template::instance()->render('gatorLock/register.php');
 }
 
-function adminPage(){
+function adminPage($fatFree){
 
     //if ($_SESSION["validUser"] == true){
+
+        // Create PDO
+        $config = include("/home/nwagreen/config.php");
+        $db = new PDO($config["db"], $config["username"], $config["password"]);
+
+        // Get HTML content
+        $homeContent = (new htmlContent($db))->getAllPageContent('home');
+
+        // Set to hive
+        $fatFree->set('homeContent', $homeContent);
         echo Template::instance()->render('views/adminPage.php');
 
 //    }else{

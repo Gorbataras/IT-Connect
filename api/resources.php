@@ -33,7 +33,7 @@ session_start();
 
 //DB connection files
 include "../models/resourcesModel.php";
-$config = include("../db/config.php");
+$config = include("/home/nwagreen/config.php");
 $db = new PDO($config["db"], $config["username"], $config["password"]);
 $resources = new ResourcesModel($db);
 
@@ -42,7 +42,6 @@ SWITCH ($_SERVER["REQUEST_METHOD"]) {
 
     // Retrieve resources body
     case "GET":
-
         $result = $resources->getBody();
         break;
 

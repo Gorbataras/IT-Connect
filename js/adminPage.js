@@ -423,7 +423,6 @@ tinymce.init({
 tinymce.init({
     height: "400",
     selector: '#resources_body',
-    content_css : '../css/resources.css',
     plugins: [
         'advlist autolink lists link print preview searchreplace',
         'insertdatetime table contextmenu paste'
@@ -437,9 +436,8 @@ tinymce.init({
 });
 
 tinymce.init({
-    height: "400",
+    height: "100",
     selector: '.wysiwyg',
-    content_css : '../css/resources.css',
     plugins: [
         'advlist autolink lists link print preview searchreplace',
         'insertdatetime table contextmenu paste'
@@ -450,6 +448,24 @@ tinymce.init({
             tinymce.triggerSave();
         });
     }
+});
+
+$('#home-submit').on('click', function () {
+    let alertContent = $('#home-alert').val();
+    let alertIsShown = $('#alert-is-shown').attr('checked');
+
+    let introContent = $('#home-intro').val();
+    let introIsShown = $('#intro-is-shown').attr('checked');
+
+    let data = [];
+    data.push({page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown});
+    data.push({page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown});
+
+    data.forEach(function (item) {
+        $.post('/editContent', item, function(result) {
+        });
+    });
+
 });
 
 

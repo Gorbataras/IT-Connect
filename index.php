@@ -39,8 +39,8 @@ $fatFree->route('GET|POST /adminLogin', function (){
 });
 
 // admin page
-$fatFree->route('GET|POST /adminPage', function (){
-    adminPage();
+$fatFree->route('GET|POST /adminPage', function ($fatFree){
+    adminPage($fatFree);
 });
 
 // register admin page
@@ -52,6 +52,10 @@ $fatFree->route('GET|POST /register', function ($fatFree){
 $fatFree->route('GET /Logout', function ($fatFree){
     logout($fatFree);
 });
+
+//$fatFree->route('GET /htmlContent', function($fatFree) {
+//    htmlContent($fatFree);
+//});
 
 //needed to run
 $fatFree->run();
