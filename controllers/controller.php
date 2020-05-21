@@ -51,8 +51,8 @@ function introduction($fatFree){
 		}
 	}
 
+	usort($meetupList, "sortFunction");
 	$fatFree->set('array', $meetupList);
-
 
 
 	//Internships integration
@@ -62,6 +62,12 @@ function introduction($fatFree){
     $fatFree->set('posts', $posts->getAllPostings());
     echo Template::instance()->render('views/introduction.php');
 }
+
+function sortFunction ($a, $b){
+		return strtotime($a["created_at"]) - strtotime($b["created_at"]);
+}
+
+
 
 /*redirect to the internship page*/
 function internship(){
