@@ -13,6 +13,18 @@
     max-width: 800px;
 }
 
+.card .btn {
+    background-color: #2c882b;
+    color: white;
+    border-color: black;
+}
+
+.card .btn:hover{
+    background-color: #1c7430;
+    color: white;
+    border-color: black;
+}
+
 .card-header:hover {
     background-color: rgb(53, 57, 61);
 }

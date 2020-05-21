@@ -79,9 +79,6 @@ function introduction($fatFree){
 	//Sort the entries using custom comparison function
 	usort($meetupList, "sortFunction");
 
-	$fatFree->set('array', $meetupList);
-
-
 	//Internships integration
     $config = include("/home/nwagreen/config.php");
     $db = new PDO($config["db"], $config["username"], $config["password"]);
@@ -93,7 +90,7 @@ function introduction($fatFree){
     $content = (new htmlContent($db))->getAllPageContent('home');
 
     // Set to hive
-    $fatFree->set('array', $meetups);
+    $fatFree->set('array', $meetupList);
     $fatFree->set('posts', $internships);
     $fatFree->set('content', $content);
 

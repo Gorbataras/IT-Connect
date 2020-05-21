@@ -109,11 +109,14 @@ SOFTWARE.
                                         </a>
                                     </li>
                                 </F3:repeat>
-                                <a href="internships">Show More--></a>
                             </ul>
                         </div>
                     </div>
 
+                    <!--Show more button -->
+                    <a class="btn container-fluid" href="internships" role="button">
+                        Show More
+                    </a>
                     </div><!-- card -->
                 </div><!-- col -->
 
@@ -150,7 +153,10 @@ SOFTWARE.
                                 </F3:repeat>
                             </ul>
                         </div>
-
+                        <!--Show more button -->
+                        <a class="btn container-fluid"
+                           href="https://www.meetup.com/South-King-Web-Mobile-Developers/events/" role="button"
+                           target="_blank">Show More</a>
                     </div><!-- card -->
                 </div><!-- col -->
 
@@ -170,6 +176,10 @@ SOFTWARE.
                             </ul>
                         </div>
 
+                        <!--Show more button -->
+                        <a class="btn container-fluid"
+                           href="https://medium.com/green-river-web-mobile-developers" role="button"
+                           target="_blank">Show More</a>
                     </div><!-- card -->
                 </div><!-- col -->
             </div><!-- row -->
