@@ -37,6 +37,6 @@
     </div>
 
     <div class="text-center">
-        <button id="home-submit" type="submit" value="" class="btn btn-success">Submit</button>
+        <button id="home-submit" type="submit" value="" class="btn btn-success">Save</button>
     </div>
 </div>

@@ -451,20 +451,30 @@ tinymce.init({
 });
 
 $('#home-submit').on('click', function () {
-    let alertContent = $('#home-alert').val();
-    let alertIsShown = $('#alert-is-shown').attr('checked');
+    let alertContent = $($.parseHTML($('#home-alert').val())).text();
+    let alertIsShown = $('#alert-is-shown').prop('checked');
 
-    let introContent = $('#home-intro').val();
-    let introIsShown = $('#intro-is-shown').attr('checked');
+    let introContent = $($.parseHTML($('#home-intro').val())).text();
+    let introIsShown = $('#intro-is-shown').prop('checked');
 
     let data = [];
     data.push({page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown});
     data.push({page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown});
 
-    data.forEach(function (item) {
+    let isSaved = true;
+    data.forEach(function(item) {
         $.post('/editContent', item, function(result) {
+            if (!result) {
+                isSaved = false;
+            }
         });
     });
+    if (isSaved) {
+        alert("Saved Successfully!!")
+    }
+    else {
+        alert("There was an error");
+    }
 
 });
 
