@@ -47,7 +47,15 @@ function introduction($fatFree){
 		$response = file_get_contents($currSource);
 		$response = json_decode($response,1);
 		foreach ($response as $event) {
+
 			array_push($meetupList, $event);
+			$counter++;
+			if ($counter == 5){
+				break;
+			}
+		}
+		if ($counter==5) {
+			break;
 		}
 	}
 
