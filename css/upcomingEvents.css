@@ -1,0 +1,6 @@
+.no-decoration {
+	color: rgb(33, 37, 41);
+	text-decoration-color: initial;
+	text-decoration-line: none;
+	text-decoration: none;
+}
