@@ -1,5 +1,12 @@
 <?php
 
+/* Performs database operations for editable html content of the site
+ *
+ * File: htmlContent.php
+ * @author Chad Drennan
+ * Date Created: 5/20/2020
+ */
+
 
 /**
  * Class htmlContent. Performs database operations for editable html content of the site
@@ -12,11 +19,22 @@ class htmlContent
     private $_dbh;
 
 
+    /**
+     * htmlContent constructor.
+     * @param PDO $dbh database connection object
+     */
     public function __construct(PDO $dbh)
     {
         $this->_dbh = $dbh;
     }
 
+
+    /**
+     * Retrieves html content by page name and content name
+     * @param $pageName string name of the page the content belongs to
+     * @param $contentName sting name of the content ex. 'introduction'
+     * @return array the matching row if any
+     */
     public function getContent($pageName, $contentName)
     {
         $sql = "SELECT content_name, html, is_shown
@@ -31,6 +49,12 @@ class htmlContent
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    /**
+     * Retrieves all html content for a page. Key of the array result is the content name
+     * @param $pageName string name of page content belongs to
+     * @return array result of query. Key of array is content name
+     */
     public function getAllPageContent($pageName)
     {
         $sql = "SELECT content_name, html, is_shown
@@ -52,6 +76,14 @@ class htmlContent
         return $result;
     }
 
+
+    /**
+     * Updates html content to the html_content table
+     * @param $pageName string name of page the content belongs to
+     * @param $contentName string name of the content ex introduction
+     * @param $html string html of content
+     * @param $isShown int 1 indicates html is to be shown. 0 indicates to hide content
+     */
     public function setContent($pageName, $contentName, $html, $isShown) {
         $sql = "UPDATE html_content
                 SET html = :html, is_shown = :isShown

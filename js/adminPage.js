@@ -435,6 +435,7 @@ tinymce.init({
     }
 });
 
+// WYSIWYG editor configuration for html content
 tinymce.init({
     height: "100",
     selector: '.wysiwyg',
@@ -450,18 +451,24 @@ tinymce.init({
     }
 });
 
+// Makes a POST request for html content belonging to the home page
 $('#home-submit').on('click', function () {
+
+    // Gather data from controls
     let alertContent = $($.parseHTML($('#home-alert').val())).text();
     let alertIsShown = $('#alert-is-shown').prop('checked');
 
     let introContent = $($.parseHTML($('#home-intro').val())).text();
     let introIsShown = $('#intro-is-shown').prop('checked');
 
+    // Collect into array as JSON
     let data = [];
     data.push({page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown});
     data.push({page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown});
 
     let isSaved = true;
+
+    // Make post requests for data
     data.forEach(function(item) {
         $.post('/editContent', item, function(result) {
             if (!result) {
@@ -469,13 +476,14 @@ $('#home-submit').on('click', function () {
             }
         });
     });
+
+    // Show confirmation
     if (isSaved) {
         alert("Saved Successfully!!")
     }
     else {
         alert("There was an error");
     }
-
 });
 
 

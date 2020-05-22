@@ -26,6 +26,8 @@ session_start();
 /**
  * Main controller that redirects to different pages
  * @author Taras Gorbachevskiy
+ * @author Chad Drennan
+ * @author Marcos Rivera
  * 2020-5-7
  */
 
@@ -125,6 +127,9 @@ function register(){
     echo Template::instance()->render('gatorLock/register.php');
 }
 
+/*
+ * Shows all editable site content
+ */
 function adminPage($fatFree){
 
     //if ($_SESSION["validUser"] == true){
@@ -169,6 +174,10 @@ function adminPage($fatFree){
 
 }
 
+
+/*
+ * Add new Meetup group to JSON file
+ */
 function meetupUpdate($meetupGroupsList, $fatFree) {
 	//If the entry does not already exist
 	if( !in_array($_POST['new-group'], $meetupGroupsList) ) {
@@ -184,6 +193,10 @@ function meetupUpdate($meetupGroupsList, $fatFree) {
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
+
+/*
+ * Remove a Meetup group from JSON file
+ */
 function meetupDelete($meetupsGroupsList, $fatFree) {
 	//Find the requested source in the list
 	if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
@@ -200,7 +213,9 @@ function meetupDelete($meetupsGroupsList, $fatFree) {
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
-
+/*
+ * Shows all upcoming Meetup events for saved meetup groups
+ */
 function upcomingEvents($fatFree) {
 	//Retrieve sources from json
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
@@ -244,6 +259,9 @@ function logout(){
     exit;
 }
 
+/*
+ * Receives and saves edited html content
+ */
 function editContent() {
     $page = $_POST['page'];
     $contentName = $_POST['contentName'];
