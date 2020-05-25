@@ -49,7 +49,6 @@ SOFTWARE.
         <div class="alert success">
             <span class="closebtn">&times;</span>
             {{ @content['alert']['html'] }}
-            <!--        <strong>Welcome!</strong> to the new IT Connect Page.-->
         </div>
     </check>
 
@@ -59,11 +58,9 @@ SOFTWARE.
         <check if="{{ @content['intro']['isShown'] == 1 }}">
             <p id="intro">
                 {{ @content['intro']['html'] }}
-                <!--            Thanks for visiting IT Connect. The site where Green River College software development students can find-->
-                <!--            upcoming events, current internships and other student resources.-->
             </p>
         </check>
-        <h2>Recent Activity</h2>
+        <h2 id="page-title">Recent Activity</h2>
         <hr class="mt-0">
         <br>
 

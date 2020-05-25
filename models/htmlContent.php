@@ -83,6 +83,7 @@ class htmlContent
      * @param $contentName string name of the content ex introduction
      * @param $html string html of content
      * @param $isShown int 1 indicates html is to be shown. 0 indicates to hide content
+     * @return true if query did not fail
      */
     public function setContent($pageName, $contentName, $html, $isShown) {
         $sql = "UPDATE html_content
@@ -96,6 +97,6 @@ class htmlContent
         $statement->bindValue(':pageName', $pageName);
         $statement->bindValue(':contentName', $contentName);
 
-        $statement->execute();
+        return $statement->execute();
     }
 }

@@ -147,6 +147,10 @@
     text-shadow: 0 0 8px black;
 }
 
+#page-title {
+    margin-top: 30px;
+}
+
 .photo-header {
     position: relative;
     color: white;
