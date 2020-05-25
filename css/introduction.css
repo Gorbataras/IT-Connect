@@ -172,13 +172,8 @@
         background-color: rgb(33, 37, 41);
     }
 
-    /* Remove down arrow when not in accordion */
-    .card-header h3::before {
-        content: none;
-    }
-
-    /* Remove right arrow when not in accordion */
-    .collapsed .card-header h3::before {
+    /* Remove down and down arrows when not in accordion */
+    .card-header h3::before, .collapsed .card-header h3::before {
         content: none;
     }
 
