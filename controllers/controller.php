@@ -266,14 +266,12 @@ function editContent() {
     $page = $_POST['page'];
     $contentName = $_POST['contentName'];
     $html = $_POST['html'];
-    $isShown = $_POST['isShown'] ? 1 : 0;
+    $isShown = $_POST['isShown'] == 'true' ? 1 : 0;
 
     // Create PDO
     $config = include("/home/nwagreen/config.php");
     $db = new PDO($config["db"], $config["username"], $config["password"]);
 
     // Save HTML content
-    (new htmlContent($db))->setContent($page, $contentName, $html, $isShown);
-
-    echo true;
+    echo (new htmlContent($db))->setContent($page, $contentName, $html, $isShown);
 }
