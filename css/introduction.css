@@ -9,6 +9,10 @@
  * @version 1.0
  */
 
+.alert p {
+    margin-bottom: 0;
+}
+
 .card {
     max-width: 800px;
 }

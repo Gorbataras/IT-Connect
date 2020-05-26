@@ -48,7 +48,7 @@ SOFTWARE.
     <check if="{{ @content['alert']['isShown'] == 1 }}">
         <div class="alert success">
             <span class="closebtn">&times;</span>
-            {{ @content['alert']['html'] }}
+            {{ @content['alert']['html'] | raw }}
         </div>
     </check>
 
@@ -56,9 +56,9 @@ SOFTWARE.
     <div class="container">
         <!-- Site Introduction -->
         <check if="{{ @content['intro']['isShown'] == 1 }}">
-            <p id="intro">
-                {{ @content['intro']['html'] }}
-            </p>
+            <div id="intro">
+                {{ @content['intro']['html'] | raw }}
+            </div>
         </check>
         <h2 id="page-title">Recent Activity</h2>
         <hr class="mt-0">

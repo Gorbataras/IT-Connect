@@ -263,6 +263,8 @@ function logout(){
  * Receives and saves edited html content
  */
 function editContent() {
+
+    // Collect variables
     $page = $_POST['page'];
     $contentName = $_POST['contentName'];
     $html = $_POST['html'];

@@ -455,10 +455,12 @@ tinymce.init({
 $('#home-submit').on('click', function () {
 
     // Gather data from controls
-    let alertContent = $($.parseHTML($('#home-alert').val())).text();
+    // let alertContent = $($.parseHTML($('#home-alert').val())).text();
+    let alertContent = $('#home-alert').val();
     let alertIsShown = $('#alert-is-shown').prop('checked');
 
-    let introContent = $($.parseHTML($('#home-intro').val())).text();
+    // let introContent = $($.parseHTML($('#home-intro').val())).text();
+    let introContent = $('#home-intro').val();
     let introIsShown = $('#intro-is-shown').prop('checked');
 
     // Collect into array as JSON
