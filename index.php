@@ -57,6 +57,14 @@ $fatFree->route('GET /Logout', function ($fatFree){
     logout($fatFree);
 });
 
+$fatFree->route('POST /editContent', function (){
+    editContent();
+});
+
+//$fatFree->route('GET /htmlContent', function($fatFree) {
+//    htmlContent($fatFree);
+//});
+
 //needed to run
 $fatFree->run();
 ?>

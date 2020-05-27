@@ -26,11 +26,19 @@ session_start();
 /**
  * Main controller that redirects to different pages
  * @author Taras Gorbachevskiy
+ * @author Chad Drennan
+ * @author Marcos Rivera
  * 2020-5-7
  */
 
 /*redirect to the introduction page*/
 function introduction($fatFree){
+
+    // Get recent Meetups
+	$meetups = file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
+	$meetups = json_decode($meetups);
+
+    // Create PDO
 
 	//Meetup integration
 
@@ -73,14 +81,21 @@ function introduction($fatFree){
 	//Sort the entries using custom comparison function
 	usort($meetupList, "sortFunction");
 
-	$fatFree->set('array', $meetupList);
-
-
 	//Internships integration
     $config = include("/home/nwagreen/config.php");
     $db = new PDO($config["db"], $config["username"], $config["password"]);
-    $posts = new PostingsModel($db);
-    $fatFree->set('posts', $posts->getAllPostings());
+
+    // Get recent internships
+    $internships = (new PostingsModel($db))->getAllPostings();
+
+    // Get HTML content
+    $content = (new htmlContent($db))->getAllPageContent('home');
+
+    // Set to hive
+    $fatFree->set('array', $meetupList);
+    $fatFree->set('posts', $internships);
+    $fatFree->set('content', $content);
+
     echo Template::instance()->render('views/introduction.php');
 }
 
@@ -112,7 +127,11 @@ function register(){
     echo Template::instance()->render('gatorLock/register.php');
 }
 
+/*
+ * Shows all editable site content
+ */
 function adminPage($fatFree){
+
     //if ($_SESSION["validUser"] == true){
 
 	//retrieve the json with list of sources
@@ -135,6 +154,16 @@ function adminPage($fatFree){
 		}
 	}
 
+    // Create PDO
+    $config = include("/home/nwagreen/config.php");
+    $db = new PDO($config["db"], $config["username"], $config["password"]);
+
+    // Get HTML content
+    $homeContent = (new htmlContent($db))->getAllPageContent('home');
+
+    // Set to hive
+    $fatFree->set('homeContent', $homeContent);
+
 	echo Template::instance()->render('views/adminPage.php');
 
 	//    }else{
@@ -145,6 +174,10 @@ function adminPage($fatFree){
 
 }
 
+
+/*
+ * Add new Meetup group to JSON file
+ */
 function meetupUpdate($meetupGroupsList, $fatFree) {
 	//If the entry does not already exist
 	if( !in_array($_POST['new-group'], $meetupGroupsList) ) {
@@ -160,6 +193,10 @@ function meetupUpdate($meetupGroupsList, $fatFree) {
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
+
+/*
+ * Remove a Meetup group from JSON file
+ */
 function meetupDelete($meetupsGroupsList, $fatFree) {
 	//Find the requested source in the list
 	if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
@@ -176,7 +213,9 @@ function meetupDelete($meetupsGroupsList, $fatFree) {
 	$fatFree->set('meetupGroupsList', $meetupGroupsList);
 }
 
-
+/*
+ * Shows all upcoming Meetup events for saved meetup groups
+ */
 function upcomingEvents($fatFree) {
 	//Retrieve sources from json
 	$meetupGroupsList = file_get_contents('db/meetupSources.json');
@@ -218,4 +257,23 @@ function logout(){
     // send to main page
    header('Location: https://itconnect.greenrivertech.net/adminLogin');
     exit;
+}
+
+/*
+ * Receives and saves edited html content
+ */
+function editContent() {
+
+    // Collect variables
+    $page = $_POST['page'];
+    $contentName = $_POST['contentName'];
+    $html = $_POST['html'];
+    $isShown = $_POST['isShown'] == 'true' ? 1 : 0;
+
+    // Create PDO
+    $config = include("/home/nwagreen/config.php");
+    $db = new PDO($config["db"], $config["username"], $config["password"]);
+
+    // Save HTML content
+    echo (new htmlContent($db))->setContent($page, $contentName, $html, $isShown);
 }

@@ -80,12 +80,6 @@
         margin-bottom: 0px;
     }
 
-    .input-group-addon {
-        /*color: #ffffff;*/
-        /*background-color: #5cb85c;*/
-        border-color: #56A514;
-    }
-
     .form-errors {
         margin-bottom: 5px;
         padding: 6px;
@@ -146,12 +140,6 @@
         font-size: 17px;
         border-radius: 0px;
         margin-bottom: 0px;
-    }
-
-    .input-group-addon {
-        /*color: #ffffff;*/
-        /*background-color: #5cb85c;*/
-        border-color: #56A514;
     }
 
     .form-errors {
@@ -216,12 +204,6 @@
         margin-bottom: 0px;
     }
 
-    .input-group-addon {
-        color: #ffffff;
-        background-color: #5cb85c;
-        border-color: #56A514;
-    }
-
     .form-errors {
         margin-bottom: 5px;
         padding: 6px;
@@ -282,12 +264,6 @@
         font-size: 17px;
         border-radius: 0px;
         margin-bottom: 0px;
-    }
-
-    .input-group-addon {
-        color: #ffffff;
-        background-color: #5cb85c;
-        border-color: #56A514;
     }
 
     .form-errors {

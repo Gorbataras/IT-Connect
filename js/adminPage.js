@@ -423,7 +423,6 @@ tinymce.init({
 tinymce.init({
     height: "400",
     selector: '#resources_body',
-    content_css : '../css/index.css, ../css/resources.css',
     plugins: [
         'advlist autolink lists link print preview searchreplace',
         'insertdatetime table contextmenu paste'
@@ -435,3 +434,58 @@ tinymce.init({
         });
     }
 });
+
+// WYSIWYG editor configuration for html content
+tinymce.init({
+    height: "100",
+    selector: '.wysiwyg',
+    plugins: [
+        'advlist autolink lists link print preview searchreplace',
+        'insertdatetime table contextmenu paste'
+    ],
+    toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+    setup: function(editor) {
+        editor.on('change', function() {
+            tinymce.triggerSave();
+        });
+    }
+});
+
+// Makes a POST request for html content belonging to the home page
+$('#home-submit').on('click', function () {
+
+    // Gather data from controls
+    // let alertContent = $($.parseHTML($('#home-alert').val())).text();
+    let alertContent = $('#home-alert').val();
+    let alertIsShown = $('#alert-is-shown').prop('checked');
+
+    // let introContent = $($.parseHTML($('#home-intro').val())).text();
+    let introContent = $('#home-intro').val();
+    let introIsShown = $('#intro-is-shown').prop('checked');
+
+    // Collect into array as JSON
+    let data = [];
+    data.push({page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown});
+    data.push({page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown});
+
+    let isSaved = true;
+
+    // Make post requests for data
+    data.forEach(function(item) {
+        $.post('/editContent', item, function(result) {
+            if (!result) {
+                isSaved = false;
+            }
+        });
+    });
+
+    // Show confirmation
+    if (isSaved) {
+        alert("Saved Successfully!!")
+    }
+    else {
+        alert("There was an error");
+    }
+});
+
+

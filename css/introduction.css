@@ -9,8 +9,24 @@
  * @version 1.0
  */
 
+.alert p {
+    margin-bottom: 0;
+}
+
 .card {
     max-width: 800px;
+}
+
+.card .btn {
+    background-color: #2c882b;
+    color: white;
+    border-color: black;
+}
+
+.card .btn:hover{
+    background-color: #1c7430;
+    color: white;
+    border-color: black;
 }
 
 .card-header:hover {
@@ -135,6 +151,10 @@
     text-shadow: 0 0 8px black;
 }
 
+#page-title {
+    margin-top: 30px;
+}
+
 .photo-header {
     position: relative;
     color: white;
@@ -156,13 +176,8 @@
         background-color: rgb(33, 37, 41);
     }
 
-    /* Remove down arrow when not in accordion */
-    .card-header h3::before {
-        content: none;
-    }
-
-    /* Remove right arrow when not in accordion */
-    .collapsed .card-header h3::before {
+    /* Remove down and down arrows when not in accordion */
+    .card-header h3::before, .collapsed .card-header h3::before {
         content: none;
     }
 

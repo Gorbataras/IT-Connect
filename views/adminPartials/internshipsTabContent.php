@@ -108,7 +108,9 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" value="SUBMIT" class="btn btn-success">Submit</button>
+                <div class="text-center">
+                    <button type="submit" value="SUBMIT" class="btn btn-success">Submit</button>
+                </div>
             </form>
         </div>
     </div>
