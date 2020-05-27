@@ -22,7 +22,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-session_start();
+
+
 /**
  * Main controller that redirects to different pages
  * @author Taras Gorbachevskiy
@@ -30,250 +31,272 @@ session_start();
  * @author Marcos Rivera
  * 2020-5-7
  */
+class Controller
+{
+    // Base instance for Fat-Free Framework
+    private $_f3;
 
-/*redirect to the introduction page*/
-function introduction($fatFree){
+    function __construct($f3)
+    {
+        $this->_f3 = $f3;
+    }
 
-    // Get recent Meetups
-	$meetups = file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
-	$meetups = json_decode($meetups);
+    /*redirect to the introduction page*/
+    function introduction()
+    {
+        // Get recent Meetups
+        $meetups = file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
+        $meetups = json_decode($meetups);
 
-    // Create PDO
+        // Create PDO
 
-	//Meetup integration
+        //Meetup integration
 
-	//Retrieve list of sources
-	$meetupGroupsList = file_get_contents('db/meetupSources.json');
-	$meetupGroupsList = json_decode($meetupGroupsList,1);
+        //Retrieve list of sources
+        $meetupGroupsList = file_get_contents('db/meetupSources.json');
+        $meetupGroupsList = json_decode($meetupGroupsList, 1);
 
-	//link to be manipulated. "placeholder" will be replaced repeatedly with each entry
-	//in the list
-	$link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
+        //link to be manipulated. "placeholder" will be replaced repeatedly with each entry
+        //in the list
+        $link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
 
-	//Store meetups
-	$meetupList = array();
-	//limit 5
-	$counter = 0;
+        //Store meetups
+        $meetupList = array();
+        //limit 5
+        $counter = 0;
 
-	// Send request for each source
-	foreach ($meetupGroupsList as $source) {
-		// make link for the current source
-		$currSource = str_replace('placeholder', $source, $link);
+        // Send request for each source
+        foreach ($meetupGroupsList as $source) {
+            // make link for the current source
+            $currSource = str_replace('placeholder', $source, $link);
 
-		//Make request to meetup api
-		$response = file_get_contents($currSource);
-		$response = json_decode($response,1);
-		//Add each event from request to array
-		foreach ($response as $event) {
-			//add event to list
-			array_push($meetupList, $event);
-			$counter++;
-			//Check for limit reached
-			if ($counter == 5){
-				break;
-			}
-		}
-		//Check for limit reached
-		if ($counter==5) {
-			break;
-		}
-	}
-	//Sort the entries using custom comparison function
-	usort($meetupList, "sortFunction");
+            //Make request to meetup api
+            $response = file_get_contents($currSource);
+            $response = json_decode($response, 1);
+            //Add each event from request to array
+            foreach ($response as $event) {
+                //add event to list
+                array_push($meetupList, $event);
+                $counter++;
+                //Check for limit reached
+                if ($counter == 5) {
+                    break;
+                }
+            }
+            //Check for limit reached
+            if ($counter == 5) {
+                break;
+            }
+        }
+        //Sort the entries using custom comparison function
+        usort($meetupList, ["Controller", "sortFunction"]);
 
-	//Internships integration
-    $config = include("/home/nwagreen/config.php");
-    $db = new PDO($config["db"], $config["username"], $config["password"]);
+        //Internships integration
+        $config = include("/home/nwagreen/config.php");
+        $db = new PDO($config["db"], $config["username"], $config["password"]);
 
-    // Get recent internships
-    $internships = (new PostingsModel($db))->getAllPostings();
+        // Get recent internships
+        $internships = (new PostingsModel($db))->getAllPostings();
 
-    // Get HTML content
-    $content = (new htmlContent($db))->getAllPageContent('home');
+        // Get HTML content
+        $content = (new htmlContent($db))->getAllPageContent('home');
 
-    // Set to hive
-    $fatFree->set('array', $meetupList);
-    $fatFree->set('posts', $internships);
-    $fatFree->set('content', $content);
+        // Set to hive
+        $this->_f3->set('array', $meetupList);
+        $this->_f3->set('posts', $internships);
+        $this->_f3->set('content', $content);
 
-    echo Template::instance()->render('views/introduction.php');
-}
+        echo Template::instance()->render('views/introduction.php');
+    }
 
-function sortFunction ($a, $b){
-		return strtotime($a["local_date"]) - strtotime($b["local_date"]);
-}
-
-
-
-/*redirect to the internship page*/
-function internship(){
-    // show the internship page
-    echo Template::instance()->render('views/internships.php');
-}
-
-/*redirect to the student resources page*/
-function studentResources(){
-    //  show the student resources page
-    echo Template::instance()->render('views/studentResources.php');
-}
-
-function login(){
-    //  show the admin Login page
-    echo Template::instance()->render('gatorLock/login.php');
-}
-
-function register(){
-    //  show the admin Login page
-    echo Template::instance()->render('gatorLock/register.php');
-}
-
-/*
- * Shows all editable site content
- */
-function adminPage($fatFree){
-
-    //if ($_SESSION["validUser"] == true){
-
-	//retrieve the json with list of sources
-	$meetupGroupsList = file_get_contents('db/meetupSources.json');
-	$meetupGroupsList = json_decode($meetupGroupsList, 1);
-	$fatFree->set('meetupGroupsList', $meetupGroupsList);
-
-	//Meetups Control
-	if ($_REQUEST['source-tab'] == 'meetups') {
-		//Decide what to do based on what user clicked
-		switch($_REQUEST['task']){
-			case 'add':
-				//Add a new source
-				meetupUpdate($meetupGroupsList, $fatFree);
-				break;
-			case 'delete':
-				//Delete the selected entry from the sources list
-				meetupDelete($meetupGroupsList, $fatFree);
-				break;
-		}
-	}
-
-    // Create PDO
-    $config = include("/home/nwagreen/config.php");
-    $db = new PDO($config["db"], $config["username"], $config["password"]);
-
-    // Get HTML content
-    $homeContent = (new htmlContent($db))->getAllPageContent('home');
-
-    // Set to hive
-    $fatFree->set('homeContent', $homeContent);
-
-	echo Template::instance()->render('views/adminPage.php');
-
-	//    }else{
-	//        /*redirect to admin Login*/
-	//        header('Location: https://itconnect.greenrivertech.net/adminLogin');
-	//        exit;
-	//    }
-
-}
+    static function sortFunction($a, $b)
+    {
+        return strtotime($a["local_date"]) - strtotime($b["local_date"]);
+    }
 
 
-/*
- * Add new Meetup group to JSON file
- */
-function meetupUpdate($meetupGroupsList, $fatFree) {
-	//If the entry does not already exist
-	if( !in_array($_POST['new-group'], $meetupGroupsList) ) {
-		//Add entry to list
-		array_push($meetupGroupsList,$_POST['new-group']);
-		//Push the list to json file
-		file_put_contents('db/meetupSources.json',
-			json_encode($meetupGroupsList));
-	}
-	//Update the current sources displayed
-	$meetupGroupsList = file_get_contents('db/meetupSources.json');
-	$meetupGroupsList = json_decode($meetupGroupsList,1);
-	$fatFree->set('meetupGroupsList', $meetupGroupsList);
-}
+    /*redirect to the internship page*/
+    function internship()
+    {
+        // show the internship page
+        echo Template::instance()->render('views/internships.php');
+    }
+
+    /*redirect to the student resources page*/
+    function studentResources()
+    {
+        //  show the student resources page
+        echo Template::instance()->render('views/studentResources.php');
+    }
+
+    function login()
+    {
+        //  show the admin Login page
+        echo Template::instance()->render('gatorLock/login.php');
+    }
+
+    function register()
+    {
+        //  show the admin Login page
+        echo Template::instance()->render('gatorLock/register.php');
+    }
+
+    /*
+     * Shows all editable site content
+     */
+    function adminPage()
+    {
+
+        //if ($_SESSION["validUser"] == true){
+
+        //retrieve the json with list of sources
+        $meetupGroupsList = file_get_contents('db/meetupSources.json');
+        $meetupGroupsList = json_decode($meetupGroupsList, 1);
+        $this->_f3->set('meetupGroupsList', $meetupGroupsList);
+
+        //Meetups Control
+        if ($_REQUEST['source-tab'] == 'meetups') {
+            //Decide what to do based on what user clicked
+            switch ($_REQUEST['task']) {
+                case 'add':
+                    //Add a new source
+                    $this->meetupUpdate($meetupGroupsList);
+                    break;
+                case 'delete':
+                    //Delete the selected entry from the sources list
+                    $this->meetupDelete($meetupGroupsList);
+                    break;
+            }
+        }
+
+        // Create PDO
+        $config = include("/home/nwagreen/config.php");
+        $db = new PDO($config["db"], $config["username"], $config["password"]);
+
+        // Get HTML content
+        $homeContent = (new htmlContent($db))->getAllPageContent('home');
+
+        // Set to hive
+        $this->_f3->set('homeContent', $homeContent);
+
+        echo Template::instance()->render('views/adminPage.php');
+
+        //    }else{
+        //        /*redirect to admin Login*/
+        //        header('Location: https://itconnect.greenrivertech.net/adminLogin');
+        //        exit;
+        //    }
+
+    }
 
 
-/*
- * Remove a Meetup group from JSON file
- */
-function meetupDelete($meetupsGroupsList, $fatFree) {
-	//Find the requested source in the list
-	if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
-		//Remove the source from the array
-		unset($meetupsGroupsList[$key]);
-	}
+    /*
+     * Add new Meetup group to JSON file
+     */
+    function meetupUpdate($meetupGroupsList)
+    {
+        //If the entry does not already exist
+        if (!in_array($_POST['new-group'], $meetupGroupsList)) {
+            //Add entry to list
+            array_push($meetupGroupsList, $_POST['new-group']);
+            //Push the list to json file
+            file_put_contents('db/meetupSources.json',
+                json_encode($meetupGroupsList));
+        }
+        //Update the current sources displayed
+        $meetupGroupsList = file_get_contents('db/meetupSources.json');
+        $meetupGroupsList = json_decode($meetupGroupsList, 1);
+        $this->_f3->set('meetupGroupsList', $meetupGroupsList);
+    }
 
-	//Write the changes to json
-	file_put_contents('db/meetupSources.json',
-		json_encode($meetupsGroupsList));
-	//Update the current sources displayed
-	$meetupGroupsList = file_get_contents('db/meetupSources.json');
-	$meetupGroupsList = json_decode($meetupGroupsList, 1);
-	$fatFree->set('meetupGroupsList', $meetupGroupsList);
-}
 
-/*
- * Shows all upcoming Meetup events for saved meetup groups
- */
-function upcomingEvents($fatFree) {
-	//Retrieve sources from json
-	$meetupGroupsList = file_get_contents('db/meetupSources.json');
-	$meetupGroupsList = json_decode($meetupGroupsList,1);
+    /*
+     * Remove a Meetup group from JSON file
+     */
+    function meetupDelete($meetupsGroupsList)
+    {
+        //Find the requested source in the list
+        if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
+            //Remove the source from the array
+            unset($meetupsGroupsList[$key]);
+        }
 
-	//Link to be manipulated. "placeholder" will be replaced multiple times in order to do
-	//multiple requests
-	$link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
+        //Write the changes to json
+        file_put_contents('db/meetupSources.json',
+            json_encode($meetupsGroupsList));
+        //Update the current sources displayed
+        $meetupGroupsList = file_get_contents('db/meetupSources.json');
+        $meetupGroupsList = json_decode($meetupGroupsList, 1);
+        $this->_f3->set('meetupGroupsList', $meetupGroupsList);
+    }
 
-	//Store single events
-	$meetupList = array();
+    /*
+     * Shows all upcoming Meetup events for saved meetup groups
+     */
+    function upcomingEvents()
+    {
+        //Retrieve sources from json
+        $meetupGroupsList = file_get_contents('db/meetupSources.json');
+        $meetupGroupsList = json_decode($meetupGroupsList, 1);
 
-	//Loop through sources
-	foreach ($meetupGroupsList as $source) {
-		//Create link to be requested from the meetup api
-		$currSource = str_replace('placeholder', $source, $link);
+        //Link to be manipulated. "placeholder" will be replaced multiple times in order to do
+        //multiple requests
+        $link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
 
-		//Request to meetup api
-		$response = file_get_contents($currSource);
-		$response = json_decode($response,1);
-		//Add each array item to our meetup list
-		foreach ($response as $event) { array_push($meetupList, $event); }
+        //Store single events
+        $meetupList = array();
 
-	}
+        //Loop through sources
+        foreach ($meetupGroupsList as $source) {
+            //Create link to be requested from the meetup api
+            $currSource = str_replace('placeholder', $source, $link);
 
-	//Sort all entries by date using custom comparison function
-	usort($meetupList, "sortFunction");
-	//Add the list to fat free hive
-	$fatFree->set('upcomingEvents', $meetupList);
+            //Request to meetup api
+            $response = file_get_contents($currSource);
+            $response = json_decode($response, 1);
+            //Add each array item to our meetup list
+            foreach ($response as $event) {
+                array_push($meetupList, $event);
+            }
 
-	echo Template::instance()->render('views/upcomingEvents.php');
-}
+        }
 
-function logout(){
-	//  Log out of page
-    // destroy session
-    session_destroy();
+        //Sort all entries by date using custom comparison function
+        usort($meetupList, ["Controller", "sortFunction"]);
+        //Add the list to fat free hive
+        $this->_f3->set('upcomingEvents', $meetupList);
 
-    // send to main page
-   header('Location: https://itconnect.greenrivertech.net/adminLogin');
-    exit;
-}
+        echo Template::instance()->render('views/upcomingEvents.php');
+    }
 
-/*
- * Receives and saves edited html content
- */
-function editContent() {
+    function logout()
+    {
+        //  Log out of page
+        // destroy session
+        session_destroy();
 
-    // Collect variables
-    $page = $_POST['page'];
-    $contentName = $_POST['contentName'];
-    $html = $_POST['html'];
-    $isShown = $_POST['isShown'] == 'true' ? 1 : 0;
+        // send to main page
+        header('Location: https://itconnect.greenrivertech.net/adminLogin');
+        exit;
+    }
 
-    // Create PDO
-    $config = include("/home/nwagreen/config.php");
-    $db = new PDO($config["db"], $config["username"], $config["password"]);
+    /*
+     * Receives and saves edited html content
+     */
+    function editContent()
+    {
 
-    // Save HTML content
-    echo (new htmlContent($db))->setContent($page, $contentName, $html, $isShown);
+        // Collect variables
+        $page = $_POST['page'];
+        $contentName = $_POST['contentName'];
+        $html = $_POST['html'];
+        $isShown = $_POST['isShown'] == 'true' ? 1 : 0;
+
+        // Create PDO
+        $config = include("/home/nwagreen/config.php");
+        $db = new PDO($config["db"], $config["username"], $config["password"]);
+
+        // Save HTML content
+        echo (new htmlContent($db))->setContent($page, $contentName, $html, $isShown);
+    }
 }
