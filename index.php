@@ -3,67 +3,67 @@
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 
-//global includes
-require 'controllers/controller.php';
-
 //Require autoload file
 require("vendor/autoload.php");
 
+session_start();
+
 // load the fat free framework
 $fatFree = require 'vendor/bcosca/fatfree-core/base.php';
+
+// Show errors for debugging
+$fatFree->set('DEBUG', 3);
 
 // fat free errors handling
 $fatFree->set('ONERROR', function ($fatFree){
     echo $fatFree->get('ERROR.text');
 });
 
+$controller = new Controller($fatFree);
+
 //define some routes
 // main page
 $fatFree->route('GET /', function ($fatFree){
-    introduction($fatFree);
+    $GLOBALS['controller']->introduction($fatFree);
 });
 
 //internship page
 $fatFree->route('GET /internships', function (){
-    internship();
+    $GLOBALS['controller']->internship();
 });
 
 // resources page
 $fatFree->route('GET /studentResources', function (){
-    studentResources();
+    $GLOBALS['controller']->studentResources();
 });
 
 // admin login page
 $fatFree->route('GET|POST /adminLogin', function (){
-    login();
+    $GLOBALS['controller']->login();
 });
 
 // admin page
 $fatFree->route('GET|POST /adminPage', function ($fatFree){
-    adminPage($fatFree);
+    $GLOBALS['controller']->adminPage($fatFree);
 });
 
 // register admin page
 $fatFree->route('GET|POST /register', function ($fatFree){
-    register($fatFree);
+    $GLOBALS['controller']->register($fatFree);
 });
 
 $fatFree->route('GET|POST /upcoming-events', function($fatFree) {
-    upcomingEvents($fatFree);
+    $GLOBALS['controller']->upcomingEvents($fatFree);
 });
 
 // logout admin page
 $fatFree->route('GET /Logout', function ($fatFree){
-    logout($fatFree);
+    $GLOBALS['controller']->logout($fatFree);
 });
 
 $fatFree->route('POST /editContent', function (){
-    editContent();
+    $GLOBALS['controller']->editContent();
 });
-
-//$fatFree->route('GET /htmlContent', function($fatFree) {
-//    htmlContent($fatFree);
-//});
 
 //needed to run
 $fatFree->run();
