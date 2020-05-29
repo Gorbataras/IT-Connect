@@ -51,24 +51,58 @@ class Controller
      */
     function introduction()
     {
-        $meetupList = $this->getRecentMeetups();
-
         // Create PDO
         $config = include("/home/nwagreen/config.php");
         $db = new PDO($config["db"], $config["username"], $config["password"]);
 
-        // Get recent internships
+        // Get internships, Meetup events, blog posts and HTML content
         $internships = (new PostingsModel($db))->getAllPostings();
-
-        // Get HTML content
+        $meetupList = $this->getRecentMeetups();
+        $blog = $this->getRecentBlogPosts();
         $content = (new htmlContent($db))->getAllPageContent('home');
 
         // Set to hive
         $this->_f3->set('array', $meetupList);
         $this->_f3->set('posts', $internships);
+        $this->_f3->set('blog', $blog);
         $this->_f3->set('content', $content);
 
         echo Template::instance()->render('views/introduction.php');
+    }
+
+
+    private function getRecentBlogPosts() {
+
+        // Retrieve Medium JSON querie results from Medium RSS feed
+        $result = json_decode(file_get_contents('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/green-river-web-mobile-developers'), true);
+
+        // Separate posts from comments
+        $posts = array_filter($result['items'], function($value, $key) {
+           return sizeof($value['categories']) > 0;
+        }, ARRAY_FILTER_USE_BOTH);
+
+        $recentPosts = [];
+
+        // Format posts and take most recent 3
+        for ($i = 0; $i < 3; $i++) {
+            $currPost = $posts[$i];
+
+            // Get first paragraph and cap its length
+            $html = new DOMDocument();
+
+            // @ to suppress irrelevant error
+            @$html->loadHTML($currPost['content']);
+            $firstParagraph = $html->getElementsByTagName('p')[0]->nodeValue;
+            $posts[$i]['content'] = substr($firstParagraph, 0, 150) . '... read more';
+
+            // Format date
+            $time = strtotime($currPost['pubDate']);
+            $posts[$i]['pubDate'] = date('M j', $time);
+
+            // Collect recent post
+            $recentPosts[$i] = $posts[$i];
+        }
+        return $recentPosts;
     }
 
 
@@ -295,10 +329,6 @@ class Controller
      */
     private function getRecentMeetups()
     {
-        $meetups = file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
-        $meetups = json_decode($meetups);
-
-        //Meetup integration
         //Retrieve list of sources
         $meetupGroupsList = file_get_contents('db/meetupSources.json');
         $meetupGroupsList = json_decode($meetupGroupsList, 1);

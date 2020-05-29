@@ -79,6 +79,7 @@ SOFTWARE.
                             </div>
                         </a>
 
+                        <!-- Card content -->
                         <div id="internships-body" class="collapse show" aria-labelledby="internships-heading"
                              data-parent="#home-accordion">
                             <div class="card-body">
@@ -128,6 +129,7 @@ SOFTWARE.
                             </div>
                         </a>
 
+                        <!-- Card content -->
                         <div id="meetups-body" class="collapse" aria-labelledby="meetups-heading"
                              data-parent="#home-accordion">
                             <ul id="latest-meetups" class="list-group list-group-flush">
@@ -167,8 +169,24 @@ SOFTWARE.
                                 <h3>Posts</h3>
                             </div>
                         </a>
+
+                        <!-- Card content -->
                         <div id="posts-body" class="collapse" aria-labelledby="posts-heading" data-parent="#home-accordion">
                             <ul id="latest-blogs" class="list-group list-group-flush">
+                                <repeat group="{{ @blog }}" value="{{ @currPost }}">
+                                    <li class="list-group-item">
+                                        <a href="{{ @currPost.link }}" target="_blank" class="no-decoration">
+                                            <div class='photo-header'>
+                                                <img class="card-img-top" src="{{ @currPost.thumbnail }}" alt="thumbnail for the post titled {{ @currPost.title }}">
+                                                <h4 class="card-title h5">{{ @currPost.title }}</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-text"><p>{{ @currPost.content }}</p></div>
+                                                <small class="card-subtitle mb-2 text-muted">{{ @currPost.author }}, {{ @currPost.pubDate }}</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </repeat>
                             </ul>
                             <!--Show more button -->
                             <a class="btn container-fluid"
