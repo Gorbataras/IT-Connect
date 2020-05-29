@@ -44,54 +44,9 @@ class Controller
     /*redirect to the introduction page*/
     function introduction()
     {
-        // Get recent Meetups
-        $meetups = file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
-        $meetups = json_decode($meetups);
+        $meetupList = $this->getRecentMeetups();
 
         // Create PDO
-
-        //Meetup integration
-
-        //Retrieve list of sources
-        $meetupGroupsList = file_get_contents('db/meetupSources.json');
-        $meetupGroupsList = json_decode($meetupGroupsList, 1);
-
-        //link to be manipulated. "placeholder" will be replaced repeatedly with each entry
-        //in the list
-        $link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
-
-        //Store meetups
-        $meetupList = array();
-        //limit 5
-        $counter = 0;
-
-        // Send request for each source
-        foreach ($meetupGroupsList as $source) {
-            // make link for the current source
-            $currSource = str_replace('placeholder', $source, $link);
-
-            //Make request to meetup api
-            $response = file_get_contents($currSource);
-            $response = json_decode($response, 1);
-            //Add each event from request to array
-            foreach ($response as $event) {
-                //add event to list
-                array_push($meetupList, $event);
-                $counter++;
-                //Check for limit reached
-                if ($counter == 5) {
-                    break;
-                }
-            }
-            //Check for limit reached
-            if ($counter == 5) {
-                break;
-            }
-        }
-        //Sort the entries using custom comparison function
-        usort($meetupList, ["Controller", "sortFunction"]);
-
-        //Internships integration
         $config = include("/home/nwagreen/config.php");
         $db = new PDO($config["db"], $config["username"], $config["password"]);
 
@@ -298,5 +253,55 @@ class Controller
 
         // Save HTML content
         echo (new htmlContent($db))->setContent($page, $contentName, $html, $isShown);
+    }
+
+    /**
+     * @return array
+     */
+    public function getRecentMeetups()
+    {
+        $meetups = file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
+        $meetups = json_decode($meetups);
+
+        //Meetup integration
+        //Retrieve list of sources
+        $meetupGroupsList = file_get_contents('db/meetupSources.json');
+        $meetupGroupsList = json_decode($meetupGroupsList, 1);
+
+        //link to be manipulated. "placeholder" will be replaced repeatedly with each entry
+        //in the list
+        $link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
+
+        //Store meetups
+        $meetupList = array();
+        //limit 5
+        $counter = 0;
+
+        // Send request for each source
+        foreach ($meetupGroupsList as $source) {
+            // make link for the current source
+            $currSource = str_replace('placeholder', $source, $link);
+
+            //Make request to meetup api
+            $response = file_get_contents($currSource);
+            $response = json_decode($response, 1);
+            //Add each event from request to array
+            foreach ($response as $event) {
+                //add event to list
+                array_push($meetupList, $event);
+                $counter++;
+                //Check for limit reached
+                if ($counter == 5) {
+                    break;
+                }
+            }
+            //Check for limit reached
+            if ($counter == 5) {
+                break;
+            }
+        }
+        //Sort the entries using custom comparison function
+        usort($meetupList, ["Controller", "sortFunction"]);
+        return $meetupList;
     }
 }
