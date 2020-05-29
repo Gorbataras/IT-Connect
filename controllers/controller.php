@@ -36,12 +36,19 @@ class Controller
     // Base instance for Fat-Free Framework
     private $_f3;
 
+    /**
+     * Controller constructor.
+     * @param $f3 Fat-Free Base object
+     */
     function __construct($f3)
     {
         $this->_f3 = $f3;
     }
 
-    /*redirect to the introduction page*/
+
+    /**
+     * Redirect to the introduction page
+     */
     function introduction()
     {
         $meetupList = $this->getRecentMeetups();
@@ -64,39 +71,60 @@ class Controller
         echo Template::instance()->render('views/introduction.php');
     }
 
-    static function sortFunction($a, $b)
+
+    /**
+     * Compare function to sort by recent date
+     * @param $a String date of item
+     * @param $b String date of another item
+     * @return int positive if sorted by most recent, negative if by least recent, 0 if equal
+     */
+    private static function sortFunction($a, $b)
     {
         return strtotime($a["local_date"]) - strtotime($b["local_date"]);
     }
 
 
-    /*redirect to the internship page*/
+    /**
+     * redirect to the internship page
+     */
     function internship()
     {
         // show the internship page
         echo Template::instance()->render('views/internships.php');
     }
 
-    /*redirect to the student resources page*/
+
+    /**
+     * redirect to the student resources page
+     */
     function studentResources()
     {
         //  show the student resources page
         echo Template::instance()->render('views/studentResources.php');
     }
 
+
+    /**
+     * Logs admin into website
+     */
     function login()
     {
         //  show the admin Login page
         echo Template::instance()->render('gatorLock/login.php');
     }
 
+
+    /**
+     * Registers admin into website
+     */
     function register()
     {
         //  show the admin Login page
         echo Template::instance()->render('gatorLock/register.php');
     }
 
-    /*
+
+    /**
      * Shows all editable site content
      */
     function adminPage()
@@ -145,10 +173,10 @@ class Controller
     }
 
 
-    /*
+    /**
      * Add new Meetup group to JSON file
      */
-    function meetupUpdate($meetupGroupsList)
+    private function meetupUpdate($meetupGroupsList)
     {
         //If the entry does not already exist
         if (!in_array($_POST['new-group'], $meetupGroupsList)) {
@@ -165,10 +193,10 @@ class Controller
     }
 
 
-    /*
+    /**
      * Remove a Meetup group from JSON file
      */
-    function meetupDelete($meetupsGroupsList)
+    private function meetupDelete($meetupsGroupsList)
     {
         //Find the requested source in the list
         if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
@@ -185,7 +213,8 @@ class Controller
         $this->_f3->set('meetupGroupsList', $meetupGroupsList);
     }
 
-    /*
+
+    /**
      * Shows all upcoming Meetup events for saved meetup groups
      */
     function upcomingEvents()
@@ -224,6 +253,10 @@ class Controller
         echo Template::instance()->render('views/upcomingEvents.php');
     }
 
+
+    /**
+     * Logs admin out of the website
+     */
     function logout()
     {
         //  Log out of page
@@ -235,7 +268,8 @@ class Controller
         exit;
     }
 
-    /*
+
+    /**
      * Receives and saves edited html content
      */
     function editContent()
@@ -256,9 +290,10 @@ class Controller
     }
 
     /**
-     * @return array
+     * Collect recent Meetup events from all the site's Meetup groups sorted be recent date
+     * @return array Meetup event data
      */
-    public function getRecentMeetups()
+    private function getRecentMeetups()
     {
         $meetups = file_get_contents('https://api.meetup.com/South-King-Web-Mobile-Developers/events?&sign=true&photo-host=public');
         $meetups = json_decode($meetups);
