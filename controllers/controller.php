@@ -93,7 +93,15 @@ class Controller
             // @ to suppress irrelevant error
             @$html->loadHTML($currPost['content']);
             $firstParagraph = $html->getElementsByTagName('p')[0]->nodeValue;
-            $posts[$i]['content'] = substr($firstParagraph, 0, 150) . '... read more';
+
+            // Use placeholder if no paragraph content
+            if (empty($firstParagraph)) {
+                $posts[$i]['content'] = "No sample available";
+            }
+            else {
+                $posts[$i]['content'] = substr($firstParagraph, 0, 150) . '... read more';
+            }
+
 
             // Format date
             $time = strtotime($currPost['pubDate']);
