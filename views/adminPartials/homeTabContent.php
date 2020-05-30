@@ -40,15 +40,22 @@
         <textarea class="form-control wysiwyg" id="home-intro" name="home-intro"
                   cols="30" rows="3">{{ @homeContent['intro']['html'] }}</textarea>
     </div>
+    <br>
 
     <!-- Medium Blog Link -->
     <div class="form-group">
         <label for="medium-blog-link">Medium Blog Link</label>
-        <input class="form-control" id="medium-blog-link" name="medium-blog-link" type="text">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="medium-url-pre">https://medium.com/</span>
+            </div>
+            <input class="form-control" id="medium-blog-link" name="medium-blog-link" type="text"
+                   value="{{ @blogSourceName }}" aria-describedby="medium-url-pre">
+        </div>
     </div>
 
     <!-- Submit -->
-    <div class="text-center">
-        <button id="home-submit" type="submit" value="" class="btn btn-success">Save</button>
+    <div class="text-center mb-5 mt-4">
+        <button id="home-submit" class="btn btn-success">Save</button>
     </div>
 </div>

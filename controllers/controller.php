@@ -33,6 +33,8 @@ SOFTWARE.
  */
 class Controller
 {
+    const BLOG_POST_QTY = 3;
+
     // Base instance for Fat-Free Framework
     private $_f3;
 
@@ -55,11 +57,13 @@ class Controller
         $config = include("/home/nwagreen/config.php");
         $db = new PDO($config["db"], $config["username"], $config["password"]);
 
+        $htmlContent = new htmlContent($db);
+
         // Get internships, Meetup events, blog posts and HTML content
         $internships = (new PostingsModel($db))->getAllPostings();
         $meetupList = $this->getRecentMeetups();
-        $blog = $this->getRecentBlogPosts();
-        $content = (new htmlContent($db))->getAllPageContent('home');
+        $blog = $this->getRecentBlogPosts($htmlContent);
+        $content = $htmlContent->getAllPageContent('home');
 
         // Set to hive
         $this->_f3->set('array', $meetupList);
@@ -71,46 +75,66 @@ class Controller
     }
 
 
-    private function getRecentBlogPosts() {
+    /**
+     * Retrieves the most recent blog posts from api and formats the data
+     * @param $htmlContent
+     * @return array 3 most recent blog posts
+     */
+    private function getRecentBlogPosts($htmlContent) {
+        $row = $htmlContent->getApiSourceNamesByDomain('medium.com');
 
-        // Retrieve Medium JSON querie results from Medium RSS feed
-        $result = json_decode(file_get_contents('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/green-river-web-mobile-developers'), true);
-
-        // Separate posts from comments
-        $posts = array_filter($result['items'], function($value, $key) {
-           return sizeof($value['categories']) > 0;
-        }, ARRAY_FILTER_USE_BOTH);
-
-        $recentPosts = [];
-
-        // Format posts and take most recent 3
-        for ($i = 0; $i < 3; $i++) {
-            $currPost = $posts[$i];
-
-            // Get first paragraph and cap its length
-            $html = new DOMDocument();
-
-            // @ to suppress irrelevant error
-            @$html->loadHTML($currPost['content']);
-            $firstParagraph = $html->getElementsByTagName('p')[0]->nodeValue;
-
-            // Use placeholder if no paragraph content
-            if (empty($firstParagraph)) {
-                $posts[$i]['content'] = "No sample available";
-            }
-            else {
-                $posts[$i]['content'] = substr($firstParagraph, 0, 150) . '... read more';
-            }
-
-
-            // Format date
-            $time = strtotime($currPost['pubDate']);
-            $posts[$i]['pubDate'] = date('M j', $time);
-
-            // Collect recent post
-            $recentPosts[$i] = $posts[$i];
+        $srcName = '';
+        if (empty($row) || empty($row[0]['source_name'])) {
+            return null;
         }
-        return $recentPosts;
+        else {
+            $srcName = $row[0]['source_name'];
+        }
+
+        // Retrieve Medium JSON query results from Medium RSS feed
+        $result = json_decode(file_get_contents('https://api.rss2json.com/v1/api.json?rss_url='
+                . 'https://medium.com/feed/' . $srcName), true);
+
+        // Separate posts from comments, take only 3 posts
+        $posts = [];
+        $count = 0;
+
+        // Format and take 3 most recent
+        foreach ($result['items'] as $currPost) {
+
+            // Separate posts from comments
+            if (!empty($currPost['categories'])) {
+
+                // Get first paragraph and cap its length
+                $doc = new DOMDocument();
+
+                // @ to suppress irrelevant error caused by data
+                @$doc->loadHTML($currPost['content']);
+                $firstParagraph = $doc->getElementsByTagName('p')[0]->nodeValue;
+
+                // Use placeholder if no paragraph content
+                if (empty($firstParagraph)) {
+                    $currPost['content'] = "No sample content available";
+                }
+                else {
+                    $currPost['content'] = substr($firstParagraph, 0, 150) . '... read more';
+                }
+
+                // Format date, ex Dec 30
+                $time = strtotime($currPost['pubDate']);
+                $currPost['pubDate'] = date('M j', $time);
+
+                // Collect post
+                $posts[] = $currPost;
+                $count++;
+
+                // Take only 3
+                if ($count == self::BLOG_POST_QTY) {
+                    break;
+                }
+            }
+        }
+        return $posts;
     }
 
 
@@ -174,10 +198,13 @@ class Controller
 
         //if ($_SESSION["validUser"] == true){
 
+        // Create PDO
+        $config = include("/home/nwagreen/config.php");
+        $db = new PDO($config["db"], $config["username"], $config["password"]);
+
         //retrieve the json with list of sources
         $meetupGroupsList = file_get_contents('db/meetupSources.json');
         $meetupGroupsList = json_decode($meetupGroupsList, 1);
-        $this->_f3->set('meetupGroupsList', $meetupGroupsList);
 
         //Meetups Control
         if ($_REQUEST['source-tab'] == 'meetups') {
@@ -194,15 +221,16 @@ class Controller
             }
         }
 
-        // Create PDO
-        $config = include("/home/nwagreen/config.php");
-        $db = new PDO($config["db"], $config["username"], $config["password"]);
+        $htmlContent = new htmlContent($db);
 
-        // Get HTML content
-        $homeContent = (new htmlContent($db))->getAllPageContent('home');
+        // Get HTML content, blog source
+        $homeContent = $htmlContent->getAllPageContent('home');
+        $blogSourceName = $this->getBlogSourceName($htmlContent);
 
         // Set to hive
         $this->_f3->set('homeContent', $homeContent);
+        $this->_f3->set('blogSourceName', $blogSourceName);
+        $this->_f3->set('meetupGroupsList', $meetupGroupsList);
 
         echo Template::instance()->render('views/adminPage.php');
 
@@ -212,6 +240,15 @@ class Controller
         //        exit;
         //    }
 
+    }
+
+    private function getBlogSourceName($htmlContent) {
+        $row = $htmlContent->getApiSourceNamesByDomain('medium.com');
+
+        if (!empty($row)) {
+            return $row[0]['source_name'];
+        }
+        return null;
     }
 
 
@@ -316,19 +353,60 @@ class Controller
      */
     function editContent()
     {
+        $blogSourceName = trim($_POST['blogSourceName']);
+        $url = 'https://medium.com/' . $blogSourceName;
 
-        // Collect variables
-        $page = $_POST['page'];
-        $contentName = $_POST['contentName'];
-        $html = $_POST['html'];
-        $isShown = $_POST['isShown'] == 'true' ? 1 : 0;
+        // Medium blog must be a valid url
+        if (!$this->isValidUrl($url)) {
+            echo "The submitted Medium link ($url) does not work. No changes were saved.";
+            return;
+        }
 
         // Create PDO
         $config = include("/home/nwagreen/config.php");
         $db = new PDO($config["db"], $config["username"], $config["password"]);
+        $htmlContentDb = new htmlContent($db);
 
-        // Save HTML content
-        echo (new htmlContent($db))->setContent($page, $contentName, $html, $isShown);
+        $status = "";
+
+        // Save blog source name
+        if (!$htmlContentDb->updateApiSourceNameByDomain('medium.com', $blogSourceName)) {
+            $status .= 'Error: "' .  str_replace('-', ' ', $blogSourceName) . '" was not saved.';
+        }
+
+        // Save htmlContent
+        foreach ($_POST['htmlContent'] as $contentItem) {
+
+            // Collect variables
+            $page = $contentItem['page'];
+            $contentName = $contentItem['contentName'];
+            $html = $contentItem['html'];
+            $isShown = $contentItem['isShown'] == 'true' ? 1 : 0;
+
+            // Save HTML content
+            if (!$htmlContentDb->setContent($page, $contentName, $html, $isShown)) {
+                $status .= 'Error: "' .  str_replace('-', ' ', $contentName) . '" was not saved.';
+            }
+        }
+        echo $status;
+    }
+
+    private function isValidUrl($url) {
+        $handle = curl_init($url);
+        curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+
+        /* Get the HTML or whatever is linked in $url. */
+        $response = curl_exec($handle);
+
+        /* Check for 404 (file not found). */
+        $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+        curl_close($handle);
+
+        // http status code must be in 200s
+        if ($httpCode / 100 == 2) {
+            return true;
+        }
+        return false;
     }
 
     /**

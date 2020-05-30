@@ -99,4 +99,30 @@ class htmlContent
 
         return $statement->execute();
     }
+
+    public function getApiSourceNamesByDomain($domain) {
+        $sql = "SELECT source_name
+                FROM api_resource
+                WHERE domain = :domain";
+
+        $statement = $this->_dbh->prepare($sql);
+        $statement->bindParam(':domain', $domain);
+
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function updateApiSourceNameByDomain($domain, $sourceName) {
+        $sql = "UPDATE api_resource
+                SET source_name = :sourceName
+                WHERE domain = :domain
+                LIMIT 1";
+
+        $statement = $this->_dbh->prepare($sql);
+        $statement->bindValue(':domain', $domain);
+        $statement->bindValue(':sourceName', $sourceName);
+
+        return $statement->execute();
+    }
 }
