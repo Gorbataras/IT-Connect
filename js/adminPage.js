@@ -483,14 +483,6 @@ $('#home-submit').on('click', function () {
             }
         }
     );
-    // data.forEach(function(item) {
-    //     $.post('/editContent', item, function(result) {
-    //         if (!result) {
-    //             isSaved = false;
-    //         }
-    //     });
-    // });
-
 });
 
 
