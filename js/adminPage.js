@@ -455,37 +455,34 @@ tinymce.init({
 $('#home-submit').on('click', function () {
 
     // Gather data from controls
-    // let alertContent = $($.parseHTML($('#home-alert').val())).text();
     let alertContent = $('#home-alert').val();
     let alertIsShown = $('#alert-is-shown').prop('checked');
 
-    // let introContent = $($.parseHTML($('#home-intro').val())).text();
     let introContent = $('#home-intro').val();
     let introIsShown = $('#intro-is-shown').prop('checked');
 
+    let blogSourceName = $('#medium-blog-link').val();
+
     // Collect into array as JSON
-    let data = [];
-    data.push({page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown});
-    data.push({page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown});
+    let htmlContent = [];
+    htmlContent.push({page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown});
+    htmlContent.push({page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown});
 
     let isSaved = true;
 
     // Make post requests for data
-    data.forEach(function(item) {
-        $.post('/editContent', item, function(result) {
-            if (!result) {
-                isSaved = false;
-            }
-        });
-    });
+    $.post('/editContent', {htmlContent: htmlContent, blogSourceName: blogSourceName},
+        function(result) {
 
-    // Show confirmation
-    if (isSaved) {
-        alert("Saved Successfully!!")
-    }
-    else {
-        alert("There was an error");
-    }
+            // Show confirmation
+            if (result.length === 0) {
+                alert("Saved Successfully!!")
+            }
+            else {
+                alert(result);
+            }
+        }
+    );
 });
 
 

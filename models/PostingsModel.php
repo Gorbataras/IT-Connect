@@ -35,10 +35,13 @@ class PostingsModel
     protected $db;
 
     // Constructor
-    public function __construct(PDO $db)
+    public function __construct()
     {
-        $this->db = $db;
+        // Create PDO
+        $config = include("/home/nwagreen/config.php");
+        $db = new PDO($config["db"], $config["username"], $config["password"]);
 
+        $this->db = $db;
     }
 
     /**
