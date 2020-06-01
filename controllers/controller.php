@@ -57,13 +57,13 @@ class Controller
         $config = include("/home/nwagreen/config.php");
         $db = new PDO($config["db"], $config["username"], $config["password"]);
 
-        $htmlContent = new htmlContent($db);
+        $htmlContentDb = new htmlContent($db);
 
         // Get internships, Meetup events, blog posts and HTML content
         $internships = (new PostingsModel($db))->getAllPostings();
         $meetupList = $this->getRecentMeetups();
-        $blog = $this->getRecentBlogPosts($htmlContent);
-        $content = $htmlContent->getAllPageContent('home');
+        $blog = $this->getRecentBlogPosts($htmlContentDb);
+        $content = $htmlContentDb->getAllPageContent('home');
 
         // Set to hive
         $this->_f3->set('array', $meetupList);
@@ -108,8 +108,8 @@ class Controller
                 // Get first paragraph and cap its length
                 $doc = new DOMDocument();
 
-                // @ to suppress irrelevant error caused by data
-                @$doc->loadHTML($currPost['content']);
+                // @ to suppress irrelevant error caused by data.
+                @$doc->loadHTML(mb_convert_encoding($currPost['content'], "HTML-ENTITIES", "UTF-8"));
                 $firstParagraph = $doc->getElementsByTagName('p')[0]->nodeValue;
 
                 // Use placeholder if no paragraph content
