@@ -34,12 +34,8 @@ session_start();
 //Includes the postings model with all the function to deal w/ posts
 include "../models/PostingsModel.php";
 
-//Includes DB files
-$config = include("../db/config.php");
-$db = new PDO($config["db"], $config["username"], $config["password"]);
-
 //Creating new posts object with DB specs
-$postings = new PostingsModel($db);
+$postings = new PostingsModel();
 
 //The switch chooses what server Request_Method is being submitted
 SWITCH ($_SERVER["REQUEST_METHOD"]) {
