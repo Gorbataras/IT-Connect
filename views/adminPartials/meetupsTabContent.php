@@ -21,11 +21,11 @@
 				<li class="list-group-item">
 					<div class="row">
 						<div class="col">
-							<p class="h5">{{ @value }}</p>
+							<p class="h5">{{ @value.source_name }}</p>
 						</div>
 						<div class="col text-right">
 							<button class="btn" type="submit">&#128465</button>
-							<input name="entry" type="text" value="{{ @value }}" hidden>
+							<input name="entry" type="text" value="{{ @value.source_name }}" hidden>
 						</div>
 					</div>
 				</li>
