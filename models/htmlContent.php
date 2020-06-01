@@ -21,10 +21,13 @@ class htmlContent
 
     /**
      * htmlContent constructor.
-     * @param PDO $dbh database connection object
      */
-    public function __construct(PDO $dbh)
+    public function __construct()
     {
+        // Create PDO
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
         $this->_dbh = $dbh;
     }
 
@@ -100,6 +103,12 @@ class htmlContent
         return $statement->execute();
     }
 
+
+    /**
+     * Gets the API source names from the db with matching domain
+     * @param $domain string source of the API content
+     * @return array of source names
+     */
     public function getApiSourceNamesByDomain($domain) {
         $sql = "SELECT source_name
                 FROM api_resource
@@ -113,6 +122,12 @@ class htmlContent
     }
 
 
+    /**
+     * Updates API source name
+     * @param $domain string source of the API content
+     * @param $sourceName string source of the API content
+     * @return bool
+     */
     public function updateApiSourceNameByDomain($domain, $sourceName) {
         $sql = "UPDATE api_resource
                 SET source_name = :sourceName
@@ -124,5 +139,63 @@ class htmlContent
         $statement->bindValue(':sourceName', $sourceName);
 
         return $statement->execute();
+    }
+
+
+    /**
+     * Adds API source name to the database
+     * @param $domain string source of the API content
+     * @param $sourceName string source of the API content
+     */
+    public function addApiSourceName($domain, $sourceName) {
+        $sql = "INSERT INTO api_resource (domain, source_name)
+                VALUES (:domain, :sourceName)";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':domain', $domain);
+        $statement->bindParam(':sourceName', $sourceName);
+
+        $statement->execute();
+    }
+
+
+    /**
+     * Checks if API source exists in the database
+     * @param $domain C
+     * @param $sourceName string source of the API content
+     * @return bool true if API source exists in the db
+     */
+    public function apiSourceNameDoesExist($domain, $sourceName) {
+        $sql = "SELECT EXISTS(
+                    SELECT api_resource_id
+                    FROM api_resource
+                    WHERE domain = :domain AND source_name = :sourceName)";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':domain', $domain);
+        $statement->bindParam(':sourceName', $sourceName);
+
+        $statement->execute();
+        return $statement->fetch()[0] == 1 ? true : false;
+    }
+
+
+    /**
+     * Deletes API source name from db
+     * @param $domain string domain of website the API belongs to
+     * @param $sourceName string source of the API content
+     */
+    public function deleteApiSourceName($domain, $sourceName) {
+        $sql = 'DELETE FROM api_resource
+                WHERE domain = :domain AND source_name = :sourceName';
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':domain', $domain);
+        $statement->bindParam(':sourceName', $sourceName);
+
+        $statement->execute();
     }
 }
