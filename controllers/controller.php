@@ -33,7 +33,17 @@ SOFTWARE.
  */
 class Controller
 {
+    // Quantity to show for each item on home page
     const BLOG_POST_QTY = 3;
+    const EVENT_QTY = 5;
+
+    // Domains used to identify APIs
+    const MEETUP_DOMAIN = 'www.meetup.com';
+    const MEDIUM_DOMAIN = 'medium.com';
+
+    //Link to be manipulated. "placeholder" will be replaced
+    const MEETUP_API_URL = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
+    const MEDIUM_API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/';
 
     // Base instance for Fat-Free Framework
     private $_f3;
@@ -53,15 +63,11 @@ class Controller
      */
     function introduction()
     {
-        // Create PDO
-        $config = include("/home/nwagreen/config.php");
-        $db = new PDO($config["db"], $config["username"], $config["password"]);
-
-        $htmlContentDb = new htmlContent($db);
+        $htmlContentDb = new htmlContent();
 
         // Get internships, Meetup events, blog posts and HTML content
-        $internships = (new PostingsModel($db))->getAllPostings();
-        $meetupList = $this->getRecentMeetups();
+        $internships = (new PostingsModel())->getAllPostings();
+        $meetupList = $this->getRecentMeetups($htmlContentDb, true);
         $blog = $this->getRecentBlogPosts($htmlContentDb);
         $content = $htmlContentDb->getAllPageContent('home');
 
@@ -77,13 +83,15 @@ class Controller
 
     /**
      * Retrieves the most recent blog posts from api and formats the data
-     * @param $htmlContent
+     * @param $htmlContentDb db context
      * @return array 3 most recent blog posts
      */
-    private function getRecentBlogPosts($htmlContent) {
-        $row = $htmlContent->getApiSourceNamesByDomain('medium.com');
+    private function getRecentBlogPosts($htmlContentDb) {
+        $row = $htmlContentDb->getApiSourceNamesByDomain(self::MEDIUM_DOMAIN);
 
         $srcName = '';
+
+        // Preconditions
         if (empty($row) || empty($row[0]['source_name'])) {
             return null;
         }
@@ -91,9 +99,15 @@ class Controller
             $srcName = $row[0]['source_name'];
         }
 
+        $url = self::MEDIUM_API_URL . $srcName;
+
+        // Medium blog must be a valid url
+        if (!$this->isValidUrl($url)) {
+            return null;
+        }
+
         // Retrieve Medium JSON query results from Medium RSS feed
-        $result = json_decode(file_get_contents('https://api.rss2json.com/v1/api.json?rss_url='
-                . 'https://medium.com/feed/' . $srcName), true);
+        $result = json_decode(file_get_contents(self::MEDIUM_API_URL . $srcName), true);
 
         // Separate posts from comments, take only 3 posts
         $posts = [];
@@ -106,9 +120,8 @@ class Controller
             if (!empty($currPost['categories'])) {
 
                 // Get first paragraph and cap its length
-                $doc = new DOMDocument();
-
                 // @ to suppress irrelevant error caused by data.
+                $doc = new DOMDocument();
                 @$doc->loadHTML(mb_convert_encoding($currPost['content'], "HTML-ENTITIES", "UTF-8"));
                 $firstParagraph = $doc->getElementsByTagName('p')[0]->nodeValue;
 
@@ -197,35 +210,28 @@ class Controller
     {
 
         //if ($_SESSION["validUser"] == true){
-
-        // Create PDO
-        $config = include("/home/nwagreen/config.php");
-        $db = new PDO($config["db"], $config["username"], $config["password"]);
-
-        //retrieve the json with list of sources
-        $meetupGroupsList = file_get_contents('db/meetupSources.json');
-        $meetupGroupsList = json_decode($meetupGroupsList, 1);
+        $htmlContentDb = new htmlContent();
 
         //Meetups Control
         if ($_REQUEST['source-tab'] == 'meetups') {
-            //Decide what to do based on what user clicked
+            $addedGroupName = $_POST['new-group'];
+            $removedGroupname = $_POST['entry'];
+
+            // Add or Delete meetup group
             switch ($_REQUEST['task']) {
                 case 'add':
-                    //Add a new source
-                    $this->meetupUpdate($meetupGroupsList);
+                    $this->addMeetupGroup($htmlContentDb, $addedGroupName);
                     break;
                 case 'delete':
-                    //Delete the selected entry from the sources list
-                    $this->meetupDelete($meetupGroupsList);
+                    $this->meetupDelete($htmlContentDb, $removedGroupname);
                     break;
             }
         }
 
-        $htmlContent = new htmlContent($db);
-
-        // Get HTML content, blog source
-        $homeContent = $htmlContent->getAllPageContent('home');
-        $blogSourceName = $this->getBlogSourceName($htmlContent);
+        // Get HTML content, blog source, Meetup Groups
+        $homeContent = $htmlContentDb->getAllPageContent('home');
+        $blogSourceName = $this->getBlogSourceName($htmlContentDb);
+        $meetupGroupsList = $htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
         // Set to hive
         $this->_f3->set('homeContent', $homeContent);
@@ -242,8 +248,14 @@ class Controller
 
     }
 
-    private function getBlogSourceName($htmlContent) {
-        $row = $htmlContent->getApiSourceNamesByDomain('medium.com');
+
+    /**
+     * Gets the name of the of the blog source from the database or null if none
+     * @param $htmlContentDb db context
+     * @return mixed|null name of blog source
+     */
+    private function getBlogSourceName($htmlContentDb) {
+        $row = $htmlContentDb->getApiSourceNamesByDomain(self::MEDIUM_DOMAIN);
 
         if (!empty($row)) {
             return $row[0]['source_name'];
@@ -253,43 +265,30 @@ class Controller
 
 
     /**
-     * Add new Meetup group to JSON file
+     * Add new Meetup group to Db
+     * @param $htmlContentDb object db context
+     * @param $groupName string name of group to add
      */
-    private function meetupUpdate($meetupGroupsList)
+    private function addMeetupGroup($htmlContentDb, $groupName)
     {
-        //If the entry does not already exist
-        if (!in_array($_POST['new-group'], $meetupGroupsList)) {
-            //Add entry to list
-            array_push($meetupGroupsList, $_POST['new-group']);
-            //Push the list to json file
-            file_put_contents('db/meetupSources.json',
-                json_encode($meetupGroupsList));
+        //If the entry does not already exist, add to db
+        if (!$htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
+            $htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN, $groupName);
         }
-        //Update the current sources displayed
-        $meetupGroupsList = file_get_contents('db/meetupSources.json');
-        $meetupGroupsList = json_decode($meetupGroupsList, 1);
-        $this->_f3->set('meetupGroupsList', $meetupGroupsList);
     }
 
 
     /**
      * Remove a Meetup group from JSON file
+     * @param $groupName string name of group to delete
+     * @param $htmlContentDb object db context
      */
-    private function meetupDelete($meetupsGroupsList)
+    private function meetupDelete($htmlContentDb, $groupName)
     {
-        //Find the requested source in the list
-        if (($key = array_search($_POST['entry'], $meetupsGroupsList)) !== false) {
-            //Remove the source from the array
-            unset($meetupsGroupsList[$key]);
+        // Delete existing group from the db
+        if ($htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
+            $htmlContentDb->deleteApiSourceName(self::MEETUP_DOMAIN, $groupName);
         }
-
-        //Write the changes to json
-        file_put_contents('db/meetupSources.json',
-            json_encode($meetupsGroupsList));
-        //Update the current sources displayed
-        $meetupGroupsList = file_get_contents('db/meetupSources.json');
-        $meetupGroupsList = json_decode($meetupGroupsList, 1);
-        $this->_f3->set('meetupGroupsList', $meetupGroupsList);
     }
 
 
@@ -298,34 +297,9 @@ class Controller
      */
     function upcomingEvents()
     {
-        //Retrieve sources from json
-        $meetupGroupsList = file_get_contents('db/meetupSources.json');
-        $meetupGroupsList = json_decode($meetupGroupsList, 1);
+        $htmlContentDb = new htmlContent();
+        $meetupList = $this->getRecentMeetups($htmlContentDb, false);
 
-        //Link to be manipulated. "placeholder" will be replaced multiple times in order to do
-        //multiple requests
-        $link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
-
-        //Store single events
-        $meetupList = array();
-
-        //Loop through sources
-        foreach ($meetupGroupsList as $source) {
-            //Create link to be requested from the meetup api
-            $currSource = str_replace('placeholder', $source, $link);
-
-            //Request to meetup api
-            $response = file_get_contents($currSource);
-            $response = json_decode($response, 1);
-            //Add each array item to our meetup list
-            foreach ($response as $event) {
-                array_push($meetupList, $event);
-            }
-
-        }
-
-        //Sort all entries by date using custom comparison function
-        usort($meetupList, ["Controller", "sortFunction"]);
         //Add the list to fat free hive
         $this->_f3->set('upcomingEvents', $meetupList);
 
@@ -354,23 +328,20 @@ class Controller
     function editContent()
     {
         $blogSourceName = trim($_POST['blogSourceName']);
-        $url = 'https://medium.com/' . $blogSourceName;
+        $url = self::MEDIUM_API_URL . $blogSourceName;
 
         // Medium blog must be a valid url
         if (!$this->isValidUrl($url)) {
-            echo "The submitted Medium link ($url) does not work. No changes were saved.";
+            echo "The submitted Medium source ($blogSourceName) does not work. No changes were saved.";
             return;
         }
 
-        // Create PDO
-        $config = include("/home/nwagreen/config.php");
-        $db = new PDO($config["db"], $config["username"], $config["password"]);
-        $htmlContentDb = new htmlContent($db);
+        $htmlContentDb = new htmlContent();
 
         $status = "";
 
         // Save blog source name
-        if (!$htmlContentDb->updateApiSourceNameByDomain('medium.com', $blogSourceName)) {
+        if (!$htmlContentDb->updateApiSourceNameByDomain(self::MEDIUM_DOMAIN, $blogSourceName)) {
             $status .= 'Error: "' .  str_replace('-', ' ', $blogSourceName) . '" was not saved.';
         }
 
@@ -391,14 +362,20 @@ class Controller
         echo $status;
     }
 
+
+    /**
+     * Ensures that a link works ie returns HTTP status in 200s
+     * @param $url string URL to validate
+     * @return bool true if link is valid ie HTTP status is in 200s
+     */
     private function isValidUrl($url) {
         $handle = curl_init($url);
         curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
 
-        /* Get the HTML or whatever is linked in $url. */
+        // Get the url content
         $response = curl_exec($handle);
 
-        /* Check for 404 (file not found). */
+        // Get the status code
         $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
         curl_close($handle);
 
@@ -411,48 +388,56 @@ class Controller
 
     /**
      * Collect recent Meetup events from all the site's Meetup groups sorted be recent date
+     * @param $htmlContentDb db context
+     * @param $hasLimit boolean true if only want to return 5 of most recent Meetup events
      * @return array Meetup event data
      */
-    private function getRecentMeetups()
+    private function getRecentMeetups($htmlContentDb, $hasLimit)
     {
         //Retrieve list of sources
-        $meetupGroupsList = file_get_contents('db/meetupSources.json');
-        $meetupGroupsList = json_decode($meetupGroupsList, 1);
-
-        //link to be manipulated. "placeholder" will be replaced repeatedly with each entry
-        //in the list
-        $link = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
+        $meetupGroupsList = $htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
         //Store meetups
         $meetupList = array();
-        //limit 5
-        $counter = 0;
 
         // Send request for each source
         foreach ($meetupGroupsList as $source) {
+
             // make link for the current source
-            $currSource = str_replace('placeholder', $source, $link);
+            $currSource = str_replace('placeholder', $source['source_name'], self::MEETUP_API_URL);
+
+            // Skip invalid links
+            if (!$this->isValidUrl($currSource)) {
+                continue;
+            }
 
             //Make request to meetup api
             $response = file_get_contents($currSource);
             $response = json_decode($response, 1);
+
+            //limit 5 events for each group
+            $counter = 0;
+
             //Add each event from request to array
             foreach ($response as $event) {
+
                 //add event to list
                 array_push($meetupList, $event);
                 $counter++;
+
                 //Check for limit reached
-                if ($counter == 5) {
+                if ($hasLimit && $counter == self::EVENT_QTY) {
                     break;
                 }
-            }
-            //Check for limit reached
-            if ($counter == 5) {
-                break;
             }
         }
         //Sort the entries using custom comparison function
         usort($meetupList, ["Controller", "sortFunction"]);
+
+        // Return only 5 most recent events if has limit
+        if ($hasLimit) {
+            return array_slice($meetupList, 0, self::EVENT_QTY);
+        }
         return $meetupList;
     }
 }
