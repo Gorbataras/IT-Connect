@@ -272,11 +272,24 @@ class Controller
     private function addMeetupGroup($htmlContentDb, $groupName)
     {
         //If the entry does not already exist, add to db
-        if (!$htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
+        if (!$htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName) && $this->validMeetupGroup($_POST['new-group'])) {
             $htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN, $groupName);
         }
     }
 
+	function validMeetupGroup($newGroup) {
+		$isValid = TRUE;
+
+		$linkTemplate = "https://api.meetup.com/placeholder/events";
+		$meetupLink = str_replace('placeholder', $newGroup, $linkTemplate);
+		$meetup = file_get_contents($meetupLink);
+		$meetup = json_decode($meetup, 1);
+		if (in_array('errors', $meetup)) {
+			$isValid = FALSE;
+		}
+		return $isValid;
+
+	}
 
     /**
      * Remove a Meetup group from JSON file
