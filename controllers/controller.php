@@ -272,8 +272,7 @@ class Controller
     private function addMeetupGroup($htmlContentDb, $groupName)
     {
     	//Create a URL
-
-		$meetupLink = str_replace('placeholder', $_POST['new-group'], MEETUP_API_URL);
+		$meetupLink = str_replace('placeholder', $_POST['new-group'], self::MEETUP_API_URL);
 
         //If the entry does not already exist, add to db
         if (!$htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName) && $this->isValidUrl($meetupLink)) {
