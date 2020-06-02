@@ -39,25 +39,14 @@ SOFTWARE.
 <div id="site-container">
     <div class="student-resources">
         <!--body is generated here-->
-        <div id="resources_body"></div>
+        <div id="resources_body">
+            {{ @content['content']['html'] | raw }}
+        </div>
     </div>
 </div>
 
 <!--script needed to generate the page-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!--ajax script that gets the resource body-->
-<script>
-    $.ajax({
-        url: 'api/resources.php',
-        type: 'GET',
-        success: function(result) {
-            console.log(result);
-            $("#resources_body").html(result.body);
-        }
-    });
-</script>
-
 </body>
 
 

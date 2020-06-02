@@ -178,6 +178,14 @@ class Controller
      */
     function studentResources()
     {
+        $htmlContentDb = new htmlContent();
+
+        // Gather content
+        $content = $htmlContentDb->getAllPageContent('resources');
+
+        // Set hive variables
+        $this->_f3->set('content', $content);
+
         //  show the student resources page
         echo Template::instance()->render('views/studentResources.php');
     }
@@ -251,7 +259,7 @@ class Controller
 
     /**
      * Gets the name of the of the blog source from the database or null if none
-     * @param $htmlContentDb db context
+     * @param $htmlContentDb object db context
      * @return mixed|null name of blog source
      */
     private function getBlogSourceName($htmlContentDb) {
