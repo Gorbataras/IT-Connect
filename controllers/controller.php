@@ -45,6 +45,9 @@ class Controller
     const MEETUP_API_URL = 'https://api.meetup.com/placeholder/events?&sign=true&photo-host=public';
     const MEDIUM_API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/';
 
+    // Db context
+    private $_htmlContentDb;
+
     // Base instance for Fat-Free Framework
     private $_f3;
 
@@ -54,6 +57,7 @@ class Controller
      */
     function __construct($f3)
     {
+        $this->_htmlContentDb = new htmlContent();
         $this->_f3 = $f3;
     }
 
@@ -63,13 +67,11 @@ class Controller
      */
     function introduction()
     {
-        $htmlContentDb = new htmlContent();
-
         // Get internships, Meetup events, blog posts and HTML content
         $internships = (new PostingsModel())->getAllPostings();
-        $meetupList = $this->getRecentMeetups($htmlContentDb, true);
-        $blog = $this->getRecentBlogPosts($htmlContentDb);
-        $content = $htmlContentDb->getAllPageContent('home');
+        $meetupList = $this->getRecentMeetups(true);
+        $blog = $this->getRecentBlogPosts();
+        $content = $this->_htmlContentDb->getAllPageContent('home');
 
         // Set to hive
         $this->_f3->set('array', $meetupList);
@@ -83,11 +85,10 @@ class Controller
 
     /**
      * Retrieves the most recent blog posts from api and formats the data
-     * @param $htmlContentDb db context
      * @return array 3 most recent blog posts
      */
-    private function getRecentBlogPosts($htmlContentDb) {
-        $row = $htmlContentDb->getApiSourceNamesByDomain(self::MEDIUM_DOMAIN);
+    private function getRecentBlogPosts() {
+        $row = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEDIUM_DOMAIN);
 
         $srcName = '';
 
@@ -178,10 +179,8 @@ class Controller
      */
     function studentResources()
     {
-        $htmlContentDb = new htmlContent();
-
         // Gather content
-        $content = $htmlContentDb->getAllPageContent('resources');
+        $content = $this->_htmlContentDb->getAllPageContent('resources');
 
         // Set hive variables
         $this->_f3->set('content', $content);
@@ -217,7 +216,6 @@ class Controller
     function adminPage()
     {
         //if ($_SESSION["validUser"] == true){
-        $htmlContentDb = new htmlContent();
 
         //Meetups Control
         if ($_REQUEST['source-tab'] == 'meetups') {
@@ -227,20 +225,20 @@ class Controller
             // Add or Delete meetup group
             switch ($_REQUEST['task']) {
                 case 'add':
-                    $this->addMeetupGroup($htmlContentDb, $addedGroupName);
+                    $this->addMeetupGroup($addedGroupName);
                     break;
                 case 'delete':
-                    $this->meetupDelete($htmlContentDb, $removedGroupname);
+                    $this->meetupDelete($removedGroupname);
                     break;
             }
         }
 
         // Get HTML content, blog source, Meetup Groups
-        $homeContent = $htmlContentDb->getAllPageContent('home');
-        $resourcesContent = $htmlContentDb->getAllPageContent('resources');
+        $homeContent = $this->_htmlContentDb->getAllPageContent('home');
+        $resourcesContent = $this->_htmlContentDb->getAllPageContent('resources');
 
-        $blogSourceName = $this->getBlogSourceName($htmlContentDb);
-        $meetupGroupsList = $htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
+        $blogSourceName = $this->getBlogSourceName();
+        $meetupGroupsList = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
         // Set to hive
         $this->_f3->set('homeContent', $homeContent);
@@ -261,11 +259,10 @@ class Controller
 
     /**
      * Gets the name of the of the blog source from the database or null if none
-     * @param $htmlContentDb object db context
      * @return mixed|null name of blog source
      */
-    private function getBlogSourceName($htmlContentDb) {
-        $row = $htmlContentDb->getApiSourceNamesByDomain(self::MEDIUM_DOMAIN);
+    private function getBlogSourceName() {
+        $row = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEDIUM_DOMAIN);
 
         if (!empty($row)) {
             return $row[0]['source_name'];
@@ -276,14 +273,13 @@ class Controller
 
     /**
      * Add new Meetup group to Db
-     * @param $htmlContentDb object db context
      * @param $groupName string name of group to add
      */
-    private function addMeetupGroup($htmlContentDb, $groupName)
+    private function addMeetupGroup($groupName)
     {
         //If the entry does not already exist, add to db
-        if (!$htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
-            $htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN, $groupName);
+        if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
+            $this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN, $groupName);
         }
     }
 
@@ -291,13 +287,12 @@ class Controller
     /**
      * Remove a Meetup group from JSON file
      * @param $groupName string name of group to delete
-     * @param $htmlContentDb object db context
      */
-    private function meetupDelete($htmlContentDb, $groupName)
+    private function meetupDelete($groupName)
     {
         // Delete existing group from the db
-        if ($htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
-            $htmlContentDb->deleteApiSourceName(self::MEETUP_DOMAIN, $groupName);
+        if ($this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
+            $this->_htmlContentDb->deleteApiSourceName(self::MEETUP_DOMAIN, $groupName);
         }
     }
 
@@ -307,8 +302,7 @@ class Controller
      */
     function upcomingEvents()
     {
-        $htmlContentDb = new htmlContent();
-        $meetupList = $this->getRecentMeetups($htmlContentDb, false);
+        $meetupList = $this->getRecentMeetups(false);
 
         //Add the list to fat free hive
         $this->_f3->set('upcomingEvents', $meetupList);
@@ -335,7 +329,7 @@ class Controller
     function editResourcesPage() {
 //        //if ($_SESSION["validUser"] == true){
 //        {
-        echo $this->editHtmlContent(new htmlContent(), $_POST['htmlContent']);
+        echo $this->editHtmlContent($_POST['htmlContent']);
 //        }
     }
 
@@ -362,25 +356,23 @@ class Controller
             return;
         }
 
-        $htmlContentDb = new htmlContent();
-
         $status = "";
 
         // Save blog source name
-        if (!$htmlContentDb->updateApiSourceNameByDomain(self::MEDIUM_DOMAIN, $blogSourceName)) {
+        if (!$this->_htmlContentDb->updateApiSourceNameByDomain(self::MEDIUM_DOMAIN, $blogSourceName)) {
             $status .= 'Error: "' .  str_replace('-', ' ', $blogSourceName) . '" was not saved.';
         }
 
         // Save all htmlContent
         foreach ($htmlItems as $contentItem) {
-            $status .= $this->editHtmlContent($htmlContentDb, $contentItem);
+            $status .= $this->editHtmlContent($contentItem);
         }
 
         echo $status;
     }
 
 
-    private function editHtmlContent($htmlContentDb, $contentItem) {
+    private function editHtmlContent($contentItem) {
 
         // Collect variables
         $page = $contentItem['page'];
@@ -389,7 +381,7 @@ class Controller
         $isShown = $contentItem['isShown'] == 'true' ? 1 : 0;
 
         // Save HTML content
-        if (!$htmlContentDb->setContent($page, $contentName, $html, $isShown)) {
+        if (!$this->_htmlContentDb->setContent($page, $contentName, $html, $isShown)) {
             return 'Error: "' .  str_replace('-', ' ', $contentName) . '" was not saved.';
         }
         return '';
@@ -421,14 +413,13 @@ class Controller
 
     /**
      * Collect recent Meetup events from all the site's Meetup groups sorted be recent date
-     * @param $htmlContentDb db context
      * @param $hasLimit boolean true if only want to return 5 of most recent Meetup events
      * @return array Meetup event data
      */
-    private function getRecentMeetups($htmlContentDb, $hasLimit)
+    private function getRecentMeetups($hasLimit)
     {
         //Retrieve list of sources
-        $meetupGroupsList = $htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
+        $meetupGroupsList = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
         //Store meetups
         $meetupList = array();
