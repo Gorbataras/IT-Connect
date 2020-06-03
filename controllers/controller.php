@@ -66,6 +66,7 @@ class Controller
         }
 
         $this->_f3 = $f3;
+        $this->getColor();
     }
 
 
@@ -254,7 +255,6 @@ class Controller
         $this->_f3->set('blogSourceName', $blogSourceName);
         $this->_f3->set('meetupGroupsList', $meetupGroupsList);
 
-        $this->getColor();
         echo Template::instance()->render('views/adminPage.php');
 
         //    }else{
@@ -514,11 +514,11 @@ class Controller
         $color2 = $color2[0]['color_hex'];
         $color3 = $color3[0]['color_hex'];
 
-        var_dump($color1,$color2,$color3);
+        //var_dump($color1,$color2,$color3);
 
        $this->_f3->set('color1', $color1);
        $this->_f3->set('color2', $color2);
-       $this->_f3->set('color2', $color3);
+       $this->_f3->set('color3', $color3);
 
     }
 
