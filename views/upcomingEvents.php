@@ -32,7 +32,7 @@
 
 							<tr>
 								<th scope="row"><a target="_blank" class="no-decoration" href="{{@event.link}}">{{@event.name}}</a></th>
-									<td>{{date_format(date_create($event.local_date), "D M d, Y")}}</td>
+									<td>{{date_format(date_create(@event.local_date), "D M d, Y")}}</td>
 									<td>{{date("g:i a", strtotime(@event.local_time))}}</td>
 									<td>{{@event.group.name}}</td>
 									<td>{{@event.venue.name}}</td>
