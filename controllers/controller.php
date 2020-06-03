@@ -277,6 +277,9 @@ class Controller
         //If the entry does not already exist, add to db
         if (!$htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName) && $this->isValidUrl($meetupLink)) {
 			$htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName);
+			$this->_f3->unset('meetupSourceError');
+		} else {
+        	$this->_f3->set('meetupSourceError', "Invalid Group Source or Group already exists.");
 		}
     }
 

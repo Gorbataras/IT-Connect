@@ -13,6 +13,9 @@
 			<button type="submit" class="btn btn-success ml-3">Add</button>
 		</div>
 	</form>
+	<F3:check if="{{ isset(@meetupSourceError) }}">
+		<span class="form-errors">{{ @meetupSourceError }}</span>
+	</F3:check>
 
 <!--	DISPLAY ALL CURRENT MEETUP GROUP SOURCES -->
 	<ul class="list-group">
