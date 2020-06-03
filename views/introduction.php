@@ -154,7 +154,7 @@ SOFTWARE.
                             </ul>
                             <!--Show more button -->
                             <a class="btn container-fluid"
-                               href="https://www.meetup.com/South-King-Web-Mobile-Developers/events/" role="button"
+                               href="{{@BASE}}/upcoming-events" role="button"
                                target="_blank">Show More</a>
                         </div>
                     </div><!-- card -->
