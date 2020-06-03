@@ -51,6 +51,7 @@ class Controller
     // Base instance for Fat-Free Framework
     private $_f3;
 
+
     /**
      * Controller constructor.
      * @param $f3 Fat-Free Base object
@@ -58,6 +59,12 @@ class Controller
     function __construct($f3)
     {
         $this->_htmlContentDb = new htmlContent();
+
+        // If a site title is returned set to hive
+        if ($result = $this->_htmlContentDb->getContent('header', 'title')) {
+            $f3->set('siteTitle', $result[0]['html']);
+        }
+
         $this->_f3 = $f3;
     }
 
@@ -326,10 +333,10 @@ class Controller
     }
 
 
-    function editResourcesPage() {
+    function editHtmlContent() {
 //        //if ($_SESSION["validUser"] == true){
 //        {
-        echo $this->editHtmlContent($_POST['htmlContent']);
+        echo $this->editHtmlContentHelper($_POST['htmlContent']);
 //        }
     }
 
@@ -365,14 +372,14 @@ class Controller
 
         // Save all htmlContent
         foreach ($htmlItems as $contentItem) {
-            $status .= $this->editHtmlContent($contentItem);
+            $status .= $this->editHtmlContentHelper($contentItem);
         }
 
         echo $status;
     }
 
 
-    private function editHtmlContent($contentItem) {
+    private function editHtmlContentHelper($contentItem) {
 
         // Collect variables
         $page = $contentItem['page'];

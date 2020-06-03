@@ -65,8 +65,8 @@ $fatFree->route('POST /editHomePage', function (){
     $GLOBALS['controller']->editHomePage();
 });
 
-$fatFree->route('POST /editResourcesPage', function (){
-    $GLOBALS['controller']->editResourcesPage();
+$fatFree->route('POST /editHtmlContent', function (){
+    $GLOBALS['controller']->editHtmlContent();
 });
 
 //needed to run

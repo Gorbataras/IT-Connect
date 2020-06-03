@@ -406,7 +406,7 @@ const PLUGINS = [
     'insertdatetime table contextmenu paste'
 ];
 
-const TOOLBAR = 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify |'
+const TOOLBAR = 'undo redo | styleselect | fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify |'
         + ' bullist, numlist | link';
 
 
@@ -481,9 +481,25 @@ $('#home-submit').on('click', function() {
 });
 
 $('#resources-submit').on('click', function() {
-    let htmlContent = {page: 'resources', contentName: 'page', html: $('#resources-page').val(), isShown: 'false'};
+    let htmlContent = {page: 'resources', contentName: 'page', html: $('#resources-page').val(), isShown: 'true'};
 
-    $.post('/editResourcesPage', {htmlContent: htmlContent},
+    $.post('/editHtmlContent', {htmlContent: htmlContent},
+        function(result) {
+            // Show confirmation
+            if (result.length === 0) {
+                alert("Saved Successfully!!")
+            }
+            else {
+                alert(result);
+            }
+        }
+    );
+});
+
+$('#site-title-submit').on('click', function() {
+    let htmlContent = {page: 'header', contentName: 'title', html: $('#site-title').val(), isShown: 'true'};
+
+    $.post('/editHtmlContent', {htmlContent: htmlContent},
         function(result) {
             // Show confirmation
             if (result.length === 0) {

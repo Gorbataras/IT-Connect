@@ -1,5 +1,20 @@
 <div class="tab-pane fade show active" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
 
+    <h2>Site Settings</h2>
+
+    <!-- Page Content WYSIWYG-->
+    <div class="form-group">
+        <label for="site-title">Website Title</label>
+        <textarea class="form-control wysiwyg-sm" id="site-title" name="site-title">
+            {{ @siteTitle | raw }}
+        </textarea>
+    </div>
+
+    <!-- Submit -->
+    <div class="text-center mb-5 mt-4">
+        <button id="site-title-submit" class="btn btn-success">Save</button>
+    </div>
+
     <!-- Color Theme -->
     <div class="card">
         <div class="card-header">
