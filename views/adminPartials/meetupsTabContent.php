@@ -2,6 +2,10 @@
     <h2 class="my-3">Meetups</h2>
 	<form action="/adminPage?source-tab=meetups&task=add" method="post" class="form-group">
 
+		<F3:check if="{{ isset(@meetupSourceError) }}">
+			<span class="password-error">{{ @meetupSourceError }}</span>
+		</F3:check>
+		<br><br>
 		<div class="input-group">
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="meetup-pre">https://meetup.com/</span>
@@ -13,9 +17,7 @@
 			<button type="submit" class="btn btn-success ml-3">Add</button>
 		</div>
 	</form>
-	<F3:check if="{{ isset(@meetupSourceError) }}">
-		<span class="form-errors">{{ @meetupSourceError }}</span>
-	</F3:check>
+
 
 <!--	DISPLAY ALL CURRENT MEETUP GROUP SOURCES -->
 	<ul class="list-group">
