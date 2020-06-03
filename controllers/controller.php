@@ -66,6 +66,8 @@ class Controller
         }
 
         $this->_f3 = $f3;
+
+        $this->getColor();
     }
 
 
@@ -478,5 +480,35 @@ class Controller
             return array_slice($meetupList, 0, self::EVENT_QTY);
         }
         return $meetupList;
+    }
+
+    function setColor(){
+//        $config = include("/home/nwagreen/config.php");
+//        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
+        //get's the color from the color picker.
+        $color1 = $_POST['color1'];
+        $color2 = $_POST['color2'];
+        $color3 = $_POST['color3'];
+
+        //updates the color on the database.
+       (new siteSetting)->setColor($color1,1);
+       (new siteSetting)->setColor($color2,2);
+       (new siteSetting)->setColor($color3,3);
+
+    }
+
+    function getColor(){
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
+        $color1 = (new siteSetting)->getColor1();
+        $color2 = (new siteSetting)->getColor2();
+        $color3 = (new siteSetting)->getColor3();
+
+        var_dump($color1, $color2, $color3);
+        //$this->_f3->set('c1', $color1[0]['color_hex']);
+
+
     }
 }

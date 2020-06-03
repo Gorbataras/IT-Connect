@@ -22,7 +22,6 @@
         </div>
         <div class="card-body">
             <form class="container">
-
                 <!-- color 1 -->
                 <div class="form-group">
                     <label for="color1">Select your color1:</label>
@@ -40,7 +39,7 @@
                     <label for="color3">Select your color3:</label>
                     <input type="color" class="col-1" id="color3" name="color4" value="#ff0000">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button id="color_button" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
