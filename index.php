@@ -61,8 +61,12 @@ $fatFree->route('GET /Logout', function ($fatFree){
     $GLOBALS['controller']->logout($fatFree);
 });
 
-$fatFree->route('POST /editContent', function (){
-    $GLOBALS['controller']->editContent();
+$fatFree->route('POST /editHomePage', function (){
+    $GLOBALS['controller']->editHomePage();
+});
+
+$fatFree->route('POST /editHtmlContent', function (){
+    $GLOBALS['controller']->editHtmlContent();
 });
 
 //needed to run

@@ -7,6 +7,17 @@
     background-color: rgb(44, 136, 43);
 }
 
+/* Keep editable title inline with logo no matter the styling applied */
+.navbar-brand :not(img) {
+    display: inline;
+    line-height: 0;
+}
+
+.navbar-brand img {
+    width: 50px;
+    height: 50px;
+}
+
 
 /* large desktops and up ----------- */
 @media screen and (min-width: 992px) {

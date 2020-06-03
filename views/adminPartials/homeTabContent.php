@@ -17,8 +17,9 @@
 
         <!-- Alert Message WYSIWYG -->
         <label for="home-alert">Alert Message</label>
-        <textarea class="form-control wysiwyg" name="home-alert" id="home-alert"
-                  cols="30" rows="3">{{ @homeContent['alert']['html'] }}</textarea>
+        <textarea class="form-control wysiwyg-sm" name="home-alert" id="home-alert">
+            {{ @homeContent['alert']['html'] }}
+        </textarea>
     </div>
     <br>
 
@@ -37,8 +38,9 @@
 
         <!-- Introduction WYSIWYG -->
         <label for="home-intro">Introduction</label>
-        <textarea class="form-control wysiwyg" id="home-intro" name="home-intro"
-                  cols="30" rows="3">{{ @homeContent['intro']['html'] }}</textarea>
+        <textarea class="form-control wysiwyg-sm" id="home-intro" name="home-intro">
+            {{ @homeContent['intro']['html'] }}
+        </textarea>
     </div>
     <br>
 

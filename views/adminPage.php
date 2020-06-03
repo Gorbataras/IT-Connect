@@ -151,7 +151,6 @@ SOFTWARE.
     <include href="views/modals/addModal.php"></include>
     <include href="views/modals/updateModal.php"></include>
     <include href="views/modals/deleteModal.php"></include>
-    <include href="views/modals/resourcesModal.php"></include>
     <include href="views/modals/meetupsModal.php"></include>
 
 <!-- Old bootstrap messes up styling of new bootstrap TODO see if we can get rid of this-->

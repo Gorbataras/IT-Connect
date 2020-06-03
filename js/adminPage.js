@@ -98,28 +98,6 @@ $(function() {
         $('#updateModal').modal('hide');
     });
 
-    // Update student resources --------------------------------------
-
-    $("#edit-resources-form").on('submit', function(e) {
-        e.preventDefault();
-
-        //Server call to edit resources
-        $.ajax({
-            url: '/api/resources.php',
-            type: 'PUT',
-            data: {
-                body: $('#resources_body').val()
-            },
-            contentType: 'application/json',
-            dataType: 'text',
-            success: function(result) {
-                // console.log(result);
-            }
-        });
-
-        $('#resourcesModal').modal('hide');
-    });
-
     // Change password --------------------------------------------
 
     $("#change-password-form").on('submit', function(e) {
@@ -178,7 +156,6 @@ var $delete = $('#delete-btn');
 var $confirmDelete = $('#delete-confirm-btn');
 var $changePWLink = $('#change-password-link');
 var $closeAlertBtn = $('#close-change-alert');
-var $resoucesEdit = $('#resources-edit');
 
 /**
  * Fills in all the fields in the Update-Post modal
@@ -347,30 +324,97 @@ $closeAlertBtn.click(function() {
     $('#change-alert-success').addClass('hide');
 });
 
-/**
- * Function to edit resources page
- */
-$resoucesEdit.click(function () {
-    //Server call to update student resources html
-    $.ajax({
-        url: '/api/resources.php',
-        type: 'GET',
-        success: function(result) {
-            tinymce.get('resources_body').setContent(result.body);
-        }
-    });
-});
-
 
 // WYSIWYG Editors -----------------------------------------
 
+// tinymce.init({
+//     selector: '#qualifications',
+//     plugins: [
+//         'advlist autolink lists link print preview searchreplace',
+//         'insertdatetime table contextmenu paste'
+//     ],
+//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+//     setup: function(editor) {
+//         editor.on('change', function() {
+//             tinymce.triggerSave();
+//         });
+//     }
+// });
+//
+// tinymce.init({
+//     selector: '#qualifications_update',
+//     plugins: [
+//         'advlist autolink lists link print preview searchreplace',
+//         'insertdatetime table contextmenu paste'
+//     ],
+//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+//     setup: function(editor) {
+//         editor.on('change', function() {
+//             tinymce.triggerSave();
+//         });
+//     }
+// });
+//
+// tinymce.init({
+//     selector: '#description',
+//     plugins: [
+//         'advlist autolink lists link print preview searchreplace',
+//         'insertdatetime table contextmenu paste'
+//     ],
+//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+//     setup: function(editor) {
+//         editor.on('change', function() {
+//             tinymce.triggerSave();
+//         });
+//     }
+// });
+//
+// tinymce.init({
+//     selector: '#description_update',
+//     plugins: [
+//         'advlist autolink lists link print preview searchreplace',
+//         'insertdatetime table contextmenu paste'
+//     ],
+//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+//     setup: function(editor) {
+//         editor.on('change', function() {
+//             tinymce.triggerSave();
+//         });
+//     }
+// });
+//
+//
+// // WYSIWYG editor configuration for html content
+// tinymce.init({
+//     height: "100",
+//     selector: '.wysiwygs-small',
+//     plugins: [
+//         'advlist autolink lists link print preview searchreplace',
+//         'insertdatetime table contextmenu paste'
+//     ],
+//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+//     setup: function(editor) {
+//         editor.on('change', function() {
+//             tinymce.triggerSave();
+//         });
+//     }
+// });
+
+// WYSIWYG editor configuration for html content
+const PLUGINS = [
+    'advlist autolink lists link print preview searchreplace',
+    'insertdatetime table contextmenu paste'
+];
+
+const TOOLBAR = 'undo redo | styleselect | fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify |'
+        + ' bullist, numlist | link';
+
+
 tinymce.init({
-    selector: '#qualifications',
-    plugins: [
-        'advlist autolink lists link print preview searchreplace',
-        'insertdatetime table contextmenu paste'
-    ],
-    toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+    height: "100",
+    selector: '.wysiwyg-sm',
+    plugins: PLUGINS,
+    toolbar: TOOLBAR,
     setup: function(editor) {
         editor.on('change', function() {
             tinymce.triggerSave();
@@ -379,40 +423,10 @@ tinymce.init({
 });
 
 tinymce.init({
-    selector: '#qualifications_update',
-    plugins: [
-        'advlist autolink lists link print preview searchreplace',
-        'insertdatetime table contextmenu paste'
-    ],
-    toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-    setup: function(editor) {
-        editor.on('change', function() {
-            tinymce.triggerSave();
-        });
-    }
-});
-
-tinymce.init({
-    selector: '#description',
-    plugins: [
-        'advlist autolink lists link print preview searchreplace',
-        'insertdatetime table contextmenu paste'
-    ],
-    toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-    setup: function(editor) {
-        editor.on('change', function() {
-            tinymce.triggerSave();
-        });
-    }
-});
-
-tinymce.init({
-    selector: '#description_update',
-    plugins: [
-        'advlist autolink lists link print preview searchreplace',
-        'insertdatetime table contextmenu paste'
-    ],
-    toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+    height: "200",
+    selector: '.wysiwyg-md',
+    plugins: PLUGINS,
+    toolbar: TOOLBAR,
     setup: function(editor) {
         editor.on('change', function() {
             tinymce.triggerSave();
@@ -422,28 +436,9 @@ tinymce.init({
 
 tinymce.init({
     height: "400",
-    selector: '#resources_body',
-    plugins: [
-        'advlist autolink lists link print preview searchreplace',
-        'insertdatetime table contextmenu paste'
-    ],
-    toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-    setup: function(editor) {
-        editor.on('change', function() {
-            tinymce.triggerSave();
-        });
-    }
-});
-
-// WYSIWYG editor configuration for html content
-tinymce.init({
-    height: "100",
-    selector: '.wysiwyg',
-    plugins: [
-        'advlist autolink lists link print preview searchreplace',
-        'insertdatetime table contextmenu paste'
-    ],
-    toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
+    selector: '.wysiwyg-lg',
+    plugins: PLUGINS,
+    toolbar: TOOLBAR,
     setup: function(editor) {
         editor.on('change', function() {
             tinymce.triggerSave();
@@ -452,7 +447,7 @@ tinymce.init({
 });
 
 // Makes a POST request for html content belonging to the home page
-$('#home-submit').on('click', function () {
+$('#home-submit').on('click', function() {
 
     // Gather data from controls
     let alertContent = $('#home-alert').val();
@@ -470,10 +465,42 @@ $('#home-submit').on('click', function () {
 
     let isSaved = true;
 
-    // Make post requests for data
-    $.post('/editContent', {htmlContent: htmlContent, blogSourceName: blogSourceName},
+    // Make post requests for
+    $.post('/editHomePage', {htmlItems: htmlContent, blogSourceName: blogSourceName},
         function(result) {
 
+            // Show confirmation
+            if (result.length === 0) {
+                alert("Saved Successfully!!")
+            }
+            else {
+                alert(result);
+            }
+        }
+    );
+});
+
+$('#resources-submit').on('click', function() {
+    let htmlContent = {page: 'resources', contentName: 'page', html: $('#resources-page').val(), isShown: 'true'};
+
+    $.post('/editHtmlContent', {htmlContent: htmlContent},
+        function(result) {
+            // Show confirmation
+            if (result.length === 0) {
+                alert("Saved Successfully!!")
+            }
+            else {
+                alert(result);
+            }
+        }
+    );
+});
+
+$('#site-title-submit').on('click', function() {
+    let htmlContent = {page: 'header', contentName: 'title', html: $('#site-title').val(), isShown: 'true'};
+
+    $.post('/editHtmlContent', {htmlContent: htmlContent},
+        function(result) {
             // Show confirmation
             if (result.length === 0) {
                 alert("Saved Successfully!!")
