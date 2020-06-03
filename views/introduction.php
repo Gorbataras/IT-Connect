@@ -82,7 +82,7 @@ SOFTWARE.
                         <!-- Card content -->
                         <div id="internships-body" class="collapse show" aria-labelledby="internships-heading"
                              data-parent="#home-accordion">
-                            <div class="card-body">
+
                                 <ul id="internships" class="list-group list-group-flush">
                                     <F3:repeat group="{{ @posts }}" value="{{ @post }}">
                                         <li class="list-group-item">
@@ -108,7 +108,7 @@ SOFTWARE.
                                         </li>
                                     </F3:repeat>
                                 </ul>
-                            </div>
+
                             <!--Show more button -->
                             <a class="btn container-fluid" href="internships" role="button">
                                 Show More
