@@ -5,16 +5,16 @@
 <include href="views/parts/header.php"></include>
 <!--  Latest compiled and minified CSS-->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
-<link rel="stylesheet" href="css/upcomingEvents.css"></link>
+<link rel="stylesheet" href="css/upcomingEvents.css">
 <!--navbar-->
 <include href="views/parts/navbar.php"></include>
 
 
 <body>
-
+<div class="container">
 		<div class="row">
-			<div class="col">
-				<h1>Upcoming Events</h1>
+			<div class="col events-table">
+				<h1 class="header">Upcoming Events</h1>
 				<!--where upcoming Events table is generated-->
 				<table id="eventsTable" class="table table-hover table-bordered" >
 					<thead>
@@ -31,19 +31,18 @@
 						<F3:repeat group="{{ @upcomingEvents }}" value="{{ @event }}">
 
 							<tr>
-							<th scope="row"><a target="_blank" class="no-decoration" href="{{@event.link}}">{{@event.name}}</a></th>
-							<td>{{@event.local_date}}</td>
-							<td>{{@event.local_time}}</td>
-							<td>{{@event.group.name}}</td>
-							<td>{{@event.venue.name}}</td>
+								<th scope="row"><a target="_blank" class="no-decoration" href="{{@event.link}}">{{@event.name}}</a></th>
+									<td>{{date_format(date_create(@event.local_date), "D M d, Y")}}</td>
+									<td>{{date("g:i a", strtotime(@event.local_time))}}</td>
+									<td>{{@event.group.name}}</td>
+									<td>{{@event.venue.name}}</td>
 							</tr>
-							</a>
 						</F3:repeat>
 					</tbody>
 				</table>
 			</div>
 		</div>
-
+</div>
 
 
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
