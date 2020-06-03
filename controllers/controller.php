@@ -216,7 +216,6 @@ class Controller
      */
     function adminPage()
     {
-
         //if ($_SESSION["validUser"] == true){
         $htmlContentDb = new htmlContent();
 
@@ -238,11 +237,14 @@ class Controller
 
         // Get HTML content, blog source, Meetup Groups
         $homeContent = $htmlContentDb->getAllPageContent('home');
+        $resourcesContent = $htmlContentDb->getAllPageContent('resources');
+
         $blogSourceName = $this->getBlogSourceName($htmlContentDb);
         $meetupGroupsList = $htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
         // Set to hive
         $this->_f3->set('homeContent', $homeContent);
+        $this->_f3->set('resourcesContent', $resourcesContent);
         $this->_f3->set('blogSourceName', $blogSourceName);
         $this->_f3->set('meetupGroupsList', $meetupGroupsList);
 
@@ -330,12 +332,28 @@ class Controller
     }
 
 
+    function editResourcesPage() {
+//        //if ($_SESSION["validUser"] == true){
+//        {
+        echo $this->editHtmlContent(new htmlContent(), $_POST['htmlContent']);
+//        }
+    }
+
+
     /**
      * Receives and saves edited html content
      */
-    function editContent()
+    function editHomePage()
     {
+//if (!$_SESSION["validUser"] == true){
+//        {
+//            return;
+//        }
+
         $blogSourceName = trim($_POST['blogSourceName']);
+        $htmlItems = $_POST['htmlItems'];
+
+        // Test first part of api url with source name
         $url = self::MEDIUM_API_URL . $blogSourceName;
 
         // Medium blog must be a valid url
@@ -353,21 +371,28 @@ class Controller
             $status .= 'Error: "' .  str_replace('-', ' ', $blogSourceName) . '" was not saved.';
         }
 
-        // Save htmlContent
-        foreach ($_POST['htmlContent'] as $contentItem) {
-
-            // Collect variables
-            $page = $contentItem['page'];
-            $contentName = $contentItem['contentName'];
-            $html = $contentItem['html'];
-            $isShown = $contentItem['isShown'] == 'true' ? 1 : 0;
-
-            // Save HTML content
-            if (!$htmlContentDb->setContent($page, $contentName, $html, $isShown)) {
-                $status .= 'Error: "' .  str_replace('-', ' ', $contentName) . '" was not saved.';
-            }
+        // Save all htmlContent
+        foreach ($htmlItems as $contentItem) {
+            $status .= $this->editHtmlContent($htmlContentDb, $contentItem);
         }
+
         echo $status;
+    }
+
+
+    private function editHtmlContent($htmlContentDb, $contentItem) {
+
+        // Collect variables
+        $page = $contentItem['page'];
+        $contentName = $contentItem['contentName'];
+        $html = $contentItem['html'];
+        $isShown = $contentItem['isShown'] == 'true' ? 1 : 0;
+
+        // Save HTML content
+        if (!$htmlContentDb->setContent($page, $contentName, $html, $isShown)) {
+            return 'Error: "' .  str_replace('-', ' ', $contentName) . '" was not saved.';
+        }
+        return '';
     }
 
 

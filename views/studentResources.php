@@ -38,9 +38,8 @@ SOFTWARE.
 
 <div id="site-container">
     <div class="student-resources">
-        <!--body is generated here-->
         <div id="resources_body">
-            {{ @content['content']['html'] | raw }}
+            {{ @content['page']['html'] | raw }}
         </div>
     </div>
 </div>
