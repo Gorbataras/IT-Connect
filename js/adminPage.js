@@ -516,10 +516,11 @@ $('#color_button').on('click', function() {
     let color1 = $('#color1').val();
     let color2 = $('#color2').val();
     let color3 = $('#color3').val();
+
     $.post('/setColor', {color1: color1,color2: color2,color3: color3 },
         function(result) {
             // Show confirmation
-            if (result.length === 0) {
+            if (result) {
                 alert("Saved Successfully!!")
             }
             else {

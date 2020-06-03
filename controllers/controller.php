@@ -66,8 +66,6 @@ class Controller
         }
 
         $this->_f3 = $f3;
-
-        $this->getColor();
     }
 
 
@@ -256,6 +254,7 @@ class Controller
         $this->_f3->set('blogSourceName', $blogSourceName);
         $this->_f3->set('meetupGroupsList', $meetupGroupsList);
 
+        $this->getColor();
         echo Template::instance()->render('views/adminPage.php');
 
         //    }else{
@@ -483,18 +482,22 @@ class Controller
     }
 
     function setColor(){
-//        $config = include("/home/nwagreen/config.php");
-//        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
-
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+        $siteSetting = new siteSetting($dbh);
         //get's the color from the color picker.
         $color1 = $_POST['color1'];
         $color2 = $_POST['color2'];
         $color3 = $_POST['color3'];
 
+        var_dump($color1, $color2, $color3);
+
+
         //updates the color on the database.
-       (new siteSetting)->setColor($color1,1);
-       (new siteSetting)->setColor($color2,2);
-       (new siteSetting)->setColor($color3,3);
+        $siteSetting->setColor($color1,1);
+        $siteSetting->setColor($color2,2);
+        $siteSetting->setColor($color3,3);
+
 
     }
 
@@ -502,13 +505,22 @@ class Controller
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
 
-        $color1 = (new siteSetting)->getColor1();
-        $color2 = (new siteSetting)->getColor2();
-        $color3 = (new siteSetting)->getColor3();
+        $siteSetting = new siteSetting($dbh);
+        $color1 =  $siteSetting->getColor1();
+        $color2 =  $siteSetting->getColor2();
+        $color3 =  $siteSetting->getColor3();
 
-        var_dump($color1, $color2, $color3);
-        //$this->_f3->set('c1', $color1[0]['color_hex']);
+        $color1 = $color1[0]['color_hex'];
+        $color2 = $color2[0]['color_hex'];
+        $color3 = $color3[0]['color_hex'];
 
+        var_dump($color1,$color2,$color3);
+
+       $this->_f3->set('color1', $color1);
+       $this->_f3->set('color2', $color2);
+       $this->_f3->set('color2', $color3);
 
     }
+
+
 }

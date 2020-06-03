@@ -20,27 +20,26 @@
         <div class="card-header">
             <h3>Site Color</h3>
         </div>
+        <p>{{@color1)} {{@color2)} {{@color3)}</p>
         <div class="card-body">
-            <form class="container">
                 <!-- color 1 -->
                 <div class="form-group">
                     <label for="color1">Select your color1:</label>
-                    <input type="color" class="col-1" id="color1" name="color1" value="#ff0000">
+                    <input type="color" class="col-1" id="color1" name="color1" value="{{@color1)}">
                 </div>
 
                 <!-- color 2 -->
                 <div class="form-group">
                     <label for="color2">Select your color2:</label>
-                    <input type="color" class="col-1" id="color2" name="color2" value="#ff0000">
+                    <input type="color" class="col-1" id="color2" name="color2" value="{{@color2)}">
                 </div>
 
                 <!-- color 3 -->
                 <div class="form-group">
                     <label for="color3">Select your color3:</label>
-                    <input type="color" class="col-1" id="color3" name="color4" value="#ff0000">
+                    <input type="color" class="col-1" id="color3" name="color4" value="{{@color3)}">
                 </div>
                 <button id="color_button" class="btn btn-primary">Submit</button>
-            </form>
         </div>
     </div>
 
