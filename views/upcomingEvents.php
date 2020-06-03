@@ -11,10 +11,10 @@
 
 
 <body>
-<div class="site-container">
+<div class="container">
 		<div class="row">
-			<div class="col upcomingEventsBody">
-				<h1>Upcoming Events</h1>
+			<div class="col events-table">
+				<h1 class="header">Upcoming Events</h1>
 				<!--where upcoming Events table is generated-->
 				<table id="eventsTable" class="table table-hover table-bordered" >
 					<thead>
