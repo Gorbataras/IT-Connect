@@ -1,6 +1,22 @@
 .no-decoration {
 	color: rgb(33, 37, 41);
 	text-decoration-color: initial;
-	text-decoration-line: none;
 	text-decoration: none;
+}
+.events-table{
+	color: green;
+	font-size: 20px;
+	min-height: 100%;
+	height: auto !important;
+	padding: 2em 1em;
+}
+
+.events-table h1{
+	font-size: 60px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: green;
+	letter-spacing: 15px;
+	padding-left: 20px;
+	margin-top: 0;
 }

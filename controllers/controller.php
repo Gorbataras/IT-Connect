@@ -75,6 +75,7 @@ class Controller
     function introduction()
     {
         // Get internships, Meetup events, blog posts and HTML content
+
         $internships = (new PostingsModel())->getAllPostings();
         $meetupList = $this->getRecentMeetups(true);
         $blog = $this->getRecentBlogPosts();
@@ -284,10 +285,17 @@ class Controller
      */
     private function addMeetupGroup($groupName)
     {
-        //If the entry does not already exist, add to db
-        if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
-            $this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN, $groupName);
-        }
+      $newGroup = $_POST['new-group'];
+    	//Create a URL
+		  $meetupLink = str_replace('placeholder', $newGroup, self::MEETUP_API_URL);
+
+      //If the entry does not already exist, add to db
+      if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName) && $this->isValidUrl($meetupLink)) {
+		  	$this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName);
+			  $this->_f3->clear('meetupSourceError');
+		  } else {
+        $this->_f3->set("meetupSourceError", "The following group name is either invalid or already is added: $newGroup");
+		  }
     }
 
 

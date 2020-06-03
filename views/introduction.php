@@ -139,7 +139,9 @@ SOFTWARE.
                                             <span class="card-title h5">{{@meetup.name}}</span>
                                             <br>
                                             <span class="card-text mb-2 h6">
-													{{@meetup.local_time}} - {{@meetup.local_date}}</span>
+													{{date("g:i a", strtotime(@meetup.local_time))}} - {{date_format(date_create(@meetup.local_date), "D M d, Y")}}
+											</span>
+											<br>
                                             <span class="card-text mb-2">
 													{{@meetup.venue.name}}</span>
                                             <br>
@@ -152,7 +154,7 @@ SOFTWARE.
                             </ul>
                             <!--Show more button -->
                             <a class="btn container-fluid"
-                               href="https://www.meetup.com/South-King-Web-Mobile-Developers/events/" role="button"
+                               href="{{@BASE}}/upcoming-events" role="button"
                                target="_blank">Show More</a>
                         </div>
                     </div><!-- card -->
