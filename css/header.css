@@ -10,7 +10,7 @@
 /* Keep editable title inline with logo no matter the styling applied */
 .navbar-brand :not(img) {
     display: inline;
-    line-height: 0;
+    /*margin-bottom: 0;*/
 }
 
 .navbar-brand img {
