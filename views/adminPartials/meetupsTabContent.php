@@ -1,5 +1,7 @@
 <div class="tab-pane fade" id="nav-meetups" role="tabpanel" aria-labelledby="nav-meetups-tab">
     <h2 class="my-3">Meetups</h2>
+
+
 	<form action="/adminPage?source-tab=meetups&task=add" method="post" class="form-group">
 
 		<F3:check if="{{ isset(@meetupSourceError) }}">
@@ -12,14 +14,14 @@
 			</div>
 
 			<input class="form-control" type="text" name="new-group" id="new-group"
-				   placeholder="Sample-Group-Name" required>
+			placeholder="Sample-Group-Name" required>
 
 			<button type="submit" class="btn btn-success ml-3">Add</button>
 		</div>
 	</form>
 
 
-<!--	DISPLAY ALL CURRENT MEETUP GROUP SOURCES -->
+	<!--	DISPLAY ALL CURRENT MEETUP GROUP SOURCES -->
 	<ul class="list-group">
 		<F3:repeat group="{{ @meetupGroupsList }}" value="{{ @value }}">
 			<form class="form-group" action="/adminPage?source-tab=meetups&task=delete" method="post">
@@ -37,4 +39,15 @@
 			</form>
 		</F3:repeat>
 	</ul>
+	<br>
+	<div class="form-group">
+		<h4>Header</h4>
+
+		<textarea class="form-control wysiwyg-sm" id="home-intro" name="home-intro">
+				{{ @content['events']['html'] }}
+		</textarea>
+		<div class="text-center mb-5 mt-4">
+			<button id="meetups-submit" class="btn btn-success">Save</button>
+		</div>
+	</div>
 </div>

@@ -14,7 +14,9 @@
 <div class="container">
 		<div class="row">
 			<div class="col events-table">
-				<h1 class="header">Upcoming Events</h1>
+
+				{{ @content['events']['html'] | raw }}
+
 				<!--where upcoming Events table is generated-->
 				<table id="eventsTable" class="table table-hover table-bordered" >
 					<thead>
