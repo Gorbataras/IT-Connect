@@ -58,15 +58,17 @@ class Controller
      */
     function __construct($f3)
     {
+        $this->_f3 = $f3;
         $this->_htmlContentDb = new htmlContent();
 
         // If a site title is returned set to hive
         if ($result = $this->_htmlContentDb->getContent('header', 'title')) {
             $f3->set('siteTitle', $result[0]['html']);
-        }
 
-        $this->_f3 = $f3;
-        $this->getColor();
+            $this->getColor();
+            // Remove HTML tags and '$nbsp;' for site tab title
+            $f3->set('siteTabTitle', str_replace('&nbsp;', '', strip_tags($result[0]['html'])));
+        }
     }
 
 
@@ -286,17 +288,17 @@ class Controller
      */
     private function addMeetupGroup($groupName)
     {
-      $newGroup = $_POST['new-group'];
-    	//Create a URL
-		  $meetupLink = str_replace('placeholder', $newGroup, self::MEETUP_API_URL);
+        $newGroup = $_POST['new-group'];
+        //Create a URL
+        $meetupLink = str_replace('placeholder', $newGroup, self::MEETUP_API_URL);
 
-      //If the entry does not already exist, add to db
-      if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName) && $this->isValidUrl($meetupLink)) {
-		  	$this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName);
-			  $this->_f3->clear('meetupSourceError');
-		  } else {
-        $this->_f3->set("meetupSourceError", "The following group name is either invalid or already is added: $newGroup");
-		  }
+        //If the entry does not already exist, add to db
+        if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName) && $this->isValidUrl($meetupLink)) {
+            $this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName);
+            $this->_f3->clear('meetupSourceError');
+        } else {
+            $this->_f3->set("meetupSourceError", "The following group name is either invalid or already is added: $newGroup");
+        }
     }
 
 

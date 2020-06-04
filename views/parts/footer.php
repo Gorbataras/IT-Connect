@@ -39,7 +39,7 @@ SOFTWARE.
         <div class="row">
 
             <!-- Grid column -->
-            <div class="col-md-3 mx-auto">
+            <div class="col-md-3 mx-auto border-top-0 border-left-0 border-bottom-0 border border-white">
                 <div class="container">
                     <!-- Links -->
                     <!--<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>-->
@@ -58,16 +58,15 @@ SOFTWARE.
             <hr class="clearfix w-100 d-md-none">
 
             <!-- Grid column -->
-            <div class="col-md-3 mx-auto">
+            <div class="col-md-3 mx-auto border-top-0 border-left-0 border-bottom-0 border border-white">
 
                 <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase mt1 mb-2">Main Campus:</h5>
+                <h5 class="font-weight-bold text-uppercase mt1 mb-2">Email Us:</h5>
 
                 <ul class="list-unstyled">
-                    <li>
-                        <a target="_blank" href="https://www.google.com/maps/place/Green+River+Community+College/@47.3130745,-122.179769,16z/data=!4m2!3m1!1s0x549058a045230aab:0x296322357297393b">
-                            12401 Southeast 320th Street<br>
-                            Auburn, WA 98092</a>
+                    <li class="font-weight-bold">
+                        <a target="_blank" href="mailto:software@greenriver.edu">
+                            software@greenriver.edu</a>
                     </li>
                 </ul>
             </div>
@@ -79,13 +78,12 @@ SOFTWARE.
             <div class="col-md-3 mx-auto">
 
                 <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase mt1 mb-2">Auburn Center Campus:</h5>
+                <h5 class="font-weight-bold text-uppercase mt1 mb-2">Want to know more:</h5>
 
                 <ul class="list-unstyled">
-                    <li>
-                        <a target="_blank" href="https://www.google.com/maps/place/Green+River+College+Auburn+Center/@47.3840745,-122.3035076,12z/data=!4m8!1m2!2m1!1sGreen+River+Community+College-Auburn+Center!3m4!1s0x5490586042ed8d9d:0xd7d1f0734c75c053!8m2!3d47.3185425!4d-122.2247615">
-                            1221 D St NE<br>
-                            Auburn, WA 98002</a>
+                    <li class="font-weight-bold">
+                        <a target="_blank" href="https://www.greenriver.edu/students/academics/degrees-programs/bachelor-of-applied-science/bachelors-in-software-development/">
+                            Join Our Program!</a>
                     </li>
                 </ul>
 
