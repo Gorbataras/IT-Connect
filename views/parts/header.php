@@ -55,7 +55,7 @@ SOFTWARE.
                                         Information Technology">
 
     <!--icon image-->
-    <link rel="shortcut icon" type="image/x-icon" href="http://itconnect.greenrivertech.net/assets/img/grtech.jpg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/logo.png">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
