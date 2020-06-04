@@ -16,11 +16,6 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <!--<a class="nav-link" href="/"><i class="fas fa-home"></i> ITConnect<span class="sr-only">(current)</span></a>-->
-                <!--  <a class="nav-link" href="/"><img src="http://itconnect.greenrivertech.net/assets/img/grtech.jpg" class="img-responsive" style="height: 50px; width: 50px;"> ITConnect<span class="sr-only">(current)</span></a>
-             -->
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="internships">Internships<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">

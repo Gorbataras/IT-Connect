@@ -49,7 +49,7 @@ SOFTWARE.
 
     <meta charset="utf-8" http-equiv="encoding">
 
-    <title>IT Connect: A resource for technology students.</title>
+    <title>{{ @siteTabTitle }}: A resource for technology students.</title>
 
     <!-- Responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale=1">

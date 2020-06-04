@@ -58,14 +58,16 @@ class Controller
      */
     function __construct($f3)
     {
+        $this->_f3 = $f3;
         $this->_htmlContentDb = new htmlContent();
 
         // If a site title is returned set to hive
         if ($result = $this->_htmlContentDb->getContent('header', 'title')) {
             $f3->set('siteTitle', $result[0]['html']);
-        }
 
-        $this->_f3 = $f3;
+            // Remove HTML tags and '$nbsp;' for site tab title
+            $f3->set('siteTabTitle', str_replace('&nbsp;', '', strip_tags($result[0]['html'])));
+        }
     }
 
 
