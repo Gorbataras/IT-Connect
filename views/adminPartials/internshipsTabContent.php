@@ -1,5 +1,18 @@
 <div class="tab-pane fade" id="nav-internships" role="tabpanel" aria-labelledby="nav-internships-tab">
     <h2>Internships</h2>
+
+	<div class="form-group">
+		<h4>Header</h4>
+
+		<textarea class="form-control wysiwyg-sm" id="internships-intro" name="internships-intro">
+				{{ @content['internships']['html'] }}
+		</textarea>
+		<div class="text-center mb-5 mt-4">
+			<button id="internships-submit" class="btn btn-success">Save</button>
+		</div>
+	</div>
+	<br>
+
     <div class="card">
         <div class="card-header">
             <h3>Add Internship</h3>

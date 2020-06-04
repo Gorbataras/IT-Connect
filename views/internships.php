@@ -38,7 +38,7 @@ SOFTWARE.
 <div>
     <div>
         <div class="internships-table">
-            <h1>Internships</h1>
+			{{ @internshipsHeader[0]['html'] | raw}}
             <!--where internship table is generated-->
             <table id="internshipsTable"></table>
         </div>
