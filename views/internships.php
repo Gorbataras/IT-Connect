@@ -31,10 +31,9 @@ SOFTWARE.
 <!--header for the page-->
 <include href="views/parts/header.php"></include>
 
+<body>
 <!--navbar-->
 <include href="views/parts/navbar.php"></include>
-
-<body>
 <div>
     <div>
         <div class="internships-table">
@@ -56,7 +55,6 @@ SOFTWARE.
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 <!--table made here-->
 <script src="js/internshipsPage.js"></script>
-</body>
 
 <!--footer for the page-->
 <include href="views/parts/footer.php"></include>

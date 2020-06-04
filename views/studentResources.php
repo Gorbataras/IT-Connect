@@ -31,10 +31,12 @@ SOFTWARE.
 <!--header for the page-->
 <include href="views/parts/header.php"></include>
 
-<!--navbar-->
-<include href="views/parts/navbar.php"></include>
+
 
 <body>
+
+<!--navbar-->
+<include href="views/parts/navbar.php"></include>
 
 <div id="site-container">
     <div class="student-resources">
@@ -46,7 +48,6 @@ SOFTWARE.
 
 <!--script needed to generate the page-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-</body>
 
 
 <!--footer for the page-->
