@@ -35,7 +35,7 @@ class htmlContent
     /**
      * Retrieves html content by page name and content name
      * @param $pageName string name of the page the content belongs to
-     * @param $contentName sting name of the content ex. 'introduction'
+     * @param $contentName string name of the content ex. 'introduction'
      * @return array the matching row if any
      */
     public function getContent($pageName, $contentName)
