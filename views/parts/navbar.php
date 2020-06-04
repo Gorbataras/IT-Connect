@@ -9,7 +9,7 @@
 
 <!--navigation bar-->
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand d-flex align-items-center" href="/"><img src="http://itconnect.greenrivertech.net/assets/img/grtech.jpg" class="img-responsive" alt="GRTech logo">{{ @siteTitle | raw }}</a>
+    <a class="navbar-brand d-flex align-items-center" href="/"><img src="../../assets/img/logo.png" class="img-responsive" alt="Generic logo">{{ @siteTitle | raw }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
