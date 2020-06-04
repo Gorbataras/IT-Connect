@@ -350,7 +350,9 @@ class Controller
         exit;
     }
 
-
+    /**
+    * Update HTML content in DB
+    */
     function editHtmlContent() {
 //        //if ($_SESSION["validUser"] == true){
 //        {
@@ -489,7 +491,10 @@ class Controller
         }
         return $meetupList;
     }
-
+    
+    /**
+    *  Set color scheme for website.
+    */
     function setColor(){
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
@@ -509,7 +514,10 @@ class Controller
 
 
     }
-
+    
+    /**
+    * Retrieves colors for website scheme
+    */
     function getColor(){
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
