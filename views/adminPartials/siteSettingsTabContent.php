@@ -19,7 +19,7 @@
     <form action="#" method="post" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
-                <h3 for="photo">Upload Site Logo</h3>
+                <h3>Upload Site Logo</h3>
             </div>
             <div class="card-body">
                 <div class="form-group">

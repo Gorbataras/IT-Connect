@@ -47,7 +47,7 @@ SOFTWARE.
         gtag('config', 'UA-82389817-1');
     </script>
 
-    <meta charset="utf-8" http-equiv="encoding">
+    <meta charset="utf-8">
 
     <title>{{ @siteTabTitle }}: A resource for technology students.</title>
 
@@ -175,11 +175,12 @@ SOFTWARE.
 
 
     <!--modals for page-->
+<exclude>
     <include href="views/modals/addModal.php"></include>
     <include href="views/modals/updateModal.php"></include>
     <include href="views/modals/deleteModal.php"></include>
     <include href="views/modals/meetupsModal.php"></include>
-
+</exclude>
 <!-- Old bootstrap messes up styling of new bootstrap TODO see if we can get rid of this-->
 <!--old bootstrap for page (do not delete. will break table. Used for the alerts)-->
 <!--<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.css">-->
