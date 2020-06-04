@@ -60,7 +60,7 @@ SOFTWARE.
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>IT Connect: A resource for technology students.</title>
+    <title>{{ @siteTabTitle }}: A resource for technology students.</title>
 
     <!--header css-->
     <link rel="stylesheet" type="text/css" media="all" href="css/header.css">
