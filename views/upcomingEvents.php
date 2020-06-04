@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col events-table">
 
-				{{ @content['events']['html'] | raw }}
+				{{ @eventsHeader[0]['html'] | raw }}
 
 				<!--where upcoming Events table is generated-->
 				<table id="eventsTable" class="table table-hover table-bordered" >

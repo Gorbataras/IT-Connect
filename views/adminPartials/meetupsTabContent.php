@@ -43,11 +43,11 @@
 	<div class="form-group">
 		<h4>Header</h4>
 
-		<textarea class="form-control wysiwyg-sm" id="home-intro" name="home-intro">
+		<textarea class="form-control wysiwyg-sm" id="events-intro" name="events-intro">
 				{{ @content['events']['html'] }}
 		</textarea>
 		<div class="text-center mb-5 mt-4">
-			<button id="meetups-submit" class="btn btn-success">Save</button>
+			<button id="events-submit" class="btn btn-success">Save</button>
 		</div>
 	</div>
 </div>
