@@ -327,6 +327,9 @@ class Controller
      */
     function upcomingEvents()
     {
+    	$this->_f3->set('eventsHeader',
+			$this->_htmlContentDb->getContent('events','events'));
+
         $meetupList = $this->getRecentMeetups(false);
 
         //Add the list to fat free hive

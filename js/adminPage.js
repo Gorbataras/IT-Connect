@@ -512,6 +512,22 @@ $('#site-title-submit').on('click', function() {
     );
 });
 
+$('#events-submit').on('click', function() {
+	let htmlContent = {page: 'events', contentName: 'events', html: $('#events-intro').val(), isShown: 'true'};
+
+	$.post('/editHtmlContent', {htmlContent: htmlContent},
+		function(result) {
+			// Show confirmation
+			if (result.length === 0) {
+				alert("Saved Successfully!!")
+			}
+			else {
+				alert(result);
+			}
+		}
+	);
+});
+
 $('#color_button').on('click', function() {
     let color1 = $('#color1').val();
     let color2 = $('#color2').val();
