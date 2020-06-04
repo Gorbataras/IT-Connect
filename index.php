@@ -69,6 +69,10 @@ $fatFree->route('POST /editHtmlContent', function (){
     $GLOBALS['controller']->editHtmlContent();
 });
 
+$fatFree->route('POST /setColor', function (){
+    $GLOBALS['controller']->setColor();
+});
+
 //needed to run
 $fatFree->run();
 ?>

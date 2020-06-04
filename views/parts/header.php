@@ -74,4 +74,28 @@ SOFTWARE.
     <link rel="stylesheet" type="text/css" media="all" href="css/resources.css">
     <!--admin login css-->
     <link rel="stylesheet" type="text/css" media="all" href="gatorLock/gatorLockStyles.css">
+    <style>
+        a.btn {
+        background-color: {{@color1}} !important;
+        }
+        #button{
+        background-color: {{@color1}} !important;
+        }
+        a.btn.container-fluid:hover  {
+        background-color: {{@color1}};
+        }
+
+        .page-footer {
+        background-color: {{@color2}};
+        }
+
+        .navbar{
+        background-color: {{@color3}};
+        }
+
+        .div.alert{
+        background-color: {{@color3}};
+        }
+
+    </style>
 </head>

@@ -65,6 +65,7 @@ class Controller
         if ($result = $this->_htmlContentDb->getContent('header', 'title')) {
             $f3->set('siteTitle', $result[0]['html']);
 
+            $this->getColor();
             // Remove HTML tags and '$nbsp;' for site tab title
             $f3->set('siteTabTitle', str_replace('&nbsp;', '', strip_tags($result[0]['html'])));
         }
@@ -481,4 +482,47 @@ class Controller
         }
         return $meetupList;
     }
+
+    function setColor(){
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+        $siteSetting = new siteSetting($dbh);
+        //get's the color from the color picker.
+        $color1 = $_POST['color1'];
+        $color2 = $_POST['color2'];
+        $color3 = $_POST['color3'];
+
+        var_dump($color1, $color2, $color3);
+
+
+        //updates the color on the database.
+        $siteSetting->setColor($color1,1);
+        $siteSetting->setColor($color2,2);
+        $siteSetting->setColor($color3,3);
+
+
+    }
+
+    function getColor(){
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
+        $siteSetting = new siteSetting($dbh);
+        $color1 =  $siteSetting->getColor1();
+        $color2 =  $siteSetting->getColor2();
+        $color3 =  $siteSetting->getColor3();
+
+        $color1 = $color1[0]['color_hex'];
+        $color2 = $color2[0]['color_hex'];
+        $color3 = $color3[0]['color_hex'];
+
+        //var_dump($color1,$color2,$color3);
+
+       $this->_f3->set('color1', $color1);
+       $this->_f3->set('color2', $color2);
+       $this->_f3->set('color3', $color3);
+
+    }
+
+
 }
