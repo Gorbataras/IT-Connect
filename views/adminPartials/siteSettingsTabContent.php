@@ -17,21 +17,26 @@
 
     <!-- Prompt upload of image -->
     <form action="#" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="photo">Upload an image:</label>
-            <br>
-            <input type="file" name="photo" id="photo">
-            <br>
-            <input class="btn btn-primary mt-2" type="submit" value="Upload" name="photo-submit">
-            <check if="{{ isset(@photoError) }}">
-                <br>
-                <span class="error text-danger">{{ @photoError }}</span>
-            </check>
+        <div class="card">
+            <div class="card-header">
+                <h3 for="photo">Upload Site Logo</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <input type="file" name="photo" id="photo">
+                    <br>
+                    <input class="btn btn-primary mt-2" type="submit" value="Upload" name="photo-submit">
+                    <check if="{{ isset(@photoError) }}">
+                        <br>
+                        <span class="error text-danger">{{ @photoError }}</span>
+                    </check>
 
-            <check if="{{ isset(@photoConfirm) }}">
-                <br>
-                <span class="text-success">{{ @photoConfirm }}</span>
-            </check>
+                    <check if="{{ isset(@photoConfirm) }}">
+                        <br>
+                        <span class="text-success">{{ @photoConfirm }}</span>
+                    </check>
+                </div>
+            </div>
         </div>
     </form>
 
