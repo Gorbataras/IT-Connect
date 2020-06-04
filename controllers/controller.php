@@ -180,6 +180,9 @@ class Controller
      */
     function internship()
     {
+		$this->_f3->set('internshipsHeader',
+			$this->_htmlContentDb->getContent('internships','internships'));
+
         // show the internship page
         echo Template::instance()->render('views/internships.php');
     }
