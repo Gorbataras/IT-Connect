@@ -114,7 +114,7 @@ class Controller
         $url = self::MEDIUM_API_URL . $srcName;
 
         // Medium blog must be a valid url
-        if (!$this->isValidUrl($url)) {
+        if (!(new Validator($this->_f3))->isValidUrl($url)) {
             return null;
         }
 
@@ -303,7 +303,8 @@ class Controller
         $meetupLink = str_replace('placeholder', $newGroup, self::MEETUP_API_URL);
 
         //If the entry does not already exist, add to db
-        if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName) && $this->isValidUrl($meetupLink)) {
+        if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)
+                && (new Validator($this->_f3))->isValidUrl($meetupLink)) {
             $this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName);
             $this->_f3->clear('meetupSourceError');
         } else {
@@ -384,7 +385,7 @@ class Controller
         $url = self::MEDIUM_API_URL . $blogSourceName;
 
         // Medium blog must be a valid url
-        if (!$this->isValidUrl($url)) {
+        if (!(new Validator($this->_f3))->isValidUrl($url)) {
             echo "The submitted Medium source ($blogSourceName) does not work. No changes were saved.";
             return;
         }
@@ -422,29 +423,6 @@ class Controller
 
 
     /**
-     * Ensures that a link works ie returns HTTP status in 200s
-     * @param $url string URL to validate
-     * @return bool true if link is valid ie HTTP status is in 200s
-     */
-    private function isValidUrl($url) {
-        $handle = curl_init($url);
-        curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
-
-        // Get the url content
-        $response = curl_exec($handle);
-
-        // Get the status code
-        $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-        curl_close($handle);
-
-        // http status code must be in 200s
-        if ($httpCode / 100 == 2) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Collect recent Meetup events from all the site's Meetup groups sorted be recent date
      * @param $hasLimit boolean true if only want to return 5 of most recent Meetup events
      * @return array Meetup event data
@@ -464,7 +442,7 @@ class Controller
             $currSource = str_replace('placeholder', $source['source_name'], self::MEETUP_API_URL);
 
             // Skip invalid links
-            if (!$this->isValidUrl($currSource)) {
+            if (!(new Validator($this->_f3))->isValidUrl($currSource)) {
                 continue;
             }
 
@@ -555,57 +533,18 @@ class Controller
         $picPath = 'assets/img/' . basename($imageIn["name"]);
         $imageFileType = strtolower(pathinfo($picPath,PATHINFO_EXTENSION));
         // Upload validated photo
-        if ($this->validPhoto($imageIn, $imageFileType)) {
-//            if (file_exists("assets/img/logo.".$imageFileType)) {
-//                echo unlink("assets/img/logo.".$imageFileType);
-//                die();
-//            }
-            //file_put_contents('assets/img/logo.'.$imageFileType);
-//            $imageIn['name'] = "logo.".$imageFileType;
+        if ((new Validator($this->_f3))->validPhoto($imageIn, $imageFileType)) {
+
             if (move_uploaded_file($imageIn["tmp_name"], $picPath)) {
+
                 //rename file to overwrite existing logo
                 rename($picPath, "assets/img/logo.".$imageFileType);
+
                 $this->_f3->set('photoConfirm', 'Picture has been uploaded.');
                 return $picPath;
             }
             $this->_f3->set('photoError', 'There was an error uploading your file.');
         }
         return null;
-    }
-
-    /**
-     * Validates if image is selected, limited to 500KB, and has a proper extension
-     *
-     * @param $imageIn - image to validate
-     * @param $imageFileType - photo extension type
-     * @return bool - true if image meets all requirements
-     *                false if image fails any case
-     */
-    public function validPhoto($imageIn, $imageFileType) {
-
-        if (empty($imageIn['tmp_name'])) {
-            $this->_f3->set('photoError', "No photo chosen");
-            return false;
-        }
-
-        // Check if image file is a actual image
-        if (isset($_POST["photo-submit"]) && !getimagesize($imageIn["tmp_name"])) {
-            $this->_f3->set('photoError', "Error: File is not an image. File was not uploaded");
-            return false;
-        }
-
-        // Check file size
-        if ($imageIn["size"] > 500000) {
-            $this->_f3->set('photoError', "Error: File is too large. File was not uploaded");
-            return false;
-        }
-
-        // Allow certain file formats
-        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
-            $this->_f3->set('photoError', "Error: Only JPG, JPEG, PNG & GIF files are allowed. File was not uploaded");
-            return false;
-        }
-        return true;
     }
 }
