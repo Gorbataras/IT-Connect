@@ -47,12 +47,11 @@
 
                             <div class="col-md-12">
                                 <div class="input-group ">
-                                    <label class="input-group-addon" for="Application_Type">Application Type:
-                                        &nbsp
-                                        <input type="radio" name="Application_Type" id="url_checkbox" value="url" checked=""/>&nbsp URL &nbsp
-                                        &nbsp
-                                        <input type="radio" name="Application_Type" id="email_checkbox" value="email"/>&nbsp Email
-                                    </label>
+                                    <p class="input-group-addon">Application Type:</p>
+                                    &nbsp;
+                                    <input type="radio" name="Application_Type" id="url_checkbox" value="url" checked=""/>&nbsp; URL &nbsp;
+                                    &nbsp;
+                                    <input type="radio" name="Application_Type" id="email_checkbox" value="email"/>&nbsp; Email
                                     <input required="required" type="text" id="contact_text" class="form-control" name="Application_Type_Text">
                                 </div>
                             </div>

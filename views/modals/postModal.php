@@ -78,10 +78,9 @@ SOFTWARE.
                 <a href="#" target="_blank" id="apply_link" class="btn btn-success">Apply</a>
             </div>
         </div>
-    </div><
-</div><!-- /.modal
-
-<!-- Trigger the modal with a button -->
+    </div>
+</div>
+<!-- /.modal Trigger the modal with a button -->
 
 
 

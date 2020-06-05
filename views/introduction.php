@@ -145,9 +145,9 @@ SOFTWARE.
                                             <span class="card-text mb-2">
 													{{@meetup.venue.name}}</span>
                                             <br>
-                                            <span class="card-text mb-2 h6">Hosted By:
-												<div class="text-muted">{{@meetup.group.name}}</div>
-											</span>
+                                            <div class="card-text mb-2 h6">Hosted By:
+												<span class="text-muted">{{@meetup.group.name}}</span>
+											</div>
                                         </a>
                                     </li>
                                 </F3:repeat>

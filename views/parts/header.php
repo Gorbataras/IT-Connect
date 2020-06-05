@@ -74,6 +74,10 @@ SOFTWARE.
     <link rel="stylesheet" type="text/css" media="all" href="css/resources.css">
     <!--admin login css-->
     <link rel="stylesheet" type="text/css" media="all" href="gatorLock/gatorLockStyles.css">
+    <!-- upcoming events css-->
+    <link rel="stylesheet" href="css/upcomingEvents.css">
+    <!--bootstrap table-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
     <style>
         a.btn {
         background-color: {{@color1}} !important;
@@ -98,4 +102,6 @@ SOFTWARE.
         }
 
     </style>
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>

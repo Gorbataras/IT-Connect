@@ -70,10 +70,10 @@ SOFTWARE.
                                 <div class="col-md-12">
                                     <div class="input-group ">
                                         <label class="input-group-addon" for="Application_Type">Application Type:
-                                            &nbsp
-                                            <input type="radio" name="Application_Type" id="url_checkbox" value="url" checked=""/>&nbsp URL &nbsp
-                                            &nbsp
-                                            <input type="radio" name="Application_Type" id="email_checkbox" value="email"/>&nbsp Email
+                                            &nbsp;
+                                            <input type="radio" name="Application_Type" id="url_checkbox" value="url" checked=""/>&nbsp; URL &nbsp;
+                                            &nbsp;
+                                            <input type="radio" name="Application_Type" id="email_checkbox" value="email"/>&nbsp; Email
                                         </label>
                                         <input required="required" type="text" id="contact_text" class="form-control" name="Application_Type_Text">
                                     </div>

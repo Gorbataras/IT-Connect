@@ -24,19 +24,19 @@
 	<!--	DISPLAY ALL CURRENT MEETUP GROUP SOURCES -->
 	<ul class="list-group">
 		<F3:repeat group="{{ @meetupGroupsList }}" value="{{ @value }}">
-			<form class="form-group" action="/adminPage?source-tab=meetups&task=delete" method="post">
-				<li class="list-group-item">
-					<div class="row">
-						<div class="col">
-							<p class="h5">{{ @value.source_name }}</p>
-						</div>
-						<div class="col text-right">
-							<button class="btn" type="submit">&#128465</button>
-							<input name="entry" type="text" value="{{ @value.source_name }}" hidden>
-						</div>
-					</div>
-				</li>
-			</form>
+            <li class="list-group-item">
+                <form class="form-group" action="/adminPage?source-tab=meetups&task=delete" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <p class="h5">{{ @value.source_name }}</p>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn" type="submit">&#128465;</button>
+                            <input name="entry" type="text" value="{{ @value.source_name }}" hidden>
+                        </div>
+                    </div>
+                </form>
+            </li>
 		</F3:repeat>
 	</ul>
 	<br>

@@ -4,13 +4,13 @@
 <!--header for the page-->
 <include href="views/parts/header.php"></include>
 <!--  Latest compiled and minified CSS-->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
-<link rel="stylesheet" href="css/upcomingEvents.css">
-<!--navbar-->
-<include href="views/parts/navbar.php"></include>
+<!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">-->
+<!--<link rel="stylesheet" href="css/upcomingEvents.css">-->
 
 
 <body>
+<!--navbar-->
+<include href="views/parts/navbar.php"></include>
 <div class="container">
 		<div class="row">
 			<div class="col events-table">
@@ -52,8 +52,6 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
-
-</body>
 
 
 <include href="views/parts/footer.php"></include>
