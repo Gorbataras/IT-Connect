@@ -44,7 +44,7 @@
 		<h4>Header</h4>
 
 		<textarea class="form-control wysiwyg-sm" id="events-intro" name="events-intro">
-				{{ @content['events']['html'] }}
+				{{ @eventsHeader[0]['html'] }}
 		</textarea>
 		<div class="text-center mb-5 mt-4">
 			<button id="events-submit" class="btn btn-success">Save</button>
