@@ -61,13 +61,19 @@ class Controller
         $this->_f3 = $f3;
         $this->_htmlContentDb = new htmlContent();
 
+        $this->getColor();
+
         // If a site title is returned set to hive
         if ($result = $this->_htmlContentDb->getContent('header', 'title')) {
             $f3->set('siteTitle', $result[0]['html']);
 
-            $this->getColor();
             // Remove HTML tags and '$nbsp;' for site tab title
             $f3->set('siteTabTitle', str_replace('&nbsp;', '', strip_tags($result[0]['html'])));
+        }
+
+        //If a image extension is returned set to hive
+        if ($result = $this->_htmlContentDb->getContent('site', 'logo')) {
+            $f3->set('logoType', $result[0]['html']);
         }
     }
 
@@ -559,7 +565,7 @@ class Controller
         $picPath = 'assets/img/' . basename($imageIn["name"]);
         $imageFileType = strtolower(pathinfo($picPath,PATHINFO_EXTENSION));
         // Upload validated photo
-        if ($this->validPhoto($imageIn, $imageFileType)) {
+        if ($this->validPhoto($imageIn, $imageFileType, $picPath)) {
 //            if (file_exists("assets/img/logo.".$imageFileType)) {
 //                echo unlink("assets/img/logo.".$imageFileType);
 //                die();
@@ -570,6 +576,7 @@ class Controller
                 //rename file to overwrite existing logo
                 rename($picPath, "assets/img/logo.".$imageFileType);
                 $this->_f3->set('photoConfirm', 'Picture has been uploaded.');
+                $this->_htmlContentDb->setContent("site", "logo", $imageFileType, 1);
                 return $picPath;
             }
             $this->_f3->set('photoError', 'There was an error uploading your file.');
@@ -582,10 +589,11 @@ class Controller
      *
      * @param $imageIn - image to validate
      * @param $imageFileType - photo extension type
+     * @param $picPath - location for image
      * @return bool - true if image meets all requirements
      *                false if image fails any case
      */
-    public function validPhoto($imageIn, $imageFileType) {
+    public function validPhoto($imageIn, $imageFileType, $picPath) {
 
         if (empty($imageIn['tmp_name'])) {
             $this->_f3->set('photoError', "No photo chosen");
@@ -595,6 +603,12 @@ class Controller
         // Check if image file is a actual image
         if (isset($_POST["photo-submit"]) && !getimagesize($imageIn["tmp_name"])) {
             $this->_f3->set('photoError', "Error: File is not an image. File was not uploaded");
+            return false;
+        }
+
+        // Check if file already exists
+        if(substr($imageIn['name'], 0, strpos($imageIn['name'], '.')) != 'logo' AND file_exists($picPath)) {
+            $this->_f3->set('photoError', "Error: File already exists. File was not uploaded".$imageIn['name']);
             return false;
         }
 
