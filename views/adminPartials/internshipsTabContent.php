@@ -5,7 +5,7 @@
 		<h4>Header</h4>
 
 		<textarea class="form-control wysiwyg-sm" id="internships-intro" name="internships-intro">
-				{{ @content['internships']['html'] }}
+				{{ @internshipsHeader[0]['html'] }}
 		</textarea>
 		<div class="text-center mb-5 mt-4">
 			<button id="internships-submit" class="btn btn-success">Save</button>

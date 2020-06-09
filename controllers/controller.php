@@ -257,11 +257,15 @@ class Controller
         // Get HTML content, blog source, Meetup Groups
         $homeContent = $this->_htmlContentDb->getAllPageContent('home');
         $resourcesContent = $this->_htmlContentDb->getAllPageContent('resources');
+		$meetupHeader = $this->_htmlContentDb->getContent('events', 'events');
+		$internshipsHeader = $this->_htmlContentDb->getContent('internships', 'Internships');
 
         $blogSourceName = $this->getBlogSourceName();
         $meetupGroupsList = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
         // Set to hive
+		$this->_f3->set('eventsHeader', $meetupHeader);
+		$this->_f3->set('internshipsHeader', $internshipsHeader);
         $this->_f3->set('homeContent', $homeContent);
         $this->_f3->set('resourcesContent', $resourcesContent);
         $this->_f3->set('blogSourceName', $blogSourceName);
