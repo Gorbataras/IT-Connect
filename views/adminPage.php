@@ -61,7 +61,7 @@ SOFTWARE.
                                         Information Technology">
 
     <!--icon image-->
-    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/logo.{{@logoType}}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"

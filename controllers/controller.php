@@ -61,13 +61,19 @@ class Controller
         $this->_f3 = $f3;
         $this->_htmlContentDb = new htmlContent();
 
+        $this->getColor();
+
         // If a site title is returned set to hive
         if ($result = $this->_htmlContentDb->getContent('header', 'title')) {
             $f3->set('siteTitle', $result[0]['html']);
 
-            $this->getColor();
             // Remove HTML tags and '$nbsp;' for site tab title
             $f3->set('siteTabTitle', str_replace('&nbsp;', '', strip_tags($result[0]['html'])));
+        }
+
+        //If a image extension is returned set to hive
+        if ($result = $this->_htmlContentDb->getContent('site', 'logo')) {
+            $f3->set('logoType', $result[0]['html']);
         }
     }
 
@@ -257,11 +263,15 @@ class Controller
         // Get HTML content, blog source, Meetup Groups
         $homeContent = $this->_htmlContentDb->getAllPageContent('home');
         $resourcesContent = $this->_htmlContentDb->getAllPageContent('resources');
+		$meetupHeader = $this->_htmlContentDb->getContent('events', 'events');
+		$internshipsHeader = $this->_htmlContentDb->getContent('internships', 'Internships');
 
         $blogSourceName = $this->getBlogSourceName();
         $meetupGroupsList = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
         // Set to hive
+		$this->_f3->set('eventsHeader', $meetupHeader);
+		$this->_f3->set('internshipsHeader', $internshipsHeader);
         $this->_f3->set('homeContent', $homeContent);
         $this->_f3->set('resourcesContent', $resourcesContent);
         $this->_f3->set('blogSourceName', $blogSourceName);
@@ -533,7 +543,7 @@ class Controller
         $picPath = 'assets/img/' . basename($imageIn["name"]);
         $imageFileType = strtolower(pathinfo($picPath,PATHINFO_EXTENSION));
         // Upload validated photo
-        if ((new Validator($this->_f3))->validPhoto($imageIn, $imageFileType)) {
+        if ((new Validator($this->_f3))->validPhoto($imageIn, $imageFileType, $picPath)) {
 
             if (move_uploaded_file($imageIn["tmp_name"], $picPath)) {
 
@@ -541,6 +551,7 @@ class Controller
                 rename($picPath, "assets/img/logo.".$imageFileType);
 
                 $this->_f3->set('photoConfirm', 'Picture has been uploaded.');
+                $this->_htmlContentDb->setContent("site", "logo", $imageFileType, 1);
                 return $picPath;
             }
             $this->_f3->set('photoError', 'There was an error uploading your file.');
