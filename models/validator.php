@@ -59,7 +59,7 @@ class Validator
      * @return bool - true if image meets all requirements
      *                false if image fails any case
      */
-    public function validPhoto($imageIn, $imageFileType) {
+    public function validPhoto($imageIn, $imageFileType, $picPath) {
 
         if (empty($imageIn['tmp_name'])) {
             $this->_f3->set('photoError', "No photo chosen");
@@ -69,6 +69,12 @@ class Validator
         // Check if image file is a actual image
         if (isset($_POST["photo-submit"]) && !getimagesize($imageIn["tmp_name"])) {
             $this->_f3->set('photoError', "Error: File is not an image. File was not uploaded");
+            return false;
+        }
+
+        // Check if file already exists
+        if(substr($imageIn['name'], 0, strpos($imageIn['name'], '.')) != 'logo' AND file_exists($picPath)) {
+            $this->_f3->set('photoError', "Error: File already exists. File was not uploaded".$imageIn['name']);
             return false;
         }
 
