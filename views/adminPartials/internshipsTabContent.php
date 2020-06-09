@@ -28,16 +28,16 @@
                         <input type="hidden" id="post_id" name="id" value="0">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="input-group">
-                                    <label class="input-group-addon" for="title">Position Title</label>
+                                <div class="form-group">
+                                    <label for="title">Position Title</label>
                                     <input required="required" type="text" class="form-control"
                                            id="title" name="title"/>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <div class="input-group">
-                                    <label class="input-group-addon" for="company">Company</label>
+                                <div class="form-group">
+                                    <label for="company">Company</label>
                                     <input required="required" type="text" class="form-control"
                                            id="company" name="company"/>
                                 </div>
@@ -46,12 +46,19 @@
                             <br><br>
 
                             <div class="col-md-12">
-                                <div class="input-group ">
-                                    <p class="input-group-addon">Application Type:</p>
-                                    &nbsp;
-                                    <input type="radio" name="Application_Type" id="url_checkbox" value="url" checked=""/>&nbsp; URL &nbsp;
-                                    &nbsp;
-                                    <input type="radio" name="Application_Type" id="email_checkbox" value="email"/>&nbsp; Email
+                                <div class="form-group">
+                                    <span class="d-inline-block mb-2 mr-2">Application Type:</span>
+
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" name="Application_Type" id="url_checkbox" class="form-check-input" value="url" checked/>
+                                        <label for="url_checkbox" class="form-check-label">URL</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" name="Application_Type" id="email_checkbox" class="form-check-input" value="email"/>
+                                        <label for="email_checkbox" class="form-check-label">Email</label>
+                                    </div>
+
                                     <input required="required" type="text" id="contact_text" class="form-control" name="Application_Type_Text">
                                 </div>
                             </div>
@@ -59,8 +66,8 @@
                             <br><br>
 
                             <div class="col-md-12 for-email-post hidden">
-                                <div class="input-group">
-                                    <label class="input-group-addon" for="description">Description</label>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
                                     <textarea class="form-control" name="description" id="description"
                                               rows="5"></textarea>
                                 </div>
@@ -78,16 +85,16 @@
                         <div class="row">
 
                             <!-- <div class="col-md-6">
-                                 <div class="input-group">
-                                     <label class="input-group-addon" for="hours">Hours Per Week</label>
+                                 <div class="form-group">
+                                     <label for="hours">Hours Per Week</label>
                                      <input type="number" name="hours" id="hours"
                                             class="form-control">
                                  </div>
                              </div>-->
 
                             <div class="col-md-6">
-                                <div class="input-group">
-                                    <label class="input-group-addon" for="location">Location</label>
+                                <div class="form-group">
+                                    <label for="location">Location</label>
                                     <input type="text" name="location" id="location" class="form-control">
                                 </div>
                             </div>
@@ -95,8 +102,8 @@
                             <br><br>
 
                             <div class="col-md-6">
-                                <div class="input-group">
-                                    <label class="input-group-addon" for="category">Category</label>
+                                <div class="form-group">
+                                    <label for="category">Category</label>
                                     <select class="form-control" name="category" id="category">
                                         <option value="0" disabled="disabled" selected="selected">Select an
                                             option
@@ -111,8 +118,8 @@
                             <br><br>
 
                             <div class="col-md-12 for-email-post hidden">
-                                <div class="input-group">
-                                    <label class="input-group-addon" for="qualifications">Qualifications</label>
+                                <div class="form-group">
+                                    <label for="qualifications">Qualifications</label>
                                     <textarea name="qualifications" id="qualifications" rows="4"
                                               class="form-control"></textarea>
                                 </div>
