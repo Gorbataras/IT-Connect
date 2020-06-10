@@ -446,6 +446,55 @@ tinymce.init({
     }
 });
 
+$('#logo-upload').on('submit',
+    function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: '/uploadPhoto',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                alert("success");
+                console.log(data);
+            },
+            error: function(data){
+                alert("error");
+                alert(data);
+            }
+        });
+    }
+);
+
+
+
+// $('#logo-upload').on('submit',
+//     function(e) {
+//         e.preventDefault();
+//
+//         let formData = new FormData(this);
+//
+//         alert(JSON.stringify(this));
+//         $.post('/adminPage', formData,
+//             function(result) {
+//
+//                 // Show confirmation if no errors
+//                 if (result.length === 0) {
+//                     alert("Saved Successfully!!");
+//                     alert(result);
+//                 }
+//                 else {
+//                     alert(result);
+//                 }
+//             }
+//         );
+//     }
+// );
+
 // Makes a POST request for html content belonging to the home page
 $('#home-submit').on('click', function() {
 
@@ -471,7 +520,7 @@ $('#home-submit').on('click', function() {
 
             // Show confirmation
             if (result.length === 0) {
-                alert("Saved Successfully!!")
+                alert("Saved Successfully!!");
             }
             else {
                 alert(result);
@@ -487,7 +536,7 @@ $('#resources-submit').on('click', function() {
         function(result) {
             // Show confirmation
             if (result.length === 0) {
-                alert("Saved Successfully!!")
+                alert("Saved Successfully!!");
             }
             else {
                 alert(result);
@@ -503,7 +552,7 @@ $('#site-title-submit').on('click', function() {
         function(result) {
             // Show confirmation
             if (result.length === 0) {
-                alert("Saved Successfully!!")
+                alert("Saved Successfully!!");
             }
             else {
                 alert(result);
@@ -519,7 +568,7 @@ $('#events-submit').on('click', function() {
 		function(result) {
 			// Show confirmation
 			if (result.length === 0) {
-				alert("Saved Successfully!!")
+				alert("Saved Successfully!!");
 			}
 			else {
 				alert(result);
@@ -535,7 +584,7 @@ $('#internships-submit').on('click', function() {
 		function(result) {
 			// Show confirmation
 			if (result.length === 0) {
-				alert("Saved Successfully!!")
+				alert("Saved Successfully!!");
 			}
 			else {
 				alert(result);
@@ -553,7 +602,7 @@ $('#color_button').on('click', function() {
         function(result) {
             // Show confirmation
             if (result) {
-                alert("Saved Successfully!!")
+                alert("Saved Successfully!!");
             }
             else {
                 alert(result);

@@ -73,6 +73,10 @@ $fatFree->route('POST /setColor', function (){
     $GLOBALS['controller']->setColor();
 });
 
+$fatFree->route('POST /uploadPhoto', function (){
+    $GLOBALS['controller']->uploadPhoto();
+});
+
 //needed to run
 $fatFree->run();
 ?>

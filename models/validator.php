@@ -62,32 +62,37 @@ class Validator
     public function validPhoto($imageIn, $imageFileType, $picPath) {
 
         if (empty($imageIn['tmp_name'])) {
-            $this->_f3->set('photoError', "No photo chosen");
+//            $this->_f3->set('photoError', "No photo chosen");
+            echo 'Error: No photo chosen.';
             return false;
         }
 
         // Check if image file is a actual image
         if (isset($_POST["photo-submit"]) && !getimagesize($imageIn["tmp_name"])) {
-            $this->_f3->set('photoError', "Error: File is not an image. File was not uploaded");
+//            $this->_f3->set('photoError', "Error: File is not an image. File was not uploaded.");
+            echo 'Error: File is not an image. File was not uploaded.';
             return false;
         }
 
         // Check if file already exists
         if(substr($imageIn['name'], 0, strpos($imageIn['name'], '.')) != 'logo' AND file_exists($picPath)) {
-            $this->_f3->set('photoError', "Error: File already exists. File was not uploaded".$imageIn['name']);
+//            $this->_f3->set('photoError', "Error: File already exists. File was not uploaded".$imageIn['name']);
+            echo 'Error: File already exists. File was not uploaded' . $imageIn['name'];
             return false;
         }
 
         // Check file size
         if ($imageIn["size"] > 500000) {
-            $this->_f3->set('photoError', "Error: File is too large. File was not uploaded");
+//            $this->_f3->set('photoError', "Error: File is too large. File was not uploaded");
+            echo 'Error: File is too large. File was not uploaded';
             return false;
         }
 
         // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" ) {
-            $this->_f3->set('photoError', "Error: Only JPG, JPEG, PNG & GIF files are allowed. File was not uploaded");
+                && $imageFileType != "gif" ) {
+//            $this->_f3->set('photoError', "Error: Only JPG, JPEG, PNG & GIF files are allowed. File was not uploaded");
+            echo 'Error: Only JPG, JPEG, PNG & GIF files are allowed. File was not uploaded';
             return false;
         }
         return true;

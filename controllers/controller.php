@@ -238,8 +238,9 @@ class Controller
         //if ($_SESSION["validUser"] == true){
         //Admin is submitting data
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             // User is uploading photo
-            if (isset($_POST['photo-submit'])) {
+            if (isset($_FILES['photo'])) {
                 $picPath = $this->uploadPhoto();
             }
 
@@ -535,13 +536,17 @@ class Controller
 
     /**
      * Uploads photo chosen by user if valid
-     * @returns string path of photo. null if not uploaded successfully
      */
-    private function uploadPhoto()
+    public function uploadPhoto()
     {
+        // Preconditions
+        if (!$_SESSION["validUser"] || !$_SERVER['REQUEST_METHOD'] == 'POST' || !isset($_FILES['photo'])) {
+            return;
+        }
         $imageIn = $_FILES['photo'];
         $picPath = 'assets/img/' . basename($imageIn["name"]);
         $imageFileType = strtolower(pathinfo($picPath,PATHINFO_EXTENSION));
+
         // Upload validated photo
         if ((new Validator($this->_f3))->validPhoto($imageIn, $imageFileType, $picPath)) {
 
@@ -550,12 +555,12 @@ class Controller
                 //rename file to overwrite existing logo
                 rename($picPath, "assets/img/logo.".$imageFileType);
 
-                $this->_f3->set('photoConfirm', 'Picture has been uploaded.');
+//                $this->_f3->set('photoConfirm', 'Picture has been uploaded.');
                 $this->_htmlContentDb->setContent("site", "logo", $imageFileType, 1);
-                return $picPath;
+//                return $picPath;
+                return;
             }
-            $this->_f3->set('photoError', 'There was an error uploading your file.');
+            echo 'There was an error uploading your file.';
         }
-        return null;
     }
 }
