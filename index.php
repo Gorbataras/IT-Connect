@@ -38,7 +38,7 @@ $fatFree->route('GET /studentResources', function (){
 });
 
 // admin login page
-$fatFree->route('GET|POST /adminLogin', function (){
+$fatFree->route('GET|POST /login', function (){
     $GLOBALS['controller']->login();
 });
 

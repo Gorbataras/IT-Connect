@@ -46,7 +46,7 @@ SOFTWARE.
 
                     <ul class="list-unstyled">
                         <li>
-                            <p> Made with <a href="http://itconnect.greenrivertech.net/adminLogin"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></a> by <br> Green River College students</p><!--<a href="#!">Very long link 1</a>-->
+                            <p> Made with <a href="https://www.nwa.greenriverdev.com/login"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></a> by <br> Green River College students</p><!--<a href="#!">Very long link 1</a>-->
                         </li>
                     </ul>
                 </div>

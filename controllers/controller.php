@@ -216,7 +216,7 @@ class Controller
     function login()
     {
         //  show the admin Login page
-        echo Template::instance()->render('gatorLock/login.php');
+        echo Template::instance()->render('views/login.php');
     }
 
 
