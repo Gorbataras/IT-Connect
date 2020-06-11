@@ -61,10 +61,6 @@ $fatFree->route('GET /Logout', function ($fatFree){
     $GLOBALS['controller']->logout($fatFree);
 });
 
-$fatFree->route('POST /editHomePage', function (){
-    $GLOBALS['controller']->editHomePage();
-});
-
 $fatFree->route('POST /editHtmlContent', function (){
     $GLOBALS['controller']->editHtmlContent();
 });
@@ -75,6 +71,10 @@ $fatFree->route('POST /setColor', function (){
 
 $fatFree->route('POST /uploadPhoto', function (){
     $GLOBALS['controller']->uploadPhoto();
+});
+
+$fatFree->route('POST /updateApiSource', function (){
+    $GLOBALS['controller']->updateApiSource();
 });
 
 //needed to run

@@ -368,29 +368,13 @@ class Controller
         exit;
     }
 
-    /**
-    * Update HTML content in DB
-    */
-    function editHtmlContent() {
-//        //if ($_SESSION["validUser"] == true){
-//        {
-        echo $this->editHtmlContentHelper($_POST['htmlContent']);
-//        }
-    }
-
-
-    /**
-     * Receives and saves edited html content
-     */
-    function editHomePage()
-    {
-//if (!$_SESSION["validUser"] == true){
+    public function updateApiSource() {
+        //if (!$_SESSION["validUser"]){
 //        {
 //            return;
 //        }
 
         $blogSourceName = trim($_POST['blogSourceName']);
-        $htmlItems = $_POST['htmlItems'];
 
         // Test first part of api url with source name
         $url = self::MEDIUM_API_URL . $blogSourceName;
@@ -401,23 +385,20 @@ class Controller
             return;
         }
 
-        $status = "";
-
         // Save blog source name
         if (!$this->_htmlContentDb->updateApiSourceNameByDomain(self::MEDIUM_DOMAIN, $blogSourceName)) {
-            $status .= 'Error: "' .  str_replace('-', ' ', $blogSourceName) . '" was not saved.';
+            echo 'Error: "' .  str_replace('-', ' ', $blogSourceName) . '" was not saved.';
         }
-
-        // Save all htmlContent
-        foreach ($htmlItems as $contentItem) {
-            $status .= $this->editHtmlContentHelper($contentItem);
-        }
-
-        echo $status;
     }
 
 
-    private function editHtmlContentHelper($contentItem) {
+    public function editHtmlContent() {
+        //if (!$_SESSION["validUser"] || !$_SERVER['REQUEST_METHOD'] == 'POST'){
+//        {
+//            return;
+//        }
+
+        $contentItem = $_POST['htmlContent'];
 
         // Collect variables
         $page = $contentItem['page'];
@@ -427,9 +408,8 @@ class Controller
 
         // Save HTML content
         if (!$this->_htmlContentDb->setContent($page, $contentName, $html, $isShown)) {
-            return 'Error: "' .  str_replace('-', ' ', $contentName) . '" was not saved.';
+            echo 'Error: "' .  str_replace('-', ' ', $contentName) . '" was not saved.';
         }
-        return '';
     }
 
 

@@ -446,6 +446,7 @@ tinymce.init({
     }
 });
 
+// Posts logo image to server to be saved
 $('#logo-upload').on('submit',
     function(e) {
         e.preventDefault();
@@ -475,109 +476,67 @@ $('#logo-upload').on('submit',
     }
 );
 
+// Makes a POST request for Medium blog source
+$('#medium-blog-submit').on('click', function() {
+    let blogSourceName = $('#medium-blog-link').val();
 
-// Makes a POST request for html content belonging to the home page
-$('#home-submit').on('click', function() {
+    $.post('/updateApiSource', {blogSourceName: blogSourceName},
+        function(result) {
 
-    // Gather data from controls
+            // Show confirmation if no errors
+            if (result.length === 0) {
+                alert("Saved Successfully!!");
+            }
+            else {
+                alert(result);
+            }
+        }
+    );
+});
+
+// Makes a POST request for homepage alert content
+$('#home-alert-submit').on('click', function() {
     let alertContent = $('#home-alert').val();
     let alertIsShown = $('#alert-is-shown').prop('checked');
 
+    let htmlContent = {page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown};
+    postHtmlContent(htmlContent);
+});
+
+// Makes a POST request for homepage intro content
+$('#home-intro-submit').on('click', function() {
     let introContent = $('#home-intro').val();
     let introIsShown = $('#intro-is-shown').prop('checked');
 
-    let blogSourceName = $('#medium-blog-link').val();
-
-    // Collect into array as JSON
-    let htmlContent = [];
-    htmlContent.push({page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown});
-    htmlContent.push({page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown});
-
-    let isSaved = true;
-
-    // Make post requests for
-    $.post('/editHomePage', {htmlItems: htmlContent, blogSourceName: blogSourceName},
-        function(result) {
-
-            // Show confirmation if no errors
-            if (result.length === 0) {
-                alert("Saved Successfully!!");
-            }
-            else {
-                alert(result);
-            }
-        }
-    );
+    let htmlContent = {page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown};
+    postHtmlContent(htmlContent);
 });
 
+// Makes a POST request for resources page content
 $('#resources-submit').on('click', function() {
     let htmlContent = {page: 'resources', contentName: 'page', html: $('#resources-page').val(), isShown: 'true'};
-
-    $.post('/editHtmlContent', {htmlContent: htmlContent},
-        function(result) {
-
-            // Show confirmation if no errors
-            if (result.length === 0) {
-                alert("Saved Successfully!!");
-            }
-            else {
-                alert(result);
-            }
-        }
-    );
+    postHtmlContent(htmlContent);
 });
 
+// Makes a POST request for website title
 $('#site-title-submit').on('click', function() {
     let htmlContent = {page: 'header', contentName: 'title', html: $('#site-title').val(), isShown: 'true'};
-
-    $.post('/editHtmlContent', {htmlContent: htmlContent},
-        function(result) {
-
-            // Show confirmation if no errors
-            if (result.length === 0) {
-                alert("Saved Successfully!!");
-            }
-            else {
-                alert(result);
-            }
-        }
-    );
+    postHtmlContent(htmlContent);
 });
 
+// Makes a POST request for events title content
 $('#events-submit').on('click', function() {
 	let htmlContent = {page: 'events', contentName: 'events', html: $('#events-intro').val(), isShown: 'true'};
-
-	$.post('/editHtmlContent', {htmlContent: htmlContent},
-		function(result) {
-
-			// Show confirmation if no errors
-			if (result.length === 0) {
-				alert("Saved Successfully!!");
-			}
-			else {
-				alert(result);
-			}
-		}
-	);
+	postHtmlContent(htmlContent);
 });
 
+// Makes a POST request for internships title content
 $('#internships-submit').on('click', function() {
 	let htmlContent = {page: 'internships', contentName: 'internships', html: $('#internships-intro').val(), isShown: 'true'};
-
-	$.post('/editHtmlContent', {htmlContent: htmlContent},
-		function(result) {
-
-			// Show confirmation if no errors
-			if (result.length === 0) {
-				alert("Saved Successfully!!");
-			}
-			else {
-				alert(result);
-			}
-		}
-	);
+	postHtmlContent(htmlContent);
 });
 
+// Makes a POST request for the site's colors
 $('#color_button').on('click', function() {
     let color1 = $('#color1').val();
     let color2 = $('#color2').val();
@@ -596,4 +555,23 @@ $('#color_button').on('click', function() {
         }
     );
 });
+
+/**
+ * Posts to server html content to be saved
+ * @param htmlContent object of content to be saved {pageName, contentName, html, isShown}
+ */
+function postHtmlContent(htmlContent) {
+    $.post('/editHtmlContent', {htmlContent: htmlContent},
+        function(result) {
+
+            // Show confirmation if no errors
+            if (result.length === 0) {
+                alert("Saved Successfully!!");
+            }
+            else {
+                alert(result);
+            }
+        }
+    );
+}
 
