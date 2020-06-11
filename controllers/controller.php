@@ -494,20 +494,17 @@ class Controller
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
         $siteSetting = new siteSetting($dbh);
+
         //get's the color from the color picker.
         $color1 = $_POST['color1'];
         $color2 = $_POST['color2'];
         $color3 = $_POST['color3'];
 
-        var_dump($color1, $color2, $color3);
-
-
         //updates the color on the database.
-        $siteSetting->setColor($color1,1);
-        $siteSetting->setColor($color2,2);
-        $siteSetting->setColor($color3,3);
-
-
+         if (!$siteSetting->setColor($color1,1) || !$siteSetting->setColor($color2,2) ||
+                !$siteSetting->setColor($color3,3) ) {
+             echo "Error: Not all colors saved successfully";
+         }
     }
     
     /**
@@ -540,9 +537,10 @@ class Controller
     public function uploadPhoto()
     {
         // Preconditions
-        if (!$_SESSION["validUser"] || !$_SERVER['REQUEST_METHOD'] == 'POST' || !isset($_FILES['photo'])) {
+        if (/*TODO !$_SESSION["validUser"] || */!$_SERVER['REQUEST_METHOD'] == 'POST' || !isset($_FILES['photo'])) {
             return;
         }
+
         $imageIn = $_FILES['photo'];
         $picPath = 'assets/img/' . basename($imageIn["name"]);
         $imageFileType = strtolower(pathinfo($picPath,PATHINFO_EXTENSION));
@@ -555,9 +553,7 @@ class Controller
                 //rename file to overwrite existing logo
                 rename($picPath, "assets/img/logo.".$imageFileType);
 
-//                $this->_f3->set('photoConfirm', 'Picture has been uploaded.');
                 $this->_htmlContentDb->setContent("site", "logo", $imageFileType, 1);
-//                return $picPath;
                 return;
             }
             echo 'There was an error uploading your file.';

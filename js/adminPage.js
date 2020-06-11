@@ -458,42 +458,23 @@ $('#logo-upload').on('submit',
             cache: false,
             contentType: false,
             processData: false,
-            success:function(data){
-                alert("success");
-                console.log(data);
+            success:function(result){
+
+                // Show confirmation
+                if (result.length === 0) {
+                    alert("Uploaded Successfully!!");
+                }
+                else {
+                    alert(result);
+                }
             },
             error: function(data){
-                alert("error");
-                alert(data);
+                alert("An error prevented the photo from uploading");
             }
         });
     }
 );
 
-
-
-// $('#logo-upload').on('submit',
-//     function(e) {
-//         e.preventDefault();
-//
-//         let formData = new FormData(this);
-//
-//         alert(JSON.stringify(this));
-//         $.post('/adminPage', formData,
-//             function(result) {
-//
-//                 // Show confirmation if no errors
-//                 if (result.length === 0) {
-//                     alert("Saved Successfully!!");
-//                     alert(result);
-//                 }
-//                 else {
-//                     alert(result);
-//                 }
-//             }
-//         );
-//     }
-// );
 
 // Makes a POST request for html content belonging to the home page
 $('#home-submit').on('click', function() {
@@ -518,7 +499,7 @@ $('#home-submit').on('click', function() {
     $.post('/editHomePage', {htmlItems: htmlContent, blogSourceName: blogSourceName},
         function(result) {
 
-            // Show confirmation
+            // Show confirmation if no errors
             if (result.length === 0) {
                 alert("Saved Successfully!!");
             }
@@ -534,7 +515,8 @@ $('#resources-submit').on('click', function() {
 
     $.post('/editHtmlContent', {htmlContent: htmlContent},
         function(result) {
-            // Show confirmation
+
+            // Show confirmation if no errors
             if (result.length === 0) {
                 alert("Saved Successfully!!");
             }
@@ -550,7 +532,8 @@ $('#site-title-submit').on('click', function() {
 
     $.post('/editHtmlContent', {htmlContent: htmlContent},
         function(result) {
-            // Show confirmation
+
+            // Show confirmation if no errors
             if (result.length === 0) {
                 alert("Saved Successfully!!");
             }
@@ -566,7 +549,8 @@ $('#events-submit').on('click', function() {
 
 	$.post('/editHtmlContent', {htmlContent: htmlContent},
 		function(result) {
-			// Show confirmation
+
+			// Show confirmation if no errors
 			if (result.length === 0) {
 				alert("Saved Successfully!!");
 			}
@@ -582,7 +566,8 @@ $('#internships-submit').on('click', function() {
 
 	$.post('/editHtmlContent', {htmlContent: htmlContent},
 		function(result) {
-			// Show confirmation
+
+			// Show confirmation if no errors
 			if (result.length === 0) {
 				alert("Saved Successfully!!");
 			}
@@ -600,8 +585,9 @@ $('#color_button').on('click', function() {
 
     $.post('/setColor', {color1: color1,color2: color2,color3: color3 },
         function(result) {
-            // Show confirmation
-            if (result) {
+
+            // Show confirmation if no errors
+            if (result.length === 0) {
                 alert("Saved Successfully!!");
             }
             else {
