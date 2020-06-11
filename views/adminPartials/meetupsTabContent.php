@@ -43,7 +43,7 @@
 	<div class="form-group">
 		<h4>Header</h4>
 
-		<textarea class="form-control wysiwyg-sm" id="events-intro" name="events-intro">
+		<textarea class="form-control wysiwyg-md" id="events-intro" name="events-intro">
 				{{ @eventsHeader[0]['html'] }}
 		</textarea>
 		<div class="text-center mb-5 mt-4">

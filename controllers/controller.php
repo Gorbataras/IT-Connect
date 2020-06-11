@@ -368,7 +368,7 @@ class Controller
         exit;
     }
 
-    public function updateApiSource() {
+    function updateApiSource() {
         //if (!$_SESSION["validUser"]){
 //        {
 //            return;
@@ -392,7 +392,7 @@ class Controller
     }
 
 
-    public function editHtmlContent() {
+    function editHtmlContent() {
         //if (!$_SESSION["validUser"] || !$_SERVER['REQUEST_METHOD'] == 'POST'){
 //        {
 //            return;
