@@ -2,7 +2,7 @@
     <h2 class="my-3">Meetups</h2>
 
 
-	<form action="/adminPage?source-tab=meetups&task=add" method="post" class="form-group">
+	<form action="/addMeetupGroup" method="post" class="form-group">
 
 		<F3:check if="{{ isset(@meetupSourceError) }}">
 			<span class="password-error">{{ @meetupSourceError }}</span>
@@ -25,7 +25,7 @@
 	<ul class="list-group">
 		<F3:repeat group="{{ @meetupGroupsList }}" value="{{ @value }}">
             <li class="list-group-item">
-                <form class="form-group" action="/adminPage?source-tab=meetups&task=delete" method="post">
+                <form class="form-group" action="/updateMeetupGroups?task=delete" method="post">
                     <div class="row">
                         <div class="col">
                             <p class="h5">{{ @value.source_name }}</p>

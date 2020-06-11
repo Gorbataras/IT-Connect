@@ -77,6 +77,15 @@ $fatFree->route('POST /updateApiSource', function (){
     $GLOBALS['controller']->updateApiSource();
 });
 
+$fatFree->route('POST /addMeetupGroup', function (){
+    $GLOBALS['controller']->addMeetupGroup();
+});
+
+$fatFree->route('POST /deleteMeetupGroup', function (){
+    $GLOBALS['controller']->deleteMeetupGroup();
+});
+
+
 //needed to run
 $fatFree->run();
 ?>

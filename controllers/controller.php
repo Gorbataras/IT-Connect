@@ -235,31 +235,7 @@ class Controller
      */
     function adminPage()
     {
-        //if ($_SESSION["validUser"] == true){
-        //Admin is submitting data
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            // User is uploading photo
-            if (isset($_FILES['photo'])) {
-                $picPath = $this->uploadPhoto();
-            }
-
-            //Meetups Control
-            if ($_REQUEST['source-tab'] == 'meetups') {
-                $addedGroupName = $_POST['new-group'];
-                $removedGroupname = $_POST['entry'];
-
-                // Add or Delete meetup group
-                switch ($_REQUEST['task']) {
-                    case 'add':
-                        $this->addMeetupGroup($addedGroupName);
-                        break;
-                    case 'delete':
-                        $this->meetupDelete($removedGroupname);
-                        break;
-                }
-            }
-        }
+        //if ($_SESSION["validUser"]){
 
         // Get HTML content, blog source, Meetup Groups
         $homeContent = $this->_htmlContentDb->getAllPageContent('home');
@@ -289,11 +265,29 @@ class Controller
     }
 
 
+    function updateMeetupGroups()
+    {
+        $addedGroupName = $_POST['new-group'];
+        $removedGroupname = $_POST['entry'];
+
+        // Add or Delete meetup group
+        switch ($_GET['task']) {
+            case 'add':
+                $this->addMeetupGroup($addedGroupName);
+                break;
+            case 'delete':
+                $this->deleteMeetupGroup($removedGroupname);
+                break;
+        }
+    }
+
+
     /**
      * Gets the name of the of the blog source from the database or null if none
      * @return mixed|null name of blog source
      */
-    private function getBlogSourceName() {
+    private function getBlogSourceName()
+    {
         $row = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEDIUM_DOMAIN);
 
         if (!empty($row)) {
@@ -305,31 +299,41 @@ class Controller
 
     /**
      * Add new Meetup group to Db
-     * @param $groupName string name of group to add
      */
-    private function addMeetupGroup($groupName)
+    private function addMeetupGroup()
     {
-        $newGroup = $_POST['new-group'];
+        //if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
+//            return;
+//        }
+
+        $groupName = $_POST['new-group'];
+
         //Create a URL
-        $meetupLink = str_replace('placeholder', $newGroup, self::MEETUP_API_URL);
+        $meetupLink = str_replace('placeholder', $groupName, self::MEETUP_API_URL);
 
         //If the entry does not already exist, add to db
         if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)
                 && (new Validator($this->_f3))->isValidUrl($meetupLink)) {
+
             $this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName);
             $this->_f3->clear('meetupSourceError');
         } else {
-            $this->_f3->set("meetupSourceError", "The following group name is either invalid or already is added: $newGroup");
+            $this->_f3->set("meetupSourceError", "The following group name is either invalid or already is added: $groupName");
         }
     }
 
 
     /**
      * Remove a Meetup group from JSON file
-     * @param $groupName string name of group to delete
      */
-    private function meetupDelete($groupName)
+    private function deleteMeetupGroup()
     {
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
+            return;
+        }
+
+        $groupName = $_POST['entry'];
+
         // Delete existing group from the db
         if ($this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
             $this->_htmlContentDb->deleteApiSourceName(self::MEETUP_DOMAIN, $groupName);
@@ -370,7 +374,6 @@ class Controller
 
     function updateApiSource() {
         //if (!$_SESSION["validUser"]){
-//        {
 //            return;
 //        }
 
@@ -392,9 +395,9 @@ class Controller
     }
 
 
-    function editHtmlContent() {
-        //if (!$_SESSION["validUser"] || !$_SERVER['REQUEST_METHOD'] == 'POST'){
-//        {
+    function editHtmlContent()
+    {
+        //if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
 //            return;
 //        }
 
@@ -470,7 +473,8 @@ class Controller
     /**
     *  Set color scheme for website.
     */
-    function setColor(){
+    function setColor()
+    {
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
         $siteSetting = new siteSetting($dbh);
@@ -490,7 +494,8 @@ class Controller
     /**
     * Retrieves colors for website scheme
     */
-    function getColor(){
+    function getColor()
+    {
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
 
@@ -517,7 +522,7 @@ class Controller
     public function uploadPhoto()
     {
         // Preconditions
-        if (/*TODO !$_SESSION["validUser"] || */!$_SERVER['REQUEST_METHOD'] == 'POST' || !isset($_FILES['photo'])) {
+        if (/*TODO !$_SESSION["validUser"] || */$_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_FILES['photo'])) {
             return;
         }
 

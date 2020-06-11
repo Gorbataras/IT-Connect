@@ -325,82 +325,9 @@ $closeAlertBtn.click(function() {
 });
 
 
-// WYSIWYG Editors -----------------------------------------
+//region /****** WYSIWYG Editors ******/
 
-// tinymce.init({
-//     selector: '#qualifications',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-//
-// tinymce.init({
-//     selector: '#qualifications_update',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-//
-// tinymce.init({
-//     selector: '#description',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-//
-// tinymce.init({
-//     selector: '#description_update',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-//
-//
-// // WYSIWYG editor configuration for html content
-// tinymce.init({
-//     height: "100",
-//     selector: '.wysiwygs-small',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-
-// WYSIWYG editor configuration for html content
+// Common WYSIWYG plugins and toolbar items
 const PLUGINS = [
     'advlist autolink lists link print preview searchreplace',
     'insertdatetime table contextmenu paste'
@@ -409,7 +336,7 @@ const PLUGINS = [
 const TOOLBAR = 'undo redo | styleselect | fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify |'
         + ' bullist, numlist | link';
 
-
+// Small height WYSIWYG initialization
 tinymce.init({
     height: "100",
     selector: '.wysiwyg-sm',
@@ -422,6 +349,7 @@ tinymce.init({
     }
 });
 
+// Medium height WYSIWYG initialization
 tinymce.init({
     height: "200",
     selector: '.wysiwyg-md',
@@ -434,6 +362,7 @@ tinymce.init({
     }
 });
 
+// Large height WYSIWYG initialization
 tinymce.init({
     height: "400",
     selector: '.wysiwyg-lg',
@@ -445,8 +374,11 @@ tinymce.init({
         });
     }
 });
+//endregion
 
-// Posts logo image to server to be saved
+//region /****** Ajax ******/
+
+// Logo Ajax
 $('#logo-upload').on('submit',
     function(e) {
         e.preventDefault();
@@ -476,7 +408,7 @@ $('#logo-upload').on('submit',
     }
 );
 
-// Makes a POST request for Medium blog source
+// Medium blog source AJAX
 $('#medium-blog-submit').on('click', function() {
     let blogSourceName = $('#medium-blog-link').val();
 
@@ -494,7 +426,7 @@ $('#medium-blog-submit').on('click', function() {
     );
 });
 
-// Makes a POST request for homepage alert content
+// Homepage alert AJAX
 $('#home-alert-submit').on('click', function() {
     let alertContent = $('#home-alert').val();
     let alertIsShown = $('#alert-is-shown').prop('checked');
@@ -503,7 +435,7 @@ $('#home-alert-submit').on('click', function() {
     postHtmlContent(htmlContent);
 });
 
-// Makes a POST request for homepage intro content
+// Homepage intro AJAX
 $('#home-intro-submit').on('click', function() {
     let introContent = $('#home-intro').val();
     let introIsShown = $('#intro-is-shown').prop('checked');
@@ -512,31 +444,31 @@ $('#home-intro-submit').on('click', function() {
     postHtmlContent(htmlContent);
 });
 
-// Makes a POST request for resources page content
+// Resources page AJAX
 $('#resources-submit').on('click', function() {
     let htmlContent = {page: 'resources', contentName: 'page', html: $('#resources-page').val(), isShown: 'true'};
     postHtmlContent(htmlContent);
 });
 
-// Makes a POST request for website title
+// Website title AJAX
 $('#site-title-submit').on('click', function() {
     let htmlContent = {page: 'header', contentName: 'title', html: $('#site-title').val(), isShown: 'true'};
     postHtmlContent(htmlContent);
 });
 
-// Makes a POST request for events title content
+// Events title AJAX
 $('#events-submit').on('click', function() {
 	let htmlContent = {page: 'events', contentName: 'events', html: $('#events-intro').val(), isShown: 'true'};
 	postHtmlContent(htmlContent);
 });
 
-// Makes a POST request for internships title content
+// Internships title AJAX
 $('#internships-submit').on('click', function() {
 	let htmlContent = {page: 'internships', contentName: 'internships', html: $('#internships-intro').val(), isShown: 'true'};
 	postHtmlContent(htmlContent);
 });
 
-// Makes a POST request for the site's colors
+// Site's colors AJAX
 $('#color_button').on('click', function() {
     let color1 = $('#color1').val();
     let color2 = $('#color2').val();
@@ -556,6 +488,7 @@ $('#color_button').on('click', function() {
     );
 });
 
+
 /**
  * Posts to server html content to be saved
  * @param htmlContent object of content to be saved {pageName, contentName, html, isShown}
@@ -574,4 +507,5 @@ function postHtmlContent(htmlContent) {
         }
     );
 }
+//endregion
 
