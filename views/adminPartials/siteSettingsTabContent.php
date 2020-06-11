@@ -26,15 +26,6 @@
                     <input type="file" id="logo" name="photo">
                     <br>
                     <input class="btn btn-primary mt-2" id="logo-submit" type="submit" value="Upload" name="photo-submit">
-                    <check if="{{ isset(@photoError) }}">
-                        <br>
-                        <span class="error text-danger">{{ @photoError }}</span>
-                    </check>
-
-                    <check if="{{ isset(@photoConfirm) }}">
-                        <br>
-                        <span class="text-success">{{ @photoConfirm }}</span>
-                    </check>
                 </div>
             </div>
         </div>
