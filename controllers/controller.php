@@ -216,6 +216,16 @@ class Controller
     function login()
     {
         //  show the admin Login page
+        if($_SERVER["REQUEST_METHOD"] = "POST"){
+            $email = trim($_POST["username"]);
+            $password = trim($_POST["password"]);
+            if(((new Validator($this->_f3))->validUsername($email)) &&
+            ((new Validator($this->_f3))->validPassword($password)) &&
+                (new login($this->_f3))->checkLogin($email,$password)){
+                $this->adminPage();
+                return;
+            }
+        }
         echo Template::instance()->render('views/login.php');
     }
 

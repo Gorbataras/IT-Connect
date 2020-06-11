@@ -37,10 +37,12 @@ SOFTWARE.
                 <div class="wrapper">
                     <form id="login-form" class="form-signin">
                         <h1>Admin Login</h1>
-                        <h4><i class="fas fa-user-tie"></i> Email:</h4>
+                        <label class="h4" for="user-email"><i class="fas fa-user-tie"></i> Email:</label>
+                        <span class="alert-danger login-span" id="email_err">Enter an Email</span>
                         <input type="text" id="user-email" class="form-control" name="username" placeholder="Enter Email" required="" autofocus=""/>
                         <br>
-                        <h4><i class="fas fa-unlock-alt"></i> Password:</h4>
+                        <label class="h4" for="user-password"><i class="fas fa-unlock-alt"></i> Password:</label>
+                        <span class="alert-danger login-span" id="password_err">Enter an Password</span>
                         <input type="password" id="user-password" class="form-control" name="password" placeholder="Enter Password" required=""/>
 
                         <button class="btn btn-lg btn-success btn-block btn-theme" id="login-button" type="submit">Log in</button>

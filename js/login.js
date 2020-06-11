@@ -7,6 +7,16 @@ $("#login-form").on("submit", function (e) {
 
     var username = $("#user-email").val();
     var password = $("#user-password").val();
+    if((username.length) === 0){
+        $('#email_err').show();
+        return;
+    }
+
+
+    if((password.length) === 0){
+        $('#password_err').show();
+        return;
+    }
 
     $.ajax({
         url: '/api/user.php',

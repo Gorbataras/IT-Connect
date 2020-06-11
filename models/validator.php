@@ -92,4 +92,34 @@ class Validator
         }
         return true;
     }
+
+    /**
+     * Validates the user email.
+     *
+     * @param $email string user entered email
+     * @return bool
+     */
+    public function validUsername($email){
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validates the user password.
+     *
+     * @param $password string user entered password
+     * @return bool
+     */
+    public function validPassword($password){
+        $uppercase = preg_match('@[A-Z]@', $password);
+        $lowercase = preg_match('@[a-z]@', $password);
+        $number    = preg_match('@[0-9]@', $password);
+
+        if(!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+            return false;
+        }
+        return true;
+    }
 }
