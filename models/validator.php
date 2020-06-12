@@ -119,7 +119,7 @@ class Validator
         $number    = preg_match('@[0-9]@', $password);
 
         if(!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
-            echo "Invalid Password, Requires at least 1 Uppercase and 1 Number";
+            echo "Invalid Password, Requires at least 1 Uppercase and 1 Number and have a length greater than 8";
             return false;
         }
         return true;

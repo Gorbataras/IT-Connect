@@ -25,6 +25,7 @@ class login
     public function checkLogin($username, $password)
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
+        $username = strtolower($username);
         /*query databse for user and password*/
         $sql = "SELECT login_id FROM login WHERE email = :username AND password = :password";
         $q = $this->db->prepare($sql);
@@ -54,6 +55,7 @@ class login
 
         // hash password
         $password = password_hash($password, PASSWORD_DEFAULT);
+        $email = strtolower($email);
         /*insert into database*/
         $sql = "INSERT INTO login (email, password) VALUES (:email , :password)";
         $q = $this->db->prepare($sql);
