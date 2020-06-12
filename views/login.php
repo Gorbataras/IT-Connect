@@ -35,11 +35,11 @@ SOFTWARE.
         <div class="container-fluid col-lg-7">
             <div class="col-xs-12">
                 <div class="wrapper">
-                    <form id="login-form" class="form-signin">
+                    <form action="/login" id="login-form" class="form-signin" method="post">
                         <h1>Admin Login</h1>
                         <label class="h4" for="user-email"><i class="fas fa-user-tie"></i> Email:</label>
                         <span class="alert-danger login-span" id="email_err">Enter an Email</span>
-                        <input type="text" id="user-email" class="form-control" name="username" placeholder="Enter Email" required="" autofocus=""/>
+                        <input type="text" id="user-email" class="form-control" name="email" placeholder="Enter Email" required="" autofocus=""/>
                         <br>
                         <label class="h4" for="user-password"><i class="fas fa-unlock-alt"></i> Password:</label>
                         <span class="alert-danger login-span" id="password_err">Enter an Password</span>
@@ -53,7 +53,7 @@ SOFTWARE.
 </div>
 <!--footer for the page-->
 <!--jquery needed for login (DO NOT DELETE)-->
-<!--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!--admin page javascript-->
 <script src="js/login.js"></script>
 <include href="views/parts/footer.php"></include>

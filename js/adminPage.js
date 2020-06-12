@@ -566,15 +566,10 @@ $('#user_add').on('click', function() {
     let email = $('#email').val();
     let password = $('#password').val();
 
-    $.post('/addUser', {email: email,password: password},
+    $.post('/addUser', {password: password, email: email},
         function(result) {
             // Show confirmation
-            if (result) {
-                alert("Saved Successfully!!")
-            }
-            else {
-                alert("Error Saving");
-            }
+            alert(result);
         }
     );
 });

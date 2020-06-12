@@ -24,22 +24,23 @@ class login
      */
     public function checkLogin($username, $password)
     {
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         /*query databse for user and password*/
-        $sql = "SELECT login_id FROM login WHERE email = :username AND password = :passwordHash";
+        $sql = "SELECT login_id FROM login WHERE email = :username AND password = :password";
         $q = $this->db->prepare($sql);
 
         $q->bindValue("username", $username);
-        $q->bindValue("password", $passwordHash);
-        $q->execute();
-        $user_id = $q->fetchColumn();
-        if ($user_id) {
-            $_SESSION['loggedIn'] = "true";
-            $_SESSION['user_id'] = $user_id;
-            return true;
-        } else {
-            return false;
-        }
+        $q->bindValue("password", $password);
+        return $q->execute();
+
+//        $user_id = $q->fetchColumn();
+//        if ($user_id) {
+//            $_SESSION['loggedIn'] = "true";
+//            $_SESSION['user_id'] = $user_id;
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 
     /**
@@ -47,7 +48,7 @@ class login
      *
      * @param $email string user entered email
      * @param $password string user entered password
-     * @return bool     True if credentials in the database
+     * @return bool True if credentials in the database
      */
     public function addUser($email, $password){
 
@@ -56,8 +57,8 @@ class login
         /*insert into database*/
         $sql = "INSERT INTO login (email, password) VALUES (:email , :password)";
         $q = $this->db->prepare($sql);
-        $q->bindValue("email",      $email);
-        $q->bindValue("password",   $password);
+        $q->bindValue("email",$email);
+        $q->bindValue("password",$password);
         return $q->execute();
     }
 }

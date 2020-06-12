@@ -215,17 +215,19 @@ class Controller
      */
     function login()
     {
-        //  show the admin Login page
-        if($_SERVER["REQUEST_METHOD"] = "POST"){
-            $email = trim($_POST["username"]);
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+            $email = trim($_POST["email"]);
             $password = trim($_POST["password"]);
             if(((new Validator($this->_f3))->validUsername($email)) &&
             ((new Validator($this->_f3))->validPassword($password)) &&
-                (new login($this->_f3))->checkLogin($email,$password)){
-                return;
+                ((new login($dbh))->checkLogin($email,$password))){
+                var_dump($email);
+                var_dump($password);
+                echo "sucessful login";
+               $this->_f3->reroute('/adminPage');
             }
-            echo "Invalid login";
-        }
+
         echo Template::instance()->render('views/login.php');
     }
 
@@ -574,9 +576,10 @@ class Controller
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
-        if((new Validator($this->_f3))->validUsername($email) && (new Validator($this->_f3))->validPassword($password)){
-            (new login($dbh))->$this->addUser($email, $password);
-        }
 
+        if((new Validator($this->_f3))->validUsername($email) && (new Validator($this->_f3))->validPassword($password)){
+           (new login($dbh))->addUser($email,$password);
+           echo "User added Successfully";
+        }
     }
 }

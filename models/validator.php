@@ -101,6 +101,7 @@ class Validator
      */
     public function validUsername($email){
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "Invalid Email Format";
             return false;
         }
         return true;
@@ -118,6 +119,7 @@ class Validator
         $number    = preg_match('@[0-9]@', $password);
 
         if(!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+            echo "Invalid Password, Requires at least 1 Uppercase and 1 Number";
             return false;
         }
         return true;
