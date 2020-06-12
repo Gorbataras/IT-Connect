@@ -45,16 +45,16 @@ class login
     /**
      * Add new user
      *
-     * @param $email user entered email
-     * @param $password user entered password
+     * @param $email string user entered email
+     * @param $password string user entered password
      * @return bool     True if credentials in the database
      */
     public function addUser($email, $password){
 
         // hash password
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         /*insert into database*/
-        $sql = "INSERT INTO login (email, password) VALUES ('$email', '$passwordHash')";
+        $sql = "INSERT INTO login (email, password) VALUES (:email , :password)";
         $q = $this->db->prepare($sql);
         $q->bindValue("email",      $email);
         $q->bindValue("password",   $password);

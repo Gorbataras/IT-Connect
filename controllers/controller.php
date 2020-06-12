@@ -222,9 +222,9 @@ class Controller
             if(((new Validator($this->_f3))->validUsername($email)) &&
             ((new Validator($this->_f3))->validPassword($password)) &&
                 (new login($this->_f3))->checkLogin($email,$password)){
-                $this->adminPage();
                 return;
             }
+            echo "Invalid login";
         }
         echo Template::instance()->render('views/login.php');
     }
@@ -567,5 +567,16 @@ class Controller
             $this->_f3->set('photoError', 'There was an error uploading your file.');
         }
         return null;
+    }
+
+    function addUser(){
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+        if((new Validator($this->_f3))->validUsername($email) && (new Validator($this->_f3))->validPassword($password)){
+            (new login($dbh))->$this->addUser($email, $password);
+        }
+
     }
 }
