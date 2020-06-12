@@ -146,6 +146,7 @@ class htmlContent
      * Adds API source name to the database
      * @param $domain string source of the API content
      * @param $sourceName string source of the API content
+     * @return boolean true if insert was successful
      */
     public function addApiSourceName($domain, $sourceName) {
         $sql = "INSERT INTO api_resource (domain, source_name)
@@ -156,7 +157,7 @@ class htmlContent
         $statement->bindParam(':domain', $domain);
         $statement->bindParam(':sourceName', $sourceName);
 
-        $statement->execute();
+        return $statement->execute();
     }
 
 
@@ -186,6 +187,7 @@ class htmlContent
      * Deletes API source name from db
      * @param $domain string domain of website the API belongs to
      * @param $sourceName string source of the API content
+     * @return boolean true if delete was successful
      */
     public function deleteApiSourceName($domain, $sourceName) {
         $sql = 'DELETE FROM api_resource
@@ -196,6 +198,6 @@ class htmlContent
         $statement->bindParam(':domain', $domain);
         $statement->bindParam(':sourceName', $sourceName);
 
-        $statement->execute();
+        return $statement->execute();
     }
 }

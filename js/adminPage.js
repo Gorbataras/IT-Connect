@@ -426,6 +426,79 @@ $('#medium-blog-submit').on('click', function() {
     );
 });
 
+// Add Meetup source AJAX
+$('#add-meetup').on('submit',
+    function(e) {
+        e.preventDefault();
+
+        let groupName = $(this).find('#new-group').first().val();
+
+        $.post(this.action, $(this).serialize(),
+            function(result) {
+
+                // Show confirmation if no errors
+                if (result.length === 0) {
+                    addToMeetupList(groupName);
+                }
+                else {
+                    alert(result);
+                }
+            }
+        );
+    }
+);
+
+
+function addToMeetupList(meetupGroup) {
+    $('#meetup-group-list').append(
+        `<li class="list-group-item">
+                <form class="form-group delete-meetup" action="/deleteMeetupGroup" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <p class="h5">${meetupGroup}</p>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn" type="submit">&#128465;</button>
+                            <input name="entry" type="text" value="${meetupGroup}" hidden>
+                        </div>
+                    </div>
+                </form>
+            </li>`
+    );
+
+    // Add delete event handler to form
+    $('#meetup-group-list li:last-child form').on('submit',
+        function(e) {
+            deleteMeetup(e, this);
+        }
+    );
+}
+
+
+// Delete Meetup source AJAX
+$('.delete-meetup').on('submit',
+    function(e) {
+        deleteMeetup(e, this);
+    }
+);
+
+function deleteMeetup(e, form) {
+    e.preventDefault();
+
+    $.post(form.action, $(form).serialize(),
+        function(result) {
+
+            // Show confirmation if no errors
+            if (result.length === 0) {
+                $(form).parent().remove();
+            }
+            else {
+                alert(result);
+            }
+        }
+    );
+}
+
 // Homepage alert AJAX
 $('#home-alert-submit').on('click', function() {
     let alertContent = $('#home-alert').val();

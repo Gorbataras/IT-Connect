@@ -265,23 +265,6 @@ class Controller
     }
 
 
-    function updateMeetupGroups()
-    {
-        $addedGroupName = $_POST['new-group'];
-        $removedGroupname = $_POST['entry'];
-
-        // Add or Delete meetup group
-        switch ($_GET['task']) {
-            case 'add':
-                $this->addMeetupGroup($addedGroupName);
-                break;
-            case 'delete':
-                $this->deleteMeetupGroup($removedGroupname);
-                break;
-        }
-    }
-
-
     /**
      * Gets the name of the of the blog source from the database or null if none
      * @return mixed|null name of blog source
@@ -300,11 +283,11 @@ class Controller
     /**
      * Add new Meetup group to Db
      */
-    private function addMeetupGroup()
+    function addMeetupGroup()
     {
-        //if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
-//            return;
-//        }
+        if (/*TODO !$_SESSION["validUser"] ||*/ $_SERVER['REQUEST_METHOD'] != 'POST'){
+            return;
+        }
 
         $groupName = $_POST['new-group'];
 
@@ -315,10 +298,12 @@ class Controller
         if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)
                 && (new Validator($this->_f3))->isValidUrl($meetupLink)) {
 
-            $this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName);
-            $this->_f3->clear('meetupSourceError');
+            // Error if not successful insert
+            if (!$this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName)) {
+                echo "Error: $groupName could not be saved";
+            }
         } else {
-            $this->_f3->set("meetupSourceError", "The following group name is either invalid or already is added: $groupName");
+            echo "Error: The following group name is either invalid or already is added: $groupName";
         }
     }
 
@@ -326,9 +311,9 @@ class Controller
     /**
      * Remove a Meetup group from JSON file
      */
-    private function deleteMeetupGroup()
+    function deleteMeetupGroup()
     {
-        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
+        if (/*TODO !$_SESSION["validUser"] ||*/ $_SERVER['REQUEST_METHOD'] != 'POST'){
             return;
         }
 
@@ -336,7 +321,11 @@ class Controller
 
         // Delete existing group from the db
         if ($this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
-            $this->_htmlContentDb->deleteApiSourceName(self::MEETUP_DOMAIN, $groupName);
+
+            // Give error if not successful delete
+            if (!$this->_htmlContentDb->deleteApiSourceName(self::MEETUP_DOMAIN, $groupName)) {
+                echo "Error: $groupName could not be deleted";
+            }
         }
     }
 
