@@ -4,6 +4,14 @@
     color: white;
 }
 
+#error-alert {
+    width: 600px;
+    position: fixed;
+    top: 50%;
+    left: calc(50% - 300px);
+    z-index: 10;
+}
+
 .modal-backdrop {
     background-color: rgba(255, 255, 255, .15) !important;
 }
