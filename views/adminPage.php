@@ -136,12 +136,7 @@ SOFTWARE.
 <!--</nav>-->
 <!--navbar-->
 <include href="views/parts/navbar.php"></include>
-<div id="error-alert" class="alert alert-danger alert-dismissible fade show mx-auto d-none" role="alert">
-    <span>Error</span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+
 <!-- Content Management Tabs -->
 <nav>
     <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
@@ -176,6 +171,19 @@ SOFTWARE.
     <include href="views/adminPartials/meetupsTabContent.php"></include>
     <!-- Student Resources -->
     <include href="views/adminPartials/resourcesTabContent.php"></include>
+</div>
+
+<!-- Dismissable error alert -->
+<div id="error-alert" class="confirm-alert alert alert-danger fade show mx-auto text-center" role="alert">
+    <button type="button" class="close float-right" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <span>Error</span>
+</div>
+
+<!-- Success alert -->
+<div id="success-alert" class="confirm-alert alert alert-success text-center" role="alert">
+    Success!!
 </div>
 
 

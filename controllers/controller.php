@@ -373,7 +373,7 @@ class Controller
 
         // Medium blog must be a valid url
         if (!(new Validator($this->_f3))->isValidUrl($url)) {
-            echo "The submitted Medium source ($blogSourceName) does not work. No changes were saved.";
+            echo "Error: The submitted Medium source ($blogSourceName) link does not work. No changes were saved.";
             return;
         }
 

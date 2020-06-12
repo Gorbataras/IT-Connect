@@ -4,7 +4,8 @@
     color: white;
 }
 
-#error-alert {
+.confirm-alert {
+    display: none;
     width: 600px;
     position: fixed;
     top: 50%;

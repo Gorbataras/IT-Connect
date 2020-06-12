@@ -396,13 +396,17 @@ $('#logo-upload').on('submit',
                 // Show confirmation
                 if (result.length === 0) {
                     alert("Uploaded Successfully!!");
+                    $('#success-alert').html("Uploaded Successfully!!")
+                    $('#success-alert').show();
                 }
                 else {
-                    alert(result);
+                    $('#error-alert > span').html(result);
+                    $('#error-alert').show();
                 }
             },
             error: function(data){
-                alert("An error prevented the photo from uploading");
+                $('#error-alert > span').html("An error prevented the photo from uploading");
+                $('#error-alert').show();
             }
         });
     }
@@ -418,9 +422,12 @@ $('#medium-blog-submit').on('click', function() {
             // Show confirmation if no errors
             if (result.length === 0) {
                 alert("Saved Successfully!!");
+                $('#success-alert').html("Saved Successfully!!")
+                $('#success-alert').show();
             }
             else {
-                alert(result);
+                $('#error-alert > span').html(result);
+                $('#error-alert').show();
             }
         }
     );
@@ -441,7 +448,8 @@ $('#add-meetup').on('submit',
                     addToMeetupList(groupName);
                 }
                 else {
-                    alert(result);
+                    $('#error-alert > span').html(result);
+                    $('#error-alert').show();
                 }
             }
         );
@@ -488,12 +496,13 @@ function deleteMeetup(e, form) {
     $.post(form.action, $(form).serialize(),
         function(result) {
 
-            // Show confirmation if no errors
+            // Remove list item if successful
             if (result.length === 0) {
                 $(form).parent().remove();
             }
             else {
-                alert(result);
+                $('#error-alert > span').html(result);
+                $('#error-alert').show();
             }
         }
     );
@@ -552,10 +561,12 @@ $('#color_button').on('click', function() {
 
             // Show confirmation if no errors
             if (result.length === 0) {
-                alert("Saved Successfully!!");
+                $('#success-alert').html("Saved Successfully!!")
+                $('#success-alert').show();
             }
             else {
-                alert(result);
+                $('#error-alert > span').html(result);
+                $('#error-alert').show();
             }
         }
     );
@@ -572,13 +583,20 @@ function postHtmlContent(htmlContent) {
 
             // Show confirmation if no errors
             if (result.length === 0) {
-                alert("Saved Successfully!!");
+                $('#success-alert').html("Saved Successfully!!")
+                $('#success-alert').show();
             }
             else {
-                alert(result);
+                $('#error-alert > span').html(result);
+                $('#error-alert').show();
             }
         }
     );
 }
 //endregion
+
+// Hide alert with when cancel button is clicked
+$('#error-alert button').on('click', function() {
+    $(this).parent().hide();
+});
 
