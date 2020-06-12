@@ -215,6 +215,11 @@ class Controller
      */
     function login()
     {
+        if ($_SESSION["validUser"] == true){
+            $this->_f3->reroute('/adminPage');
+        }
+
+
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
             $email = trim($_POST["email"]);
@@ -222,8 +227,7 @@ class Controller
             if(((new Validator($this->_f3))->validUsername($email)) &&
             ((new Validator($this->_f3))->validPassword($password)) &&
                 ((new login($dbh))->checkLogin($email,$password))){
-                var_dump($email);
-                var_dump($password);
+                $_SESSION['validUser'] = true;
                 echo "sucessful login";
                $this->_f3->reroute('/adminPage');
             }
@@ -247,7 +251,11 @@ class Controller
      */
     function adminPage()
     {
-        //if ($_SESSION["validUser"] == true){
+        if ($_SESSION["validUser"] == false){
+            $this->_f3->reroute('/login');
+        }
+
+        //{
         //Admin is submitting data
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // User is uploading photo
@@ -372,10 +380,12 @@ class Controller
     {
         //  Log out of page
         // destroy session
-        session_destroy();
+//        session_destroy();
+
+        unset($_SESSION['validUser']);
 
         // send to main page
-        header('Location: https://itconnect.greenrivertech.net/adminLogin');
+        $this->_f3->reroute('/login');
         exit;
     }
 
