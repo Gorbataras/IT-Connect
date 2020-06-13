@@ -32,16 +32,8 @@ class login
 
         $q->bindValue("username", $username);
         $q->bindValue("password", $password);
-        return $q->execute();
 
-//        $user_id = $q->fetchColumn();
-//        if ($user_id) {
-//            $_SESSION['loggedIn'] = "true";
-//            $_SESSION['user_id'] = $user_id;
-//            return true;
-//        } else {
-//            return false;
-//        }
+        return $q->execute();
     }
 
     /**
@@ -56,11 +48,14 @@ class login
         // hash password
         $password = password_hash($password, PASSWORD_DEFAULT);
         $email = strtolower($email);
+
         /*insert into database*/
         $sql = "INSERT INTO login (email, password) VALUES (:email , :password)";
+
         $q = $this->db->prepare($sql);
         $q->bindValue("email",$email);
         $q->bindValue("password",$password);
+
         return $q->execute();
     }
 }

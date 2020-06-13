@@ -219,18 +219,28 @@ class Controller
             $this->_f3->reroute('/adminPage');
         }
 
+        // Login attempt
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $config = include("/home/nwagreen/config.php");
-        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+            $config = include("/home/nwagreen/config.php");
+            $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
             $email = trim($_POST["email"]);
             $password = trim($_POST["password"]);
-            if(((new Validator($this->_f3))->validUsername($email)) &&
-            ((new Validator($this->_f3))->validPassword($password)) &&
-                ((new login($dbh))->checkLogin($email,$password))){
+
+            $validator = new Validator($this->_f3);
+
+            if ($validator->validEmail($email) && $validator->validPassword($password)
+                && ((new login($dbh))->checkLogin($email, $password))) {
+
                 $_SESSION['validUser'] = true;
-                echo "sucessful login";
-               $this->_f3->reroute('/adminPage');
+                $this->_f3->reroute('/adminPage');
             }
+            else {
+                $this->_f3->set('email', $email);
+                $this->_f3->set('password', $password);
+            }
+        }
 
         echo Template::instance()->render('views/login.php');
     }
@@ -251,33 +261,8 @@ class Controller
      */
     function adminPage()
     {
-        if ($_SESSION["validUser"] == false){
+        if (!$_SESSION["validUser"]) {
             $this->_f3->reroute('/login');
-        }
-
-        //{
-        //Admin is submitting data
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // User is uploading photo
-            if (isset($_POST['photo-submit'])) {
-                $picPath = $this->uploadPhoto();
-            }
-
-            //Meetups Control
-            if ($_REQUEST['source-tab'] == 'meetups') {
-                $addedGroupName = $_POST['new-group'];
-                $removedGroupname = $_POST['entry'];
-
-                // Add or Delete meetup group
-                switch ($_REQUEST['task']) {
-                    case 'add':
-                        $this->addMeetupGroup($addedGroupName);
-                        break;
-                    case 'delete':
-                        $this->meetupDelete($removedGroupname);
-                        break;
-                }
-            }
         }
 
         // Get HTML content, blog source, Meetup Groups
@@ -298,13 +283,6 @@ class Controller
         $this->_f3->set('meetupGroupsList', $meetupGroupsList);
 
         echo Template::instance()->render('views/adminPage.php');
-
-        //    }else{
-        //        /*redirect to admin Login*/
-        //        header('Location: https://itconnect.greenrivertech.net/adminLogin');
-        //        exit;
-        //    }
-
     }
 
 
@@ -312,7 +290,8 @@ class Controller
      * Gets the name of the of the blog source from the database or null if none
      * @return mixed|null name of blog source
      */
-    private function getBlogSourceName() {
+    private function getBlogSourceName()
+    {
         $row = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEDIUM_DOMAIN);
 
         if (!empty($row)) {
@@ -324,34 +303,50 @@ class Controller
 
     /**
      * Add new Meetup group to Db
-     * @param $groupName string name of group to add
      */
-    private function addMeetupGroup($groupName)
+    function addMeetupGroup()
     {
-        $newGroup = $_POST['new-group'];
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
+            return;
+        }
+
+        $groupName = $_POST['new-group'];
+
         //Create a URL
-        $meetupLink = str_replace('placeholder', $newGroup, self::MEETUP_API_URL);
+        $meetupLink = str_replace('placeholder', $groupName, self::MEETUP_API_URL);
 
         //If the entry does not already exist, add to db
         if (!$this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)
                 && (new Validator($this->_f3))->isValidUrl($meetupLink)) {
-            $this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName);
-            $this->_f3->clear('meetupSourceError');
+
+            // Error if not successful insert
+            if (!$this->_htmlContentDb->addApiSourceName(self::MEETUP_DOMAIN,$groupName)) {
+                echo "Error: $groupName could not be saved";
+            }
         } else {
-            $this->_f3->set("meetupSourceError", "The following group name is either invalid or already is added: $newGroup");
+            echo "Error: The following group name is either invalid or already is added: $groupName";
         }
     }
 
 
     /**
      * Remove a Meetup group from JSON file
-     * @param $groupName string name of group to delete
      */
-    private function meetupDelete($groupName)
+    function deleteMeetupGroup()
     {
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
+            return;
+        }
+
+        $groupName = $_POST['entry'];
+
         // Delete existing group from the db
         if ($this->_htmlContentDb->apiSourceNameDoesExist(self::MEETUP_DOMAIN, $groupName)) {
-            $this->_htmlContentDb->deleteApiSourceName(self::MEETUP_DOMAIN, $groupName);
+
+            // Give error if not successful delete
+            if (!$this->_htmlContentDb->deleteApiSourceName(self::MEETUP_DOMAIN, $groupName)) {
+                echo "Error: $groupName could not be deleted";
+            }
         }
     }
 
@@ -378,67 +373,43 @@ class Controller
      */
     function logout()
     {
-        //  Log out of page
-        // destroy session
-//        session_destroy();
-
         unset($_SESSION['validUser']);
 
         // send to main page
-        $this->_f3->reroute('/login');
+        $this->_f3->reroute('/');
         exit;
     }
 
-    /**
-    * Update HTML content in DB
-    */
-    function editHtmlContent() {
-//        //if ($_SESSION["validUser"] == true){
-//        {
-        echo $this->editHtmlContentHelper($_POST['htmlContent']);
-//        }
-    }
-
-
-    /**
-     * Receives and saves edited html content
-     */
-    function editHomePage()
-    {
-//if (!$_SESSION["validUser"] == true){
-//        {
-//            return;
-//        }
+    function updateApiSource() {
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
+            return;
+        }
 
         $blogSourceName = trim($_POST['blogSourceName']);
-        $htmlItems = $_POST['htmlItems'];
 
         // Test first part of api url with source name
         $url = self::MEDIUM_API_URL . $blogSourceName;
 
         // Medium blog must be a valid url
         if (!(new Validator($this->_f3))->isValidUrl($url)) {
-            echo "The submitted Medium source ($blogSourceName) does not work. No changes were saved.";
+            echo "Error: The submitted Medium source ($blogSourceName) link does not work. No changes were saved.";
             return;
         }
 
-        $status = "";
-
         // Save blog source name
         if (!$this->_htmlContentDb->updateApiSourceNameByDomain(self::MEDIUM_DOMAIN, $blogSourceName)) {
-            $status .= 'Error: "' .  str_replace('-', ' ', $blogSourceName) . '" was not saved.';
+            echo 'Error: "' .  str_replace('-', ' ', $blogSourceName) . '" was not saved.';
         }
-
-        // Save all htmlContent
-        foreach ($htmlItems as $contentItem) {
-            $status .= $this->editHtmlContentHelper($contentItem);
-        }
-
-        echo $status;
     }
 
 
-    private function editHtmlContentHelper($contentItem) {
+    function editHtmlContent()
+    {
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
+            return;
+        }
+
+        $contentItem = $_POST['htmlContent'];
 
         // Collect variables
         $page = $contentItem['page'];
@@ -448,9 +419,8 @@ class Controller
 
         // Save HTML content
         if (!$this->_htmlContentDb->setContent($page, $contentName, $html, $isShown)) {
-            return 'Error: "' .  str_replace('-', ' ', $contentName) . '" was not saved.';
+            echo 'Error: "' .  str_replace('-', ' ', $contentName) . '" was not saved.';
         }
-        return '';
     }
 
 
@@ -511,30 +481,33 @@ class Controller
     /**
     *  Set color scheme for website.
     */
-    function setColor(){
+    function setColor()
+    {
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
+            return;
+        }
+
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
         $siteSetting = new siteSetting($dbh);
+
         //get's the color from the color picker.
         $color1 = $_POST['color1'];
         $color2 = $_POST['color2'];
         $color3 = $_POST['color3'];
 
-        var_dump($color1, $color2, $color3);
-
-
         //updates the color on the database.
-        $siteSetting->setColor($color1,1);
-        $siteSetting->setColor($color2,2);
-        $siteSetting->setColor($color3,3);
-
-
+         if (!$siteSetting->setColor($color1,1) || !$siteSetting->setColor($color2,2) ||
+                !$siteSetting->setColor($color3,3) ) {
+             echo "Error: Not all colors saved successfully";
+         }
     }
     
     /**
     * Retrieves colors for website scheme
     */
-    function getColor(){
+    function getColor()
+    {
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
 
@@ -557,13 +530,18 @@ class Controller
 
     /**
      * Uploads photo chosen by user if valid
-     * @returns string path of photo. null if not uploaded successfully
      */
-    private function uploadPhoto()
+    public function uploadPhoto()
     {
+        // Preconditions
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_FILES['photo'])) {
+            return;
+        }
+
         $imageIn = $_FILES['photo'];
         $picPath = 'assets/img/' . basename($imageIn["name"]);
         $imageFileType = strtolower(pathinfo($picPath,PATHINFO_EXTENSION));
+
         // Upload validated photo
         if ((new Validator($this->_f3))->validPhoto($imageIn, $imageFileType, $picPath)) {
 
@@ -572,24 +550,45 @@ class Controller
                 //rename file to overwrite existing logo
                 rename($picPath, "assets/img/logo.".$imageFileType);
 
-                $this->_f3->set('photoConfirm', 'Picture has been uploaded.');
                 $this->_htmlContentDb->setContent("site", "logo", $imageFileType, 1);
-                return $picPath;
+                return;
             }
-            $this->_f3->set('photoError', 'There was an error uploading your file.');
+            echo 'There was an error uploading your file.';
         }
-        return null;
     }
 
-    function addUser(){
+    function addUser()
+    {
+        // Preconditions
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
+            return;
+        }
+
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
 
-        if((new Validator($this->_f3))->validUsername($email) && (new Validator($this->_f3))->validPassword($password)){
-           (new login($dbh))->addUser($email,$password);
-           echo "User added Successfully";
+        $validator = new Validator($this->_f3);
+
+        if (!$validator->validEmail($email)) {
+            echo "Invalid Email Format";
+            return;
+        }
+
+        if (!$validator->validPassword($password)) {
+            echo "Invalid Password: Requires at least 1 Uppercase and 1 Number and have a length greater than 8";
+            return;
+        }
+
+        if ($this->_htmlContentDb->emailDoesExist($email)) {
+            echo "Error: This email already exists.";
+            return;
+        }
+
+        if (!(new login($dbh))->addUser($email,$password)) {
+            echo "Error: User could not be saved to database.";
         }
     }
 }

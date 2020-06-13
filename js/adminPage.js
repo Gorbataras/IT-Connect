@@ -325,82 +325,9 @@ $closeAlertBtn.click(function() {
 });
 
 
-// WYSIWYG Editors -----------------------------------------
+//region /****** WYSIWYG Editors ******/
 
-// tinymce.init({
-//     selector: '#qualifications',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-//
-// tinymce.init({
-//     selector: '#qualifications_update',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-//
-// tinymce.init({
-//     selector: '#description',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-//
-// tinymce.init({
-//     selector: '#description_update',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-//
-//
-// // WYSIWYG editor configuration for html content
-// tinymce.init({
-//     height: "100",
-//     selector: '.wysiwygs-small',
-//     plugins: [
-//         'advlist autolink lists link print preview searchreplace',
-//         'insertdatetime table contextmenu paste'
-//     ],
-//     toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist, numlist | link',
-//     setup: function(editor) {
-//         editor.on('change', function() {
-//             tinymce.triggerSave();
-//         });
-//     }
-// });
-
-// WYSIWYG editor configuration for html content
+// Common WYSIWYG plugins and toolbar items
 const PLUGINS = [
     'advlist autolink lists link print preview searchreplace',
     'insertdatetime table contextmenu paste'
@@ -409,7 +336,7 @@ const PLUGINS = [
 const TOOLBAR = 'undo redo | styleselect | fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify |'
         + ' bullist, numlist | link';
 
-
+// Small height WYSIWYG initialization
 tinymce.init({
     height: "100",
     selector: '.wysiwyg-sm',
@@ -422,6 +349,7 @@ tinymce.init({
     }
 });
 
+// Medium height WYSIWYG initialization
 tinymce.init({
     height: "200",
     selector: '.wysiwyg-md',
@@ -434,6 +362,7 @@ tinymce.init({
     }
 });
 
+// Large height WYSIWYG initialization
 tinymce.init({
     height: "400",
     selector: '.wysiwyg-lg',
@@ -445,105 +374,204 @@ tinymce.init({
         });
     }
 });
+//endregion
 
-// Makes a POST request for html content belonging to the home page
-$('#home-submit').on('click', function() {
+//region /****** Ajax ******/
 
-    // Gather data from controls
+// Logo Ajax
+$('#logo-upload').on('submit',
+    function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: this.action,
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(result){
+
+                // Show confirmation
+                if (result.length === 0) {
+                    showSuccessAlert("Uploaded Successfully!!");
+                }
+                else {
+                    $('#error-alert > span').html(result);
+                    $('#error-alert').show();
+                }
+            },
+            error: function(data){
+                showErrorAlert("An error prevented the photo from uploading")
+            }
+        });
+    }
+);
+
+// Medium blog source AJAX
+$('#medium-blog-submit').on('click', function() {
+    let blogSourceName = $('#medium-blog-link').val();
+
+    $.post('/updateApiSource', {blogSourceName: blogSourceName},
+        function(result) {
+
+            // Show confirmation if no errors
+            if (result.length === 0) {
+                showSuccessAlert("Saved Successfully!!");
+            }
+            else {
+                showErrorAlert(result);
+            }
+        }
+    );
+});
+
+// Add user login
+$('#add-user-form').on('submit',
+    function(e) {
+        e.preventDefault();
+
+        $.post(this.action, $(this).serialize(),
+            function(result) {
+                // Show confirmation if no errors
+                if (result.length === 0) {
+                    showSuccessAlert("User Added Successfully!!");
+                }
+                else {
+                    showErrorAlert(result);
+                }
+            }
+        );
+    }
+);
+
+// Add Meetup source AJAX
+$('#add-meetup').on('submit',
+    function(e) {
+        e.preventDefault();
+
+        let groupName = $(this).find('#new-group').first().val();
+
+        $.post(this.action, $(this).serialize(),
+            function(result) {
+
+                // Show confirmation if no errors
+                if (result.length === 0) {
+                    addToMeetupList(groupName);
+                }
+                else {
+                    showErrorAlert(result);
+                }
+            }
+        );
+    }
+);
+
+
+/**
+ * Adds Meetup group item to the Meetup group list
+ * @param meetupGroup Meetup group string to add
+ */
+function addToMeetupList(meetupGroup) {
+    $('#meetup-group-list').append(
+        `<li class="list-group-item">
+                <form class="form-group delete-meetup" action="/deleteMeetupGroup" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <p class="h5">${meetupGroup}</p>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn" type="submit">&#128465;</button>
+                            <input name="entry" type="text" value="${meetupGroup}" hidden>
+                        </div>
+                    </div>
+                </form>
+            </li>`
+    );
+
+    // Add delete event handler to form
+    $('#meetup-group-list li:last-child form').on('submit',
+        function(e) {
+            deleteMeetup(e, this);
+        }
+    );
+}
+
+
+// Delete Meetup source AJAX
+$('.delete-meetup').on('submit',
+    function(e) {
+        deleteMeetup(e, this);
+    }
+);
+
+
+/**
+ * Deletes Meetup group from database and from the Meetup group list
+ * @param e
+ * @param form the form to submit
+ */
+function deleteMeetup(e, form) {
+    e.preventDefault();
+
+    $.post(form.action, $(form).serialize(),
+        function(result) {
+
+            // Remove list item if successful
+            if (result.length === 0) {
+                $(form).parent().remove();
+            }
+            else {
+                showErrorAlert(result);
+            }
+        }
+    );
+}
+
+// Homepage alert AJAX
+$('#home-alert-submit').on('click', function() {
     let alertContent = $('#home-alert').val();
     let alertIsShown = $('#alert-is-shown').prop('checked');
 
+    let htmlContent = {page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown};
+    postHtmlContent(htmlContent);
+});
+
+// Homepage intro AJAX
+$('#home-intro-submit').on('click', function() {
     let introContent = $('#home-intro').val();
     let introIsShown = $('#intro-is-shown').prop('checked');
 
-    let blogSourceName = $('#medium-blog-link').val();
-
-    // Collect into array as JSON
-    let htmlContent = [];
-    htmlContent.push({page: 'home', contentName: 'alert', html: alertContent, isShown: alertIsShown});
-    htmlContent.push({page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown});
-
-    let isSaved = true;
-
-    // Make post requests for
-    $.post('/editHomePage', {htmlItems: htmlContent, blogSourceName: blogSourceName},
-        function(result) {
-
-            // Show confirmation
-            if (result.length === 0) {
-                alert("Saved Successfully!!")
-            }
-            else {
-                alert(result);
-            }
-        }
-    );
+    let htmlContent = {page: 'home', contentName: 'intro', html: introContent, isShown: introIsShown};
+    postHtmlContent(htmlContent);
 });
 
+// Resources page AJAX
 $('#resources-submit').on('click', function() {
     let htmlContent = {page: 'resources', contentName: 'page', html: $('#resources-page').val(), isShown: 'true'};
-
-    $.post('/editHtmlContent', {htmlContent: htmlContent},
-        function(result) {
-            // Show confirmation
-            if (result.length === 0) {
-                alert("Saved Successfully!!")
-            }
-            else {
-                alert(result);
-            }
-        }
-    );
+    postHtmlContent(htmlContent);
 });
 
+// Website title AJAX
 $('#site-title-submit').on('click', function() {
     let htmlContent = {page: 'header', contentName: 'title', html: $('#site-title').val(), isShown: 'true'};
-
-    $.post('/editHtmlContent', {htmlContent: htmlContent},
-        function(result) {
-            // Show confirmation
-            if (result.length === 0) {
-                alert("Saved Successfully!!")
-            }
-            else {
-                alert(result);
-            }
-        }
-    );
+    postHtmlContent(htmlContent);
 });
 
+// Events title AJAX
 $('#events-submit').on('click', function() {
 	let htmlContent = {page: 'events', contentName: 'events', html: $('#events-intro').val(), isShown: 'true'};
-
-	$.post('/editHtmlContent', {htmlContent: htmlContent},
-		function(result) {
-			// Show confirmation
-			if (result.length === 0) {
-				alert("Saved Successfully!!")
-			}
-			else {
-				alert(result);
-			}
-		}
-	);
+	postHtmlContent(htmlContent);
 });
 
+// Internships title AJAX
 $('#internships-submit').on('click', function() {
 	let htmlContent = {page: 'internships', contentName: 'internships', html: $('#internships-intro').val(), isShown: 'true'};
-
-	$.post('/editHtmlContent', {htmlContent: htmlContent},
-		function(result) {
-			// Show confirmation
-			if (result.length === 0) {
-				alert("Saved Successfully!!")
-			}
-			else {
-				alert(result);
-			}
-		}
-	);
+	postHtmlContent(htmlContent);
 });
 
+// Site's colors AJAX
 $('#color_button').on('click', function() {
     let color1 = $('#color1').val();
     let color2 = $('#color2').val();
@@ -551,26 +579,52 @@ $('#color_button').on('click', function() {
 
     $.post('/setColor', {color1: color1,color2: color2,color3: color3 },
         function(result) {
-            // Show confirmation
-            if (result) {
-                alert("Saved Successfully!!")
+
+            // Show confirmation if no errors
+            if (result.length === 0) {
+                showSuccessAlert("Saved Successfully!!");
             }
             else {
-                alert("Error Saving");
+                showErrorAlert(result);
             }
         }
     );
 });
 
-$('#user_add').on('click', function() {
-    let email = $('#email').val();
-    let password = $('#password').val();
 
-    $.post('/addUser', {password: password, email: email},
+/**
+ * Posts to server html content to be saved
+ * @param htmlContent object of content to be saved {pageName, contentName, html, isShown}
+ */
+function postHtmlContent(htmlContent) {
+    $.post('/editHtmlContent', {htmlContent: htmlContent},
         function(result) {
-            // Show confirmation
-            alert(result);
+
+            // Show confirmation if no errors
+            if (result.length === 0) {
+                showSuccessAlert("Saved Successfully!!");
+            }
+            else {
+                showErrorAlert(result);
+            }
         }
     );
+}
+
+//endregion
+
+function showErrorAlert(message) {
+    $('#error-alert > span').html(message);
+    $('#error-alert').fadeIn(250);
+}
+
+function showSuccessAlert(message) {
+    $('#success-alert').html(message);
+    $('#success-alert').fadeIn(250).delay(1200).fadeOut(250);
+}
+
+// Hide alert with when cancel button is clicked
+$('#error-alert button').on('click', function() {
+    $(this).parent().fadeOut(250);
 });
 

@@ -45,9 +45,7 @@ SOFTWARE.
                     <!--<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>-->
 
 <!--                    <ul class="list-unstyled">-->
-                        <form action="/login" method="post">
-                            <p>Made with <button type="submit"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></button> by <br> Green River College students</p><!--<a href="#!">Very long link 1</a>-->
-                        </form>
+                            <p>Made with <a href="/login"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></a> by <br> Green River College students</p>
 <!--                    </ul>-->
                 </div>
 

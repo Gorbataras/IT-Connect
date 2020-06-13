@@ -177,6 +177,19 @@ SOFTWARE.
     <include href="views/adminPartials/resourcesTabContent.php"></include>
 </div>
 
+<!-- Dismissable error alert -->
+<div id="error-alert" class="confirm-alert alert alert-danger fade show mx-auto text-center" role="alert">
+    <button type="button" class="close float-right" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <span>Error</span>
+</div>
+
+<!-- Success alert -->
+<div id="success-alert" class="confirm-alert alert alert-success text-center" role="alert">
+    Success!!
+</div>
+
 
     <!--modals for page-->
 <exclude>

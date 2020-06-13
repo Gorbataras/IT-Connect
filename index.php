@@ -61,10 +61,6 @@ $fatFree->route('POST /Logout', function (){
     $GLOBALS['controller']->logout();
 });
 
-$fatFree->route('POST /editHomePage', function (){
-    $GLOBALS['controller']->editHomePage();
-});
-
 $fatFree->route('POST /editHtmlContent', function (){
     $GLOBALS['controller']->editHtmlContent();
 });
@@ -73,9 +69,27 @@ $fatFree->route('POST /setColor', function (){
     $GLOBALS['controller']->setColor();
 });
 
+$fatFree->route('POST /uploadPhoto', function (){
+    $GLOBALS['controller']->uploadPhoto();
+});
+
+$fatFree->route('POST /updateApiSource', function (){
+    $GLOBALS['controller']->updateApiSource();
+});
+
+$fatFree->route('POST /addMeetupGroup', function (){
+    $GLOBALS['controller']->addMeetupGroup();
+});
+
+$fatFree->route('POST /deleteMeetupGroup', function (){
+    $GLOBALS['controller']->deleteMeetupGroup();
+});
+
 $fatFree->route('POST /addUser', function (){
     $GLOBALS['controller']->addUser();
 });
+
+
 //needed to run
 $fatFree->run();
-?>
+
