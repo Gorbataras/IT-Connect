@@ -228,8 +228,9 @@ class Controller
             $email = trim($_POST["email"]);
             $password = trim($_POST["password"]);
 
-            if (((new Validator($this->_f3))->validEmail($email))
-                && ((new Validator($this->_f3))->validPassword($password))
+            $validator = new Validator($this->_f3);
+
+            if ($validator->validEmail($email) && $validator->validPassword($password)
                 && ((new login($dbh))->checkLogin($email, $password))) {
 
                 $_SESSION['validUser'] = true;
