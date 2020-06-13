@@ -215,8 +215,24 @@ class Controller
      */
     function login()
     {
-        //  show the admin Login page
-        echo Template::instance()->render('gatorLock/login.php');
+        if ($_SESSION["validUser"] == true){
+            $this->_f3->reroute('/adminPage');
+        }
+
+
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+            $email = trim($_POST["email"]);
+            $password = trim($_POST["password"]);
+            if(((new Validator($this->_f3))->validUsername($email)) &&
+            ((new Validator($this->_f3))->validPassword($password)) &&
+                ((new login($dbh))->checkLogin($email,$password))){
+                $_SESSION['validUser'] = true;
+                echo "sucessful login";
+               $this->_f3->reroute('/adminPage');
+            }
+
+        echo Template::instance()->render('views/login.php');
     }
 
 
@@ -235,7 +251,11 @@ class Controller
      */
     function adminPage()
     {
-        //if ($_SESSION["validUser"] == true){
+        if ($_SESSION["validUser"] == false){
+            $this->_f3->reroute('/login');
+        }
+
+        //{
         //Admin is submitting data
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // User is uploading photo
@@ -360,10 +380,12 @@ class Controller
     {
         //  Log out of page
         // destroy session
-        session_destroy();
+//        session_destroy();
+
+        unset($_SESSION['validUser']);
 
         // send to main page
-        header('Location: https://itconnect.greenrivertech.net/adminLogin');
+        $this->_f3->reroute('/login');
         exit;
     }
 
@@ -557,5 +579,17 @@ class Controller
             $this->_f3->set('photoError', 'There was an error uploading your file.');
         }
         return null;
+    }
+
+    function addUser(){
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+
+        if((new Validator($this->_f3))->validUsername($email) && (new Validator($this->_f3))->validPassword($password)){
+           (new login($dbh))->addUser($email,$password);
+           echo "User added Successfully";
+        }
     }
 }

@@ -38,7 +38,7 @@ $fatFree->route('GET /studentResources', function (){
 });
 
 // admin login page
-$fatFree->route('GET|POST /adminLogin', function (){
+$fatFree->route('GET|POST /login', function (){
     $GLOBALS['controller']->login();
 });
 
@@ -57,8 +57,8 @@ $fatFree->route('GET|POST /upcoming-events', function($fatFree) {
 });
 
 // logout admin page
-$fatFree->route('GET /Logout', function ($fatFree){
-    $GLOBALS['controller']->logout($fatFree);
+$fatFree->route('POST /Logout', function (){
+    $GLOBALS['controller']->logout();
 });
 
 $fatFree->route('POST /editHomePage', function (){
@@ -73,6 +73,9 @@ $fatFree->route('POST /setColor', function (){
     $GLOBALS['controller']->setColor();
 });
 
+$fatFree->route('POST /addUser', function (){
+    $GLOBALS['controller']->addUser();
+});
 //needed to run
 $fatFree->run();
 ?>

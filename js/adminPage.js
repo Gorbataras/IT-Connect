@@ -556,8 +556,20 @@ $('#color_button').on('click', function() {
                 alert("Saved Successfully!!")
             }
             else {
-                alert(result);
+                alert("Error Saving");
             }
+        }
+    );
+});
+
+$('#user_add').on('click', function() {
+    let email = $('#email').val();
+    let password = $('#password').val();
+
+    $.post('/addUser', {password: password, email: email},
+        function(result) {
+            // Show confirmation
+            alert(result);
         }
     );
 });

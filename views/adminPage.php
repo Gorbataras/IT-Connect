@@ -155,7 +155,11 @@ SOFTWARE.
         <!-- Student Resources -->
         <a class="nav-item nav-link" id="nav-resources-tab" data-toggle="tab" href="#nav-resources" role="tab"
            aria-controls="nav-resources" aria-selected="false">Student Resources</a>
+        <form method="post" action="/Logout">
+            <button type="submit" id="logout" class="nav-item nav-link">Logout</button>
+        </form>
     </div>
+
 </nav>
 
 <include href="gatorLock/gatorLockLogin.php"></include>

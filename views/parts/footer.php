@@ -44,11 +44,11 @@ SOFTWARE.
                     <!-- Links -->
                     <!--<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>-->
 
-                    <ul class="list-unstyled">
-                        <li>
-                            <p> Made with <a href="http://itconnect.greenrivertech.net/adminLogin"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></a> by <br> Green River College students</p><!--<a href="#!">Very long link 1</a>-->
-                        </li>
-                    </ul>
+<!--                    <ul class="list-unstyled">-->
+                        <form action="/login" method="post">
+                            <p>Made with <button type="submit"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></button> by <br> Green River College students</p><!--<a href="#!">Very long link 1</a>-->
+                        </form>
+<!--                    </ul>-->
                 </div>
 
 
@@ -108,6 +108,7 @@ SOFTWARE.
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <script src="/js/introduction.js"></script>
+<script src="/js/login.js"></script>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
