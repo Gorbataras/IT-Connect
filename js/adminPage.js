@@ -395,9 +395,7 @@ $('#logo-upload').on('submit',
 
                 // Show confirmation
                 if (result.length === 0) {
-                    alert("Uploaded Successfully!!");
-                    $('#success-alert').html("Uploaded Successfully!!")
-                    $('#success-alert').show();
+                    showSuccessAlert("Uploaded Successfully!!");
                 }
                 else {
                     $('#error-alert > span').html(result);
@@ -421,9 +419,7 @@ $('#medium-blog-submit').on('click', function() {
 
             // Show confirmation if no errors
             if (result.length === 0) {
-                alert("Saved Successfully!!");
-                $('#success-alert').html("Saved Successfully!!")
-                $('#success-alert').show();
+                showSuccessAlert("Saved Successfully!!");
             }
             else {
                 $('#error-alert > span').html(result);
@@ -457,6 +453,10 @@ $('#add-meetup').on('submit',
 );
 
 
+/**
+ * Adds Meetup group item to the Meetup group list
+ * @param meetupGroup Meetup group string to add
+ */
 function addToMeetupList(meetupGroup) {
     $('#meetup-group-list').append(
         `<li class="list-group-item">
@@ -490,6 +490,12 @@ $('.delete-meetup').on('submit',
     }
 );
 
+
+/**
+ * Deletes Meetup group from database and from the Meetup group list
+ * @param e
+ * @param form the form to submit
+ */
 function deleteMeetup(e, form) {
     e.preventDefault();
 
@@ -561,8 +567,7 @@ $('#color_button').on('click', function() {
 
             // Show confirmation if no errors
             if (result.length === 0) {
-                $('#success-alert').html("Saved Successfully!!")
-                $('#success-alert').show();
+                showSuccessAlert("Saved Successfully!!");
             }
             else {
                 $('#error-alert > span').html(result);
@@ -583,8 +588,7 @@ function postHtmlContent(htmlContent) {
 
             // Show confirmation if no errors
             if (result.length === 0) {
-                $('#success-alert').html("Saved Successfully!!")
-                $('#success-alert').show();
+                showSuccessAlert("Saved Successfully!!");
             }
             else {
                 $('#error-alert > span').html(result);
@@ -594,6 +598,11 @@ function postHtmlContent(htmlContent) {
     );
 }
 //endregion
+
+function showSuccessAlert(message) {
+    $('#success-alert').html(message);
+    $('#success-alert').fadeIn(250).delay(1200).fadeOut(250);
+}
 
 // Hide alert with when cancel button is clicked
 $('#error-alert button').on('click', function() {

@@ -88,4 +88,4 @@ $fatFree->route('POST /deleteMeetupGroup', function (){
 
 //needed to run
 $fatFree->run();
-?>
+
