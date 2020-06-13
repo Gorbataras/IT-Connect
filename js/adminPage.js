@@ -562,3 +562,21 @@ $('#color_button').on('click', function() {
     );
 });
 
+$('#addInternshipForm').on('submit', function(e) {
+    e.preventDefault();
+    $.post(this.action, $(this).serialize(), function(result) {
+        result = JSON.parse(result);
+
+        if(result.length === 0) {
+            alert("Success");
+        }
+        else {
+            for (let key in result) {
+
+                $('#'+key).html(result[key]);
+                $('#'+key).show();
+            }
+            alert("Fail");
+        }
+    });
+});

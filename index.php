@@ -73,6 +73,10 @@ $fatFree->route('POST /setColor', function (){
     $GLOBALS['controller']->setColor();
 });
 
+$fatFree->route('POST /add_internships', function (){
+    $GLOBALS['controller']->addInternship();
+});
+
 //needed to run
 $fatFree->run();
 ?>

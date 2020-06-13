@@ -92,4 +92,18 @@ class Validator
         }
         return true;
     }
+
+    public function validInternship()
+    {
+        //$appType, $title, $company, $appTypeText, $description, $location, $category, $qualifications
+        $requiredFields = ["title", "company", "appTypeText", "description", "location", "category", "qualifications"];
+        $errors = [];
+        foreach ($requiredFields as $key) {
+            if(empty(trim($_POST[$key]))) {
+                $errors[$key+"Error"] = "Required field";
+            }
+        }
+
+        return $errors;
+    }
 }

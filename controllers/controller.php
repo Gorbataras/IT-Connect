@@ -558,4 +558,25 @@ class Controller
         }
         return null;
     }
+
+    public function addInternship() {
+        $config = include("/home/nwagreen/config.php");
+        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
+
+        $title = $_POST["title"];
+        $company = $_POST["company"];
+        $appTypeText = $_POST["appTypeText"];
+        $description = $_POST["description"];
+        $location = $_POST["location"];
+        $category = $_POST["category"];
+        $qualifications = $_POST["qualifications"];
+
+        if($errors = (new Validator($this->_f3))->validInternship()){
+            (new addInternship($dbh))->addInternship($title, $company, $appTypeText, $description, $location, $category, $qualifications);
+            $this->_f3->reroute('/adminPage');
+            return;
+        }
+        echo json_encode($errors);
+    }
 }

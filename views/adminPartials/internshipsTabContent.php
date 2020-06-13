@@ -18,7 +18,7 @@
             <h3>Add Internship</h3>
         </div>
         <div class="card-body">
-            <form>
+            <form action="add_internships" id="addInternshipForm" method="post">
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Required Information</h4>
@@ -29,16 +29,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="title">Position Title</label>
-                                    <input required="required" type="text" class="form-control"
+                                    <label for="title">*Position Title</label>
+                                    <span class="error text-danger" id="titleError">{{ @titleError }}</span>
+                                    <input type="text" class="form-control"
                                            id="title" name="title"/>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="company">Company</label>
-                                    <input required="required" type="text" class="form-control"
+                                    <label for="company">*Company</label>
+                                    <span class="error text-danger" id="companyError">{{ @companyError }}</span>
+                                    <input type="text" class="form-control"
                                            id="company" name="company"/>
                                 </div>
                             </div>
@@ -47,7 +49,7 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <span class="d-inline-block mb-2 mr-2">Application Type:</span>
+                                    <span class="d-inline-block mb-2 mr-2">*Application Type:</span>
 
                                     <div class="form-check form-check-inline">
                                         <input type="radio" name="Application_Type" id="url_checkbox" class="form-check-input" value="url" checked/>
@@ -59,7 +61,7 @@
                                         <label for="email_checkbox" class="form-check-label">Email</label>
                                     </div>
 
-                                    <input required="required" type="text" id="contact_text" class="form-control" name="Application_Type_Text">
+                                    <input type="text" id="contact_text" class="form-control" name="appTypeText">
                                 </div>
                             </div>
 
@@ -67,7 +69,7 @@
 
                             <div class="col-md-12 for-email-post hidden">
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description">*Description</label>
                                     <textarea class="form-control" name="description" id="description"
                                               rows="5"></textarea>
                                 </div>
@@ -94,7 +96,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="location">Location</label>
+                                    <label for="location">*Location</label>
                                     <input type="text" name="location" id="location" class="form-control">
                                 </div>
                             </div>
@@ -103,7 +105,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="category">Category</label>
+                                    <label for="category">*Category</label>
                                     <select class="form-control" name="category" id="category">
                                         <option value="0" disabled="disabled" selected="selected">Select an
                                             option
@@ -119,7 +121,7 @@
 
                             <div class="col-md-12 for-email-post hidden">
                                 <div class="form-group">
-                                    <label for="qualifications">Qualifications</label>
+                                    <label for="qualifications">*Qualifications</label>
                                     <textarea name="qualifications" id="qualifications" rows="4"
                                               class="form-control"></textarea>
                                 </div>
