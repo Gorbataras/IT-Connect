@@ -184,6 +184,26 @@ class htmlContent
 
 
     /**
+     * Checks if email exists in login table
+     * @param $email email to check if exists
+     * @return bool true if is found
+     */
+    public function emailDoesExist($email) {
+        $sql = "SELECT EXISTS(
+                    SELECT login_id
+                    FROM login
+                    WHERE email = :email)";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':email', $email);
+
+        $statement->execute();
+        return $statement->fetch()[0] == 1 ? true : false;
+    }
+
+
+    /**
      * Deletes API source name from db
      * @param $domain string domain of website the API belongs to
      * @param $sourceName string source of the API content

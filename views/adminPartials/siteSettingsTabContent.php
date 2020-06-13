@@ -16,7 +16,7 @@
     </div>
 
     <!-- Prompt upload of image -->
-    <form id="logo-upload" action="#" method="post" enctype="multipart/form-data">
+    <form id="logo-upload" action="/uploadPhoto" method="post" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
                 <h3>Upload Site Logo</h3>
@@ -30,6 +30,7 @@
             </div>
         </div>
     </form>
+    <br>
 
     <!-- Color Theme -->
     <div class="card">
@@ -57,6 +58,7 @@
                 <button type="submit" id="color_button" class="btn btn-primary">Submit</button>
         </div>
     </div>
+    <br>
 
     <!-- Add User -->
     <div class="card">
@@ -64,21 +66,25 @@
             <h3>Add User</h3>
         </div>
         <div class="card-body">
-            <form class="container">
+            <form id="add-user-form" action="/addUser" method="post" class="container">
+
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <span class="alert-danger" id="user_email"></span>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <span class="alert-danger" id="user_password"></span>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
+
                 <button type="submit" id="user_add" class="btn btn-primary">Submit</button>
             </form>
         </div><!-- card body -->
     </div><!-- card -->
+    <br>
 </div><!-- tab pane -->
 

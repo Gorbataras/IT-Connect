@@ -386,7 +386,7 @@ $('#logo-upload').on('submit',
 
         $.ajax({
             type:'POST',
-            url: '/uploadPhoto',
+            url: this.action,
             data: formData,
             cache: false,
             contentType: false,
@@ -426,6 +426,25 @@ $('#medium-blog-submit').on('click', function() {
         }
     );
 });
+
+// Add user login
+$('#add-user-form').on('submit',
+    function(e) {
+        e.preventDefault();
+
+        $.post(this.action, $(this).serialize(),
+            function(result) {
+                // Show confirmation if no errors
+                if (result.length === 0) {
+                    showSuccessAlert("User Added Successfully!!");
+                }
+                else {
+                    showErrorAlert(result);
+                }
+            }
+        );
+    }
+);
 
 // Add Meetup source AJAX
 $('#add-meetup').on('submit',
@@ -591,18 +610,6 @@ function postHtmlContent(htmlContent) {
         }
     );
 }
-
-$('#user_add').on('click', function() {
-    let email = $('#email').val();
-    let password = $('#password').val();
-
-    $.post('/addUser', {password: password, email: email},
-        function(result) {
-            // Show confirmation
-            alert(result);
-        }
-    );
-});
 
 //endregion
 

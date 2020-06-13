@@ -219,18 +219,27 @@ class Controller
             $this->_f3->reroute('/adminPage');
         }
 
+        // Login attempt
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $config = include("/home/nwagreen/config.php");
-        $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+            $config = include("/home/nwagreen/config.php");
+            $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
             $email = trim($_POST["email"]);
             $password = trim($_POST["password"]);
-            if(((new Validator($this->_f3))->validUsername($email)) &&
-            ((new Validator($this->_f3))->validPassword($password)) &&
-                ((new login($dbh))->checkLogin($email,$password))){
+
+            if (((new Validator($this->_f3))->validEmail($email))
+                && ((new Validator($this->_f3))->validPassword($password))
+                && ((new login($dbh))->checkLogin($email, $password))) {
+
                 $_SESSION['validUser'] = true;
-                echo "sucessful login";
-               $this->_f3->reroute('/adminPage');
+                $this->_f3->reroute('/adminPage');
             }
+            else {
+                $this->_f3->set('email', $email);
+                $this->_f3->set('password', $password);
+            }
+        }
 
         echo Template::instance()->render('views/login.php');
     }
@@ -273,13 +282,6 @@ class Controller
         $this->_f3->set('meetupGroupsList', $meetupGroupsList);
 
         echo Template::instance()->render('views/adminPage.php');
-
-        //    }else{
-        //        /*redirect to admin Login*/
-        //        header('Location: https://itconnect.greenrivertech.net/adminLogin');
-        //        exit;
-        //    }
-
     }
 
 
@@ -303,7 +305,7 @@ class Controller
      */
     function addMeetupGroup()
     {
-        if (/*TODO !$_SESSION["validUser"] ||*/ $_SERVER['REQUEST_METHOD'] != 'POST'){
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
             return;
         }
 
@@ -331,7 +333,7 @@ class Controller
      */
     function deleteMeetupGroup()
     {
-        if (/*TODO !$_SESSION["validUser"] ||*/ $_SERVER['REQUEST_METHOD'] != 'POST'){
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
             return;
         }
 
@@ -370,21 +372,17 @@ class Controller
      */
     function logout()
     {
-        //  Log out of page
-        // destroy session
-//        session_destroy();
-
         unset($_SESSION['validUser']);
 
         // send to main page
-        $this->_f3->reroute('/login');
+        $this->_f3->reroute('/');
         exit;
     }
 
     function updateApiSource() {
-        //if (!$_SESSION["validUser"]){
-//            return;
-//        }
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
+            return;
+        }
 
         $blogSourceName = trim($_POST['blogSourceName']);
 
@@ -406,9 +404,9 @@ class Controller
 
     function editHtmlContent()
     {
-        //if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST'){
-//            return;
-//        }
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
+            return;
+        }
 
         $contentItem = $_POST['htmlContent'];
 
@@ -484,6 +482,10 @@ class Controller
     */
     function setColor()
     {
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
+            return;
+        }
+
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
         $siteSetting = new siteSetting($dbh);
@@ -531,7 +533,7 @@ class Controller
     public function uploadPhoto()
     {
         // Preconditions
-        if (/*TODO !$_SESSION["validUser"] || */$_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_FILES['photo'])) {
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_FILES['photo'])) {
             return;
         }
 
@@ -554,15 +556,38 @@ class Controller
         }
     }
 
-    function addUser(){
+    function addUser()
+    {
+        // Preconditions
+        if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
+            return;
+        }
+
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
+
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
 
-        if((new Validator($this->_f3))->validUsername($email) && (new Validator($this->_f3))->validPassword($password)){
-           (new login($dbh))->addUser($email,$password);
-           echo "User added Successfully";
+        $validator = new Validator($this->_f3);
+
+        if (!$validator->validEmail($email)) {
+            echo "Invalid Email Format";
+            return;
+        }
+
+        if (!$validator->validPassword($password)) {
+            echo "Invalid Password: Requires at least 1 Uppercase and 1 Number and have a length greater than 8";
+            return;
+        }
+
+        if ($this->_htmlContentDb->emailDoesExist($email)) {
+            echo "Error: This email already exists.";
+            return;
+        }
+
+        if (!(new login($dbh))->addUser($email,$password)) {
+            echo "Error: User could not be saved to database.";
         }
     }
 }

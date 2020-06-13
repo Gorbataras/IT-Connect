@@ -30,27 +30,39 @@ SOFTWARE.
 <!--header for the page-->
 <include href="views/parts/header.php"></include>
 <body>
-<div>
+<div id="site-container">
 
-        <div class="container-fluid col-lg-7">
+        <div class="container-fluid col-lg-7 mt-5">
             <div class="col-xs-12">
                 <div class="wrapper">
                     <form action="/login" id="login-form" class="form-signin" method="post">
-                        <h1>Admin Login</h1>
+                        <h1 class="d-inline-block">Admin Login</h1>
+
+                        <check if="{{ isset(@email) }}">
+                            <span class="text-danger">Invalid Login</span>
+
+                        </check>
+                        <br>
+
                         <label class="h4" for="user-email"><i class="fas fa-user-tie"></i> Email:</label>
                         <span class="alert-danger login-span" id="email_err">Enter an Email</span>
-                        <input type="text" id="user-email" class="form-control" name="email" placeholder="Enter Email" required="" autofocus=""/>
+                        <input type="text" id="user-email" class="form-control" name="email" placeholder="Enter Email"
+                               required autofocus="" value="{{ @email }}"/>
                         <br>
+
                         <label class="h4" for="user-password"><i class="fas fa-unlock-alt"></i> Password:</label>
                         <span class="alert-danger login-span" id="password_err">Enter an Password</span>
-                        <input type="password" id="user-password" class="form-control" name="password" placeholder="Enter Password" required=""/>
+                        <input type="password" id="user-password" class="form-control" name="password"
+                               placeholder="Enter Password" required value="{{ @password }}"/>
 
+                        <br>
                         <button class="btn btn-lg btn-success btn-block btn-theme" id="login-button" type="submit">Log in</button>
                     </form>
                 </div>
             </div>
         </div>
 </div>
+
 <!--footer for the page-->
 <!--jquery needed for login (DO NOT DELETE)-->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
