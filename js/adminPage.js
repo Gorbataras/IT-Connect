@@ -403,8 +403,7 @@ $('#logo-upload').on('submit',
                 }
             },
             error: function(data){
-                $('#error-alert > span').html("An error prevented the photo from uploading");
-                $('#error-alert').show();
+                showErrorAlert("An error prevented the photo from uploading")
             }
         });
     }
@@ -422,8 +421,7 @@ $('#medium-blog-submit').on('click', function() {
                 showSuccessAlert("Saved Successfully!!");
             }
             else {
-                $('#error-alert > span').html(result);
-                $('#error-alert').show();
+                showErrorAlert(result);
             }
         }
     );
@@ -444,8 +442,7 @@ $('#add-meetup').on('submit',
                     addToMeetupList(groupName);
                 }
                 else {
-                    $('#error-alert > span').html(result);
-                    $('#error-alert').show();
+                    showErrorAlert(result);
                 }
             }
         );
@@ -507,8 +504,7 @@ function deleteMeetup(e, form) {
                 $(form).parent().remove();
             }
             else {
-                $('#error-alert > span').html(result);
-                $('#error-alert').show();
+                showErrorAlert(result);
             }
         }
     );
@@ -570,8 +566,7 @@ $('#color_button').on('click', function() {
                 showSuccessAlert("Saved Successfully!!");
             }
             else {
-                $('#error-alert > span').html(result);
-                $('#error-alert').show();
+                showErrorAlert(result);
             }
         }
     );
@@ -591,13 +586,17 @@ function postHtmlContent(htmlContent) {
                 showSuccessAlert("Saved Successfully!!");
             }
             else {
-                $('#error-alert > span').html(result);
-                $('#error-alert').show();
+                showErrorAlert(result);
             }
         }
     );
 }
 //endregion
+
+function showErrorAlert(message) {
+    $('#error-alert > span').html(message);
+    $('#error-alert').fadeIn(250);
+}
 
 function showSuccessAlert(message) {
     $('#success-alert').html(message);
@@ -606,6 +605,6 @@ function showSuccessAlert(message) {
 
 // Hide alert with when cancel button is clicked
 $('#error-alert button').on('click', function() {
-    $(this).parent().hide();
+    $(this).parent().fadeOut(250);
 });
 
