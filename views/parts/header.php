@@ -76,6 +76,8 @@ SOFTWARE.
     <link rel="stylesheet" type="text/css" media="all" href="gatorLock/gatorLockStyles.css">
     <!-- upcoming events css-->
     <link rel="stylesheet" href="css/upcomingEvents.css">
+    <!--    login page-->
+    <link rel="stylesheet" href="css/login-form.css">
     <!--bootstrap table-->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
     <style>

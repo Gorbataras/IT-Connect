@@ -591,6 +591,19 @@ function postHtmlContent(htmlContent) {
         }
     );
 }
+
+$('#user_add').on('click', function() {
+    let email = $('#email').val();
+    let password = $('#password').val();
+
+    $.post('/addUser', {password: password, email: email},
+        function(result) {
+            // Show confirmation
+            alert(result);
+        }
+    );
+});
+
 //endregion
 
 function showErrorAlert(message) {
