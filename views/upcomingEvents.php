@@ -19,9 +19,14 @@
 
                 {{ @eventsHeader[0]['html'] | raw }}
 
-				<ul class="list-inline">
+				<ul class="list-group-inline">
 					<F3:repeat group="{{ @meetupsGroupList }}" value="{{ @group }}">
-					<li class="list-inline-item">{{ @group.source_name }}</li>
+
+						<a href="https://www.meetup.com/{{@group.source_name}}">
+							<li class="list-inline-item">{{ str_replace('-',' ',@group.source_name) }}</li>
+						</a>
+
+
 					</F3:repeat>
 				</ul>
 
