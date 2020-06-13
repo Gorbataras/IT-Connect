@@ -19,7 +19,13 @@
 
                 {{ @eventsHeader[0]['html'] | raw }}
 
-                <!--where upcoming Events table is generated-->
+				<ul class="list-inline">
+					<F3:repeat group="{{ @meetupsGroupList }}" value="{{ @group }}">
+					<li class="list-inline-item">{{ @group.source_name }}</li>
+					</F3:repeat>
+				</ul>
+
+                <!--upcoming Events table is generated-->
                 <table id="eventsTable" class="table table-hover table-bordered" >
                     <thead>
                     <tr>
