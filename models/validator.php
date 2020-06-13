@@ -93,6 +93,13 @@ class Validator
         return true;
     }
 
+    /**
+     * The following function determines the values that are parsed into the POST array when the user
+     * clicks submit when adding a new internship. If one of the required fields are empty, then the errors
+     * array will be populated with an error message to report back to the user onto the form.
+     * @return array
+     *  error messages with related required field
+     */
     public function validInternship()
     {
         //$appType, $title, $company, $appTypeText, $description, $location, $category, $qualifications
@@ -100,7 +107,7 @@ class Validator
         $errors = [];
         foreach ($requiredFields as $key) {
             if(empty(trim($_POST[$key]))) {
-                $errors[$key+"Error"] = "Required field";
+                $errors[$key."Error"] = "Required field";
             }
         }
 

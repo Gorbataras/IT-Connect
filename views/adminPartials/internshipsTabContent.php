@@ -61,6 +61,7 @@
                                         <label for="email_checkbox" class="form-check-label">Email</label>
                                     </div>
 
+                                    <span class="error text-danger" id="appTypeTextError">{{ @appTypeTextError }}</span>
                                     <input type="text" id="contact_text" class="form-control" name="appTypeText">
                                 </div>
                             </div>
@@ -70,6 +71,7 @@
                             <div class="col-md-12 for-email-post hidden">
                                 <div class="form-group">
                                     <label for="description">*Description</label>
+                                    <span class="error text-danger" id="descriptionError">{{ @descriptionError }}</span>
                                     <textarea class="form-control" name="description" id="description"
                                               rows="5"></textarea>
                                 </div>
@@ -97,6 +99,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="location">*Location</label>
+                                    <span class="error text-danger" id="locationError">{{ @locationError }}</span>
                                     <input type="text" name="location" id="location" class="form-control">
                                 </div>
                             </div>
@@ -106,6 +109,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="category">*Category</label>
+                                    <span class="error text-danger" id="categoryError">{{ @categoryError }}</span>
                                     <select class="form-control" name="category" id="category">
                                         <option value="0" disabled="disabled" selected="selected">Select an
                                             option
@@ -122,6 +126,7 @@
                             <div class="col-md-12 for-email-post hidden">
                                 <div class="form-group">
                                     <label for="qualifications">*Qualifications</label>
+                                    <span class="error text-danger" id="qualificationsError">{{ @qualificationsError }}</span>
                                     <textarea name="qualifications" id="qualifications" rows="4"
                                               class="form-control"></textarea>
                                 </div>

@@ -562,7 +562,12 @@ $('#color_button').on('click', function() {
     );
 });
 
+/**
+ * The following script determines if any errors have been reported, if so then appropriate
+ * messages will show on input fields that are missing content.
+ */
 $('#addInternshipForm').on('submit', function(e) {
+    $(".error").hide();
     e.preventDefault();
     $.post(this.action, $(this).serialize(), function(result) {
         result = JSON.parse(result);
@@ -576,7 +581,6 @@ $('#addInternshipForm').on('submit', function(e) {
                 $('#'+key).html(result[key]);
                 $('#'+key).show();
             }
-            alert("Fail");
         }
     });
 });

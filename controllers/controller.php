@@ -559,7 +559,12 @@ class Controller
         return null;
     }
 
+    /**
+     * Determines if the information being submitted when the user adds a new internship is valid, if so
+     * then we add information to the database and route back the admin page.
+     */
     public function addInternship() {
+
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
 
@@ -571,8 +576,8 @@ class Controller
         $location = $_POST["location"];
         $category = $_POST["category"];
         $qualifications = $_POST["qualifications"];
-
-        if($errors = (new Validator($this->_f3))->validInternship()){
+        $errors = (new Validator($this->_f3))->validInternship();
+        if(empty($errors)){
             (new addInternship($dbh))->addInternship($title, $company, $appTypeText, $description, $location, $category, $qualifications);
             $this->_f3->reroute('/adminPage');
             return;
