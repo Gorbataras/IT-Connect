@@ -133,8 +133,7 @@ class Validator
      */
     public function validInternship()
     {
-        //$appType, $title, $company, $appTypeText, $description, $location, $category, $qualifications
-        $requiredFields = ["title", "company", "appTypeText", "description", "location", "category", "qualifications"];
+        $requiredFields = ["title", "company", "appTypeText", "location", "category"];
         $errors = [];
         foreach ($requiredFields as $key) {
             if(empty(trim($_POST[$key]))) {

@@ -45,10 +45,19 @@ class addInternship
 
         $statement->bindParam(':company', $company);
         $statement->bindParam(':title', $title);
-        $statement->bindParam(':description', $description);
+
+        if (empty($description)){
+            $description = null;
+        }
+        $statement->bindParam(':description', $description );
+
         $statement->bindParam(':location', $location);
         $statement->bindParam(':appTypeText', $appTypeText);
         $statement->bindParam(':category', $category);
+
+        if (empty($qualifications)){
+            $qualifications = null;
+        }
         $statement->bindParam(':qualifications', $qualifications);
 
         $statement->execute();
