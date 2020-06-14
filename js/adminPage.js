@@ -635,17 +635,23 @@ $('#error-alert button').on('click', function() {
 $('#addInternshipForm').on('submit', function(e) {
     $(".error").hide();
     e.preventDefault();
-    $.post(this.action, $(this).serialize(), function(result) {
-        //alert(result);
-
-        if(result.length === 0) {
-            showSuccessAlert("Successfully added");
-        }
-        else {
-            result = JSON.parse(result);
-            for (let key in result) {
-                $('#'+key).html(result[key]);
-                $('#'+key).show();
+    $.ajax({
+        url: this.action,
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(result) {
+            if(result.length === 0) {
+                showSuccessAlert("Success");
+                $table.bootstrapTable('refresh', {
+                    silent: true
+                });
+            }
+            else {
+                result = JSON.parse(result);
+                for (let key in result) {
+                    $('#' + key).html(result[key]);
+                    $('#' + key).show();
+                }
             }
         }
     });
