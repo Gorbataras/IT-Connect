@@ -19,7 +19,17 @@
 
                 {{ @eventsHeader[0]['html'] | raw }}
 
-                <!--where upcoming Events table is generated-->
+				<ul class="list-group-inline sources">
+					<F3:repeat group="{{ @meetupsGroupList }}" value="{{ @group }}">
+						<li class="list-inline-item">
+							<a href="https://www.meetup.com/{{@group.source_name}}">
+								{{ str_replace('-',' ',@group.source_name) }}
+							</a>
+						</li>
+					</F3:repeat>
+				</ul>
+
+                <!--upcoming Events table is generated-->
                 <table id="eventsTable" class="table table-hover table-bordered" >
                     <thead>
                     <tr>

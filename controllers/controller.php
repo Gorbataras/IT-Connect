@@ -360,9 +360,11 @@ class Controller
 			$this->_htmlContentDb->getContent('events','events'));
 
         $meetupList = $this->getRecentMeetups(false);
+		$meetupGroupsList = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
         //Add the list to fat free hive
         $this->_f3->set('upcomingEvents', $meetupList);
+        $this->_f3->set('meetupsGroupList', $meetupGroupsList);
 
         echo Template::instance()->render('views/upcomingEvents.php');
     }
