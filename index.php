@@ -93,7 +93,6 @@ $fatFree->route('POST /addUser', function (){
     $GLOBALS['controller']->addUser();
 });
 
-
 //needed to run
 $fatFree->run();
 

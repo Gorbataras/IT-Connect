@@ -49,9 +49,28 @@ class PostingsModel
      *
      * @return array Array of post objects
      */
+    public function getSamplePostings()
+    {
+        $sql = "SELECT * FROM postings WHERE deleted = false ORDER BY post_id DESC LIMIT 3";
+        $q = $this->db->prepare($sql);
+        $q->execute();
+        $rows = $q->fetchALL();
+
+        $result = array();
+        foreach ($rows as $row) {
+            array_push($result, $this->read($row));
+        }
+        return $result;
+    }
+
+    /**
+     * Retrieves all posts from the postings table
+     *
+     * @return array Array of post objects
+     */
     public function getAllPostings()
     {
-        $sql = "SELECT * FROM postings ORDER BY post_id DESC LIMIT 3";
+        $sql = "SELECT * FROM postings WHERE deleted = false ORDER BY post_id DESC";
         $q = $this->db->prepare($sql);
         $q->execute();
         $rows = $q->fetchALL();

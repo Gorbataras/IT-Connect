@@ -122,7 +122,7 @@ SWITCH ($_SERVER["REQUEST_METHOD"]) {
 
         $id = $_DELETE["id"];
 
-        if (isset($_SESSION['loggedIn']) AND $_SESSION['loggedIn'] = "true") {
+        if (isset($_SESSION['validUser'])) {
             $postings->deletePost($id);
         }
 
