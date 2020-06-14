@@ -85,7 +85,7 @@ class Controller
     {
         // Get internships, Meetup events, blog posts and HTML content
 
-        $internships = (new PostingsModel())->getAllPostings();
+        $internships = (new PostingsModel())->getSamplePostings();
         $meetupList = $this->getRecentMeetups(true);
         $blog = $this->getRecentBlogPosts();
         $content = $this->_htmlContentDb->getAllPageContent('home');

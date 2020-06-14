@@ -189,7 +189,7 @@ window.operateEvents = {
 };
 
 /**
- * The edit button in the Bootsrap table
+ * The edit button in the Bootstrap table
  * @param value
  * @param row
  * @param index
@@ -216,6 +216,7 @@ $table.bootstrapTable({
     search: true,
     columns: [{
         field: "state",
+        dataField: "selected",
         checkbox: true
     }, {
         field: 'title',
@@ -263,19 +264,33 @@ $table.bootstrapTable({
  * This function deletes table rows
  */
 $delete.click(function() {
+    // var str_json = JSON.stringify($table.bootstrapTable('getSelections'));
+    //
+    // let $request = new XMLHttpRequest();
+    // $request.open("POST", "nwa.greenriverdev.com/deleteInternships", true);
+    // $request.setRequestHeader("Content-type", "application/json");
+    // $request.send(str_json);
 
-    //Get the number of selected rows
+    //get content from row(s) selected from table
+    // var id;
+    // var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
+    //
+    //      id = row.post_id;
+    //     //alert('getSelections: ' + JSON.stringify($table.bootstrapTable('getSelections')));
+    // });
+    // alert('getSelections: ' + JSON.stringify($table.bootstrapTable('getSelections')));
+    // //Get the number of selected rows
     var numberOfSelections = $.map($table.bootstrapTable('getSelections'), function(row) {
         if (row) {
             return row;
         }
+
     }).length;
 
     //Prevent modal from showing if no rows are selected
     if (numberOfSelections > 0) {
         $("#deleteModal").modal("show");
     }
-
 });
 
 /**

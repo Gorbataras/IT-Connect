@@ -89,6 +89,9 @@ $fatFree->route('POST /addUser', function (){
     $GLOBALS['controller']->addUser();
 });
 
+$fatFree->route('POST /deleteInternships', function (){
+    echo "hello";
+});
 
 //needed to run
 $fatFree->run();
