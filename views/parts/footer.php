@@ -30,7 +30,7 @@ SOFTWARE.
 
 <!-- Footer -->
 <!-- Footer -->
-<footer class="page-footer font-small indigo">
+<footer class="page-footer font-small indigo color1">
 
     <!-- Footer Links -->
     <div class="text-center text-md-left">
@@ -45,7 +45,7 @@ SOFTWARE.
                     <!--<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>-->
 
 <!--                    <ul class="list-unstyled">-->
-                            <p>Made with <a href="/login"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></a> by <br> Green River College students</p>
+                            <p class="text-white">Made with <a href="/login"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></a> by <br> Green River College students</p>
 <!--                    </ul>-->
                 </div>
 
@@ -59,7 +59,7 @@ SOFTWARE.
             <div class="col-md-3 mx-auto border-top-0 border-left-0 border-bottom-0 border border-white">
 
                 <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase mt1 mb-2">Email Us:</h5>
+                <h5 class="font-weight-bold text-uppercase mt1 mb-2 text-white">Email Us:</h5>
 
                 <ul class="list-unstyled">
                     <li class="font-weight-bold">
@@ -76,7 +76,7 @@ SOFTWARE.
             <div class="col-md-3 mx-auto">
 
                 <!-- Links -->
-                <h5 class="font-weight-bold text-uppercase mt1 mb-2">Want to know more:</h5>
+                <h5 class="font-weight-bold text-uppercase mt1 mb-2 text-white">Want to know more:</h5>
 
                 <ul class="list-unstyled">
                     <li class="font-weight-bold">

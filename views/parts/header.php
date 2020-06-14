@@ -81,28 +81,32 @@ SOFTWARE.
     <!--bootstrap table-->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
     <style>
-        a.btn {
-        background-color: {{@color1}} !important;
-        }
-        #button{
-        background-color: {{@color1}} !important;
-        }
-        a.btn.container-fluid:hover  {
-        background-color: {{@color1}};
+
+        .color1{
+            background-color: {{@color1}} !important;
         }
 
-        .page-footer {
-        background-color: {{@color2}};
+        .color2{
+        background-color: {{@color2}} !important;
         }
 
-        .navbar{
-        background-color: {{@color3}};
+        .color3{
+         color: {{@color3}} !important;
         }
 
-        .div.alert{
-        background-color: {{@color3}};
+        .btn{
+            background-color: {{@color2}} !important;
+        opacity:0.8 !important;
         }
 
+        .btn:hover{
+            background-color: {{@color2}} !important;
+            opacity:1.0 !important;
+        }
+        .card-header{
+        background-color: {{@color3}} !important;
+        }
+    /**/
     </style>
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">

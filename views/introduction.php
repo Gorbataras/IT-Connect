@@ -46,8 +46,8 @@ SOFTWARE.
 
     <!-- Alert -->
     <check if="{{ @content['alert']['isShown'] == 1 }}">
-        <div class="alert success">
-            <span class="closebtn">&times;</span>
+        <div class="alert success color2">
+            <span class="closebtn" >&times;</span>
             {{ @content['alert']['html'] | raw }}
         </div>
     </check>
@@ -69,7 +69,7 @@ SOFTWARE.
 
                 <!-- Internships -->
                 <div class="col-lg">
-                    <div class="card">
+                    <div class="card color3">
 
                         <!-- Card heading -->
                         <a class="no-decoration expand-toggle" data-toggle="collapse" href="#internships-body"
@@ -119,7 +119,7 @@ SOFTWARE.
 
                 <!-- Meetups -->
                 <div class="col-lg">
-                    <div class="card">
+                    <div class="card color3">
 
                         <!-- Card heading -->
                         <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#meetups-body"
@@ -162,7 +162,7 @@ SOFTWARE.
 
                 <!-- Posts -->
                 <div class="col-lg">
-                    <div class="card">
+                    <div class="card color3">
 
                         <!-- Card heading -->
                         <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#posts-body"

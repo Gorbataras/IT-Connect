@@ -40,19 +40,19 @@
         <div class="card-body">
                 <!-- color 1 -->
                 <div class="form-group">
-                    <label for="color1">Select your color1:</label>
+                    <label for="color1">Select your Navbar Color:</label>
                     <input type="color" class="col-1" id="color1" name="color1" value="{{@color1}}">
                 </div>
 
                 <!-- color 2 -->
                 <div class="form-group">
-                    <label for="color2">Select your color2:</label>
+                    <label for="color2">Select your Button Color:</label>
                     <input type="color" class="col-1" id="color2" name="color2" value="{{@color2}}">
                 </div>
 
                 <!-- color 3 -->
                 <div class="form-group">
-                    <label for="color3">Select your color3:</label>
+                    <label for="color3">Select your Card Color:</label>
                     <input type="color" class="col-1" id="color3" name="color4" value="{{@color3}}">
                 </div>
                 <button type="submit" id="color_button" class="btn btn-primary">Submit</button>
@@ -79,6 +79,7 @@
                     <label for="password">Password</label>
                     <span class="alert-danger" id="user_password"></span>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    <small id="emailHelp" class="form-text text-muted">Password length must be greater then 8 and Include a upper and lowercase.</small>
                 </div>
 
                 <button type="submit" id="user_add" class="btn btn-primary">Submit</button>

@@ -82,28 +82,48 @@ SOFTWARE.
 
     <!-- Update Color scheme -->
     <style>
-        a.btn {
+        /*a.btn {*/
+        /*background-color: {{@color1}} !important;*/
+        /*}*/
+        /*#button{*/
+        /*background-color: {{@color1}} !important;*/
+        /*}*/
+        /*a.btn.container-fluid:hover  {*/
+        /*background-color: {{@color1}};*/
+        /*}*/
+
+        /*.page-footer {*/
+        /*background-color: {{@color2}};*/
+        /*}*/
+
+        /*.navbar{*/
+        /*background-color: {{@color3}};*/
+        /*}*/
+
+        /*.div.alert{*/
+        /*background-color: {{@color3}};*/
+        /*}*/
+
+        .color1{
         background-color: {{@color1}} !important;
         }
-        #button{
-        background-color: {{@color1}} !important;
-        }
-        a.btn.container-fluid:hover  {
-        background-color: {{@color1}};
+
+        .color2{
+        background-color: {{@color2}} !important;
         }
 
-        .page-footer {
-        background-color: {{@color2}};
+        .color3{
+        color: {{@color3}} !important;
         }
 
-        .navbar{
-        background-color: {{@color3}};
+        .btn{
+        background-color: {{@color2}} !important;
         }
 
-        .div.alert{
-        background-color: {{@color3}};
+        .card-header{
+            background-color: {{@color3}} !important;
         }
-
+        /**/
     </style>
 
 </head>
