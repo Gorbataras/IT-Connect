@@ -146,6 +146,7 @@ class htmlContent
      * Adds API source name to the database
      * @param $domain string source of the API content
      * @param $sourceName string source of the API content
+     * @return boolean true if insert was successful
      */
     public function addApiSourceName($domain, $sourceName) {
         $sql = "INSERT INTO api_resource (domain, source_name)
@@ -156,7 +157,7 @@ class htmlContent
         $statement->bindParam(':domain', $domain);
         $statement->bindParam(':sourceName', $sourceName);
 
-        $statement->execute();
+        return $statement->execute();
     }
 
 
@@ -183,9 +184,30 @@ class htmlContent
 
 
     /**
+     * Checks if email exists in login table
+     * @param $email email to check if exists
+     * @return bool true if is found
+     */
+    public function emailDoesExist($email) {
+        $sql = "SELECT EXISTS(
+                    SELECT login_id
+                    FROM login
+                    WHERE email = :email)";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->bindParam(':email', $email);
+
+        $statement->execute();
+        return $statement->fetch()[0] == 1 ? true : false;
+    }
+
+
+    /**
      * Deletes API source name from db
      * @param $domain string domain of website the API belongs to
      * @param $sourceName string source of the API content
+     * @return boolean true if delete was successful
      */
     public function deleteApiSourceName($domain, $sourceName) {
         $sql = 'DELETE FROM api_resource
@@ -196,6 +218,6 @@ class htmlContent
         $statement->bindParam(':domain', $domain);
         $statement->bindParam(':sourceName', $sourceName);
 
-        $statement->execute();
+        return $statement->execute();
     }
 }

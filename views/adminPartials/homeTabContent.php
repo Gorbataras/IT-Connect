@@ -31,7 +31,11 @@
             {{ @homeContent['alert']['html'] }}
         </textarea>
     </div>
-    <br>
+
+    <!-- Home Alert Submit -->
+    <div class="text-center mb-5 mt-4">
+        <button id="home-alert-submit" class="btn btn-success">Save</button>
+    </div>
 
     <!-- Introduction -->
     <div class="form-group">
@@ -52,7 +56,11 @@
             {{ @homeContent['intro']['html'] }}
         </textarea>
     </div>
-    <br>
+
+    <!-- Home Intro Submit -->
+    <div class="text-center mb-5 mt-4">
+        <button id="home-intro-submit" class="btn btn-success">Save</button>
+    </div>
 
     <!-- Medium Blog Link -->
     <div class="form-group">
@@ -66,8 +74,8 @@
         </div>
     </div>
 
-    <!-- Submit -->
+    <!-- Medium Blog Link Submit -->
     <div class="text-center mb-5 mt-4">
-        <button id="home-submit" class="btn btn-success">Save</button>
+        <button id="medium-blog-submit" class="btn btn-success">Save</button>
     </div>
 </div>

@@ -155,7 +155,11 @@ SOFTWARE.
         <!-- Student Resources -->
         <a class="nav-item nav-link" id="nav-resources-tab" data-toggle="tab" href="#nav-resources" role="tab"
            aria-controls="nav-resources" aria-selected="false">Student Resources</a>
+        <form method="post" action="/Logout">
+            <button type="submit" id="logout" class="nav-item nav-link">Logout</button>
+        </form>
     </div>
+
 </nav>
 
 <include href="gatorLock/gatorLockLogin.php"></include>
@@ -171,6 +175,19 @@ SOFTWARE.
     <include href="views/adminPartials/meetupsTabContent.php"></include>
     <!-- Student Resources -->
     <include href="views/adminPartials/resourcesTabContent.php"></include>
+</div>
+
+<!-- Dismissable error alert -->
+<div id="error-alert" class="confirm-alert alert alert-danger fade show mx-auto text-center" role="alert">
+    <button type="button" class="close float-right" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <span>Error</span>
+</div>
+
+<!-- Success alert -->
+<div id="success-alert" class="confirm-alert alert alert-success text-center" role="alert">
+    Success!!
 </div>
 
 

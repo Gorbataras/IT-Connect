@@ -2,7 +2,7 @@
     <h2 class="my-3">Meetups</h2>
 
 
-	<form action="/adminPage?source-tab=meetups&task=add" method="post" class="form-group">
+	<form id="add-meetup" action="/addMeetupGroup" method="post" class="form-group">
 
 		<F3:check if="{{ isset(@meetupSourceError) }}">
 			<span class="password-error">{{ @meetupSourceError }}</span>
@@ -22,10 +22,10 @@
 
 
 	<!--	DISPLAY ALL CURRENT MEETUP GROUP SOURCES -->
-	<ul class="list-group">
+	<ul id="meetup-group-list" class="list-group">
 		<F3:repeat group="{{ @meetupGroupsList }}" value="{{ @value }}">
             <li class="list-group-item">
-                <form class="form-group" action="/adminPage?source-tab=meetups&task=delete" method="post">
+                <form class="form-group delete-meetup" action="/deleteMeetupGroup" method="post">
                     <div class="row">
                         <div class="col">
                             <p class="h5">{{ @value.source_name }}</p>
@@ -40,10 +40,12 @@
 		</F3:repeat>
 	</ul>
 	<br>
+
+    <!-- Events Heading -->
 	<div class="form-group">
 		<h4>Header</h4>
 
-		<textarea class="form-control wysiwyg-sm" id="events-intro" name="events-intro">
+		<textarea class="form-control wysiwyg-md" id="events-intro" name="events-intro">
 				{{ @eventsHeader[0]['html'] }}
 		</textarea>
 		<div class="text-center mb-5 mt-4">
