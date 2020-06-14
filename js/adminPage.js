@@ -628,3 +628,25 @@ $('#error-alert button').on('click', function() {
     $(this).parent().fadeOut(250);
 });
 
+/**
+ * The following script determines if any errors have been reported, if so then appropriate
+ * messages will show on input fields that are missing content.
+ */
+$('#addInternshipForm').on('submit', function(e) {
+    $(".error").hide();
+    e.preventDefault();
+    $.post(this.action, $(this).serialize(), function(result) {
+        result = JSON.parse(result);
+
+        if(result.length === 0) {
+            alert("Success");
+        }
+        else {
+            for (let key in result) {
+
+                $('#'+key).html(result[key]);
+                $('#'+key).show();
+            }
+        }
+    });
+});
