@@ -77,6 +77,9 @@ SOFTWARE.
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
     <!-- Update Color scheme -->
     <style>
         a.btn {
@@ -195,9 +198,9 @@ SOFTWARE.
     <!--modals for page-->
 <exclude>
     <include href="views/modals/addModal.php"></include>
-    <include href="views/modals/updateModal.php"></include>
     <include href="views/modals/meetupsModal.php"></include>
 </exclude>
+<include href="views/modals/updateModal.php"></include>
 <include href="views/modals/deleteModal.php"></include>
 <!-- Old bootstrap messes up styling of new bootstrap TODO see if we can get rid of this-->
 <!--old bootstrap for page (do not delete. will break table. Used for the alerts)-->

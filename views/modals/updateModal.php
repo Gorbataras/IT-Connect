@@ -51,16 +51,16 @@ SOFTWARE.
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label class="input-group-addon" for="title">Position Title</label>
+                                    <div class="form-group">
+                                        <label for="title">Position Title</label>
                                         <input required="required" type="text" class="form-control"
                                                id="title_update" name="title"/>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label class="input-group-addon" for="company">Company</label>
+                                    <div class="form-group">
+                                        <label for="company">Company</label>
                                         <input required="required" type="text" class="form-control"
                                                id="company_update" name="company"/>
                                     </div>
@@ -69,8 +69,8 @@ SOFTWARE.
                                 <br><br>
 
                                 <div class="col-md-12">
-                                    <div class="input-group ">
-                                        <label class="input-group-addon" for="Application_Type">Application Type:
+                                    <div class="form-group ">
+                                        <label for="Application_Type">Application Type:
                                             &nbsp
                                             <input type="radio" name="Application_Type" id="url_checkbox_update" value="url"/>&nbsp URL &nbsp
                                             &nbsp
@@ -83,8 +83,8 @@ SOFTWARE.
                                 <br><br>
 
                                 <div class="col-md-12">
-                                    <div class="input-group">
-                                        <label class="input-group-addon" for="description">Description</label>
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
                                         <textarea class="form-control" name="description" id="description_update"
                                                           rows="5"></textarea>
                                     </div>
@@ -102,16 +102,8 @@ SOFTWARE.
                             <div class="row">
 
                                 <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label class="input-group-addon" for="hours">Hours Per Week</label>
-                                        <input type="number" name="hours" id="hours_update"
-                                               class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label class="input-group-addon" for="location">Location</label>
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
                                         <input type="text" name="location" id="location_update" class="form-control">
                                     </div>
                                 </div>
@@ -119,8 +111,8 @@ SOFTWARE.
                                 <br><br>
 
                                 <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label class="input-group-addon" for="category">Category</label>
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
                                         <select class="form-control" name="category" id="category_update">
                                             <option value="0" disabled="disabled" selected="selected">Select an
                                                 option
@@ -135,8 +127,8 @@ SOFTWARE.
                                 <br><br>
 
                                 <div class="col-md-12">
-                                    <div class="input-group">
-                                        <label class="input-group-addon" for="qualifications">Qualifications</label>
+                                    <div class="form-group">
+                                        <label for="qualifications">Qualifications</label>
                                             <textarea name="qualifications" id="qualifications_update" rows="4"
                                                       class="form-control"></textarea>
                                     </div>

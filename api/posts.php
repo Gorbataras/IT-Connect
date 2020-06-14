@@ -73,7 +73,7 @@ SWITCH ($_SERVER["REQUEST_METHOD"]) {
 
         //If error array has no errors then submit the post
         if (count($error) == 0) {
-            if (isset($_SESSION['loggedIn']) AND $_SESSION['loggedIn'] = "true") {
+            if (isset($_SESSION['validUser'])) {
                 $postings->submitPost($id, $title, $company, $category, $location, $description, 0, $hours, $qualifications, $url, $email);
             }
         }
@@ -106,7 +106,7 @@ SWITCH ($_SERVER["REQUEST_METHOD"]) {
         $id = $_PUT["id"];
 
         //If admin is logged in then update
-        if (isset($_SESSION['loggedIn']) AND $_SESSION['loggedIn'] = "true") {
+        if (isset($_SESSION['validUser'])) {
             $postings->updatePost($id, $title, $company, $category, $location, $description, 0, $hours, $qualifications, $url, $email);
         }
 
