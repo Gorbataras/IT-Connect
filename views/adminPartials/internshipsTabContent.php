@@ -145,7 +145,6 @@
     <h3>All Internships</h3>
     <hr>
 
-<!--    <form action="deleteInternships" id="deleteInternship" method="post">-->
     <div class="internships-table">
         <div id="toolbar">
             <button type="submit" value="submit" id="delete-btn" class="btn btn-danger"><i class="fas fa-minus-circle"></i> Delete Selected Posts</button>
@@ -153,5 +152,5 @@
         <!--where admin table is generated-->
         <table id="adminTable"> </table>
     </div>
-<!--    </form>-->
+
 </div>

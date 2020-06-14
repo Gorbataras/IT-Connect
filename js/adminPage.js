@@ -179,11 +179,11 @@ window.operateEvents = {
             $("#contact_text_update").val(row.email);
         }
 
-        tinymce.get('description_update').setContent(row.description);
-        $("#hours_update").val(row.hours || 0);
+        $("#description_update").val(row.description);
+        //$("#hours_update").val(row.hours || 0);
         $("#location_update").val(row.location);
         $("#category_update").val(row.category);
-        tinymce.get('qualifications_update').setContent(row.qualifications);
+        $("#qualifications_update").val(row.qualifications);
 
     }
 };
@@ -247,8 +247,8 @@ $table.bootstrapTable({
          title: 'TEST Posted',
         sortable: true
     },{
-        field: 'operate',
         title: 'Actions',
+        field: 'operate',
         align: 'center',
         events: operateEvents,
         formatter: operateFormatter
@@ -264,21 +264,6 @@ $table.bootstrapTable({
  * This function deletes table rows
  */
 $delete.click(function() {
-    // var str_json = JSON.stringify($table.bootstrapTable('getSelections'));
-    //
-    // let $request = new XMLHttpRequest();
-    // $request.open("POST", "nwa.greenriverdev.com/deleteInternships", true);
-    // $request.setRequestHeader("Content-type", "application/json");
-    // $request.send(str_json);
-
-    //get content from row(s) selected from table
-    // var id;
-    // var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
-    //
-    //      id = row.post_id;
-    //     //alert('getSelections: ' + JSON.stringify($table.bootstrapTable('getSelections')));
-    // });
-    // alert('getSelections: ' + JSON.stringify($table.bootstrapTable('getSelections')));
     // //Get the number of selected rows
     var numberOfSelections = $.map($table.bootstrapTable('getSelections'), function(row) {
         if (row) {
@@ -651,14 +636,14 @@ $('#addInternshipForm').on('submit', function(e) {
     $(".error").hide();
     e.preventDefault();
     $.post(this.action, $(this).serialize(), function(result) {
-        result = JSON.parse(result);
+        //alert(result);
 
         if(result.length === 0) {
-            alert("Success");
+            showSuccessAlert("Successfully added");
         }
         else {
+            result = JSON.parse(result);
             for (let key in result) {
-
                 $('#'+key).html(result[key]);
                 $('#'+key).show();
             }
