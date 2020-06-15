@@ -600,21 +600,30 @@ class Controller
      */
     public function addInternship()
     {
-
         $config = include("/home/nwagreen/config.php");
         $dbh = new PDO($config["db"], $config["username"], $config["password"]);
 
-
         $title = $_POST["title"];
         $company = $_POST["company"];
-        $appTypeText = $_POST["appTypeText"];
+
+        if ($_POST["Application_Type"] == "email") {
+            $url = "";
+            $email = $_POST["appTypeText"];
+        } else {
+            $url = $_POST["appTypeText"];
+            $email = "";
+        }
         $description = $_POST["description"];
         $location = $_POST["location"];
         $category = $_POST["category"];
         $qualifications = $_POST["qualifications"];
+        $hours = $_POST["hours"];
+
+
         $errors = (new Validator($this->_f3))->validInternship();
         if(empty($errors)){
-            (new addInternship($dbh))->addInternship($title, $company, $appTypeText, $description, $location, $category, $qualifications);
+            (new addInternship($dbh))->addInternship($title, $company, $description, $hours, $location, $category,
+                $qualifications, $url, $email);
             return;
         }
         echo json_encode($errors);

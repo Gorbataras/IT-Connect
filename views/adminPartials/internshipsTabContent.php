@@ -88,13 +88,13 @@
 
                         <div class="row">
 
-                            <!-- <div class="col-md-6">
+                            <div class="col-md-6">
                                  <div class="form-group">
                                      <label for="hours">Hours Per Week</label>
                                      <input type="number" name="hours" id="hours"
                                             class="form-control">
                                  </div>
-                             </div>-->
+                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">

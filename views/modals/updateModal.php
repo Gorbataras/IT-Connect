@@ -85,7 +85,7 @@ SOFTWARE.
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="description">Description</label>
-                                        <textarea class="form-control" name="description" id="description_update"
+                                        <textarea class="form-control wysiwyg-md" name="description" id="description_update"
                                                           rows="5"></textarea>
                                     </div>
                                 </div>
@@ -100,6 +100,13 @@ SOFTWARE.
                             <h4>Additional Information</h4>
 
                             <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="hours_update">Hours Per Week</label>
+                                        <input type="number" name="hours" id="hours_update" class="form-control">
+                                    </div>
+                                </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -130,7 +137,7 @@ SOFTWARE.
                                     <div class="form-group">
                                         <label for="qualifications">Qualifications</label>
                                             <textarea name="qualifications" id="qualifications_update" rows="4"
-                                                      class="form-control"></textarea>
+                                                      class="form-control wysiwyg-md"></textarea>
                                     </div>
                                 </div>
 
