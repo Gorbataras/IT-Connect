@@ -86,7 +86,10 @@ SOFTWARE.
                                 <ul id="internships" class="list-group list-group-flush">
                                     <F3:repeat group="{{ @posts }}" value="{{ @post }}">
                                         <li class="list-group-item">
-                                            <a href="{{@post->url}}" target="_blank" class="no-decoration"> <!-- Url column-->
+                                            <check if="{{ empty(@post->url) }}">
+                                                <true><a href="internships" class="no-decoration"></true>
+                                                <false><a href="{{@post->url}}" target="_blank" class="no-decoration"></false> <!-- Url column-->
+                                            </check>
                                                 <span class="company-name h4">{{@post->company}}</span> <!-- Company column -->
                                                 <br>
                                                 <span class="h6">{{@post->title}}</span>
@@ -217,6 +220,9 @@ SOFTWARE.
                 </div><!-- col -->
             </div><!-- row -->
         </div><!-- accordion -->
+
+        <!-- To apply for email postings -->
+        <include href="views/modals/postModal.php"></include>
     </div><!-- container -->
 </div><!-- site container -->
 
