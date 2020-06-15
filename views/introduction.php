@@ -107,7 +107,10 @@ SOFTWARE.
                                                         <br><strong>Apply Now!</strong>
                                                     </small>
                                                 </p>
-                                            </a>
+                                            <check if="{{ empty(@post->url) }}">
+                                                <true><a href="internships" class="no-decoration"></true>
+                                                <false></a></false> <!-- Url column-->
+                                            </check>
                                         </li>
                                     </F3:repeat>
                                 </ul>

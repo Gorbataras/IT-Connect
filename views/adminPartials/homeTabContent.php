@@ -2,6 +2,7 @@
     <h2>Home</h2>
     <br>
 
+    <exclude>
     <!-- NavBar Link far right -->
     <div class="form-group">
         <!-- Alert Message WYSIWYG -->
@@ -11,6 +12,7 @@
         </textarea>
     </div>
     <br>
+    </exclude>
 
     <!-- Alert Message -->
     <div class="form-group">
