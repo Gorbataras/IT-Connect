@@ -98,7 +98,7 @@ SOFTWARE.
                                                 <p class="card-subtitle mb-2 text-muted"> <!-- Description column -->
                                                     <check if="{{empty(@post->description)}}">
                                                         <true>No description available</true>
-                                                        <false>{{substr(@post->description, 0, 150)}}...</false>
+                                                        <false>{{substr(@post->description, 0, 150) | raw}}... </false>
                                                     </check>
                                                     <small class="card-subtitle mb-2 text-muted">
                                                         <br><strong>Apply Now!</strong>
