@@ -19,3 +19,7 @@ for (i = 0; i < close.length; i++) {
         }, 600);
     }
 }
+
+$('#postModal').on('shown.bs.modal', function () {
+    $('#postModal #').trigger('focus')
+})

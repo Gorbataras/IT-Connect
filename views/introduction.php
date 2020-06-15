@@ -86,7 +86,10 @@ SOFTWARE.
                                 <ul id="internships" class="list-group list-group-flush">
                                     <F3:repeat group="{{ @posts }}" value="{{ @post }}">
                                         <li class="list-group-item">
-                                            <a href="{{@post->url}}" target="_blank" class="no-decoration"> <!-- Url column-->
+                                            <check if="{{ empty(@post->url) }}">
+                                                <true><a href="internships" class="no-decoration"></true>
+                                                <false><a href="{{@post->url}}" target="_blank" class="no-decoration"></false> <!-- Url column-->
+                                            </check>
                                                 <span class="company-name h4">{{@post->company}}</span> <!-- Company column -->
                                                 <br>
                                                 <span class="h6">{{@post->title}}</span>
@@ -98,7 +101,7 @@ SOFTWARE.
                                                 <p class="card-subtitle mb-2 text-muted"> <!-- Description column -->
                                                     <check if="{{empty(@post->description)}}">
                                                         <true>No description available</true>
-                                                        <false>{{substr(@post->description, 0, 150)}}...</false>
+                                                        <false>{{substr(@post->description, 0, 150) | raw}}... </false>
                                                     </check>
                                                     <small class="card-subtitle mb-2 text-muted">
                                                         <br><strong>Apply Now!</strong>
@@ -217,6 +220,9 @@ SOFTWARE.
                 </div><!-- col -->
             </div><!-- row -->
         </div><!-- accordion -->
+
+        <!-- To apply for email postings -->
+        <include href="views/modals/postModal.php"></include>
     </div><!-- container -->
 </div><!-- site container -->
 
