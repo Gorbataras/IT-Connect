@@ -32,20 +32,21 @@ SOFTWARE.
 <include href="views/parts/header.php"></include>
 
 <body>
-<!--navbar-->
-<include href="views/parts/navbar.php"></include>
-<div>
+<div id="site-container">
+    <!--navbar-->
+    <include href="views/parts/navbar.php"></include>
     <div>
-        <div class="internships-table">
-			{{ @internshipsHeader[0]['html'] | raw}}
-            <!--where internship table is generated-->
-            <table id="internshipsTable"></table>
+        <div>
+            <div class="internships-table">
+                {{ @internshipsHeader[0]['html'] | raw}}
+                <!--where internship table is generated-->
+                <table id="internshipsTable"></table>
+            </div>
         </div>
+        <!--information about the table columns-->
+        <include href="views/modals/postModal.php"></include>
     </div>
-    <!--information about the table columns-->
-    <include href="views/modals/postModal.php"></include>
 </div>
-
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

@@ -70,9 +70,9 @@
 
                             <div class="col-md-12 for-email-post hidden">
                                 <div class="form-group">
-                                    <label for="description">*Description</label>
+                                    <label for="description">Description</label>
                                     <span class="error text-danger" id="descriptionError">{{ @descriptionError }}</span>
-                                    <textarea class="form-control" name="description" id="description"
+                                    <textarea class="form-control wysiwyg-md" name="description" id="description"
                                               rows="5"></textarea>
                                 </div>
                             </div>
@@ -88,13 +88,13 @@
 
                         <div class="row">
 
-                            <!-- <div class="col-md-6">
+                            <div class="col-md-6">
                                  <div class="form-group">
                                      <label for="hours">Hours Per Week</label>
                                      <input type="number" name="hours" id="hours"
                                             class="form-control">
                                  </div>
-                             </div>-->
+                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -125,10 +125,10 @@
 
                             <div class="col-md-12 for-email-post hidden">
                                 <div class="form-group">
-                                    <label for="qualifications">*Qualifications</label>
+                                    <label for="qualifications">Qualifications</label>
                                     <span class="error text-danger" id="qualificationsError">{{ @qualificationsError }}</span>
                                     <textarea name="qualifications" id="qualifications" rows="4"
-                                              class="form-control"></textarea>
+                                              class="form-control wysiwyg-md"></textarea>
                                 </div>
                             </div>
                         </div>

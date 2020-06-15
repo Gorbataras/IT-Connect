@@ -179,12 +179,17 @@ window.operateEvents = {
             $("#contact_text_update").val(row.email);
         }
 
-        $("#description_update").val(row.description);
-        //$("#hours_update").val(row.hours || 0);
+        if (row.description != null) {
+            tinymce.get("description_update").setContent(row.description);
+        }
+
+        $("#hours_update").val(row.hours || 0);
         $("#location_update").val(row.location);
         $("#category_update").val(row.category);
-        $("#qualifications_update").val(row.qualifications);
 
+        if (row.qualifications != null) {
+            tinymce.get("qualifications_update").setContent(row.qualifications);
+        }
     }
 };
 
@@ -335,6 +340,7 @@ const PLUGINS = [
 
 const TOOLBAR = 'undo redo | styleselect | fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify |'
         + ' bullist, numlist | link';
+
 
 // Small height WYSIWYG initialization
 tinymce.init({
