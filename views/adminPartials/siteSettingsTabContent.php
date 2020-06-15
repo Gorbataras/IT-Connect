@@ -15,6 +15,28 @@
         <button id="site-title-submit" class="btn btn-success">Save</button>
     </div>
 
+    <!-- NavBar Link far right -->
+    <div class="form-group">
+        <!-- Alert Message WYSIWYG -->
+        <div class="custom-control custom-switch float-right">
+            <input type="checkbox" class="custom-control-input" id="link-is-shown"
+            <check if="{{ @site['linkEdit']['isShown'] == 1 }}">
+                checked
+            </check>
+            >
+            <label class="custom-control-label" for="link-is-shown">Show Link</label>
+        </div>
+        <label for="home-alert">Navigation Link</label>
+        <textarea class="form-control wysiwyg-sm" name="nav-link" id="nav-link">
+            {{ @site['linkEdit']['html'] | raw }}
+        </textarea>
+    </div>
+
+    <!-- Submit -->
+    <div class="text-center mb-5 mt-4">
+        <button id="site-nav-link-submit" class="btn btn-success">Save</button>
+    </div>
+
     <!-- Prompt upload of image -->
     <form id="logo-upload" action="/uploadPhoto" method="post" enctype="multipart/form-data">
         <div class="card">

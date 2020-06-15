@@ -2,16 +2,6 @@
     <h2>Home</h2>
     <br>
 
-    <!-- NavBar Link far right -->
-    <div class="form-group">
-        <!-- Alert Message WYSIWYG -->
-        <label for="home-alert">Edit Link far right of navigation bar</label>
-        <textarea class="form-control wysiwyg-sm" name="nav-link" id="home-nav-link">
-            {{ @homeContent['link']['html'] }}
-        </textarea>
-    </div>
-    <br>
-
     <!-- Alert Message -->
     <div class="form-group">
 
