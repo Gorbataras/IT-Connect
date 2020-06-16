@@ -515,7 +515,7 @@ $('.delete-meetup').on('submit',
 
 /**
  * Deletes Meetup group from database and from the Meetup group list
- * @param e
+ * @param e event object
  * @param form the form to submit
  */
 function deleteMeetup(e, form) {
@@ -625,11 +625,21 @@ function postHtmlContent(htmlContent) {
 
 //endregion
 
+
+/**
+ * Shows an error message as an alert
+ * @param message error to be displayed
+ */
 function showErrorAlert(message) {
     $('#error-alert > span').html(message);
     $('#error-alert').fadeIn(250);
 }
 
+
+/**
+ * Displays a confirmation message that briefly appears as an alert
+ * @param message confirmation text to display
+ */
 function showSuccessAlert(message) {
     $('#success-alert').html(message);
     $('#success-alert').fadeIn(250).delay(1200).fadeOut(250);
@@ -639,6 +649,7 @@ function showSuccessAlert(message) {
 $('#error-alert button').on('click', function() {
     $(this).parent().fadeOut(250);
 });
+
 
 /**
  * The following script determines if any errors have been reported, if so then appropriate

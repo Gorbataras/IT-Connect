@@ -88,7 +88,8 @@ class htmlContent
      * @param $isShown int 1 indicates html is to be shown. 0 indicates to hide content
      * @return true if query did not fail
      */
-    public function setContent($pageName, $contentName, $html, $isShown) {
+    public function setContent($pageName, $contentName, $html, $isShown)
+    {
         $sql = "UPDATE html_content
                 SET html = :html, is_shown = :isShown
                 WHERE page_name = :pageName AND content_name = :contentName";
@@ -109,7 +110,8 @@ class htmlContent
      * @param $domain string source of the API content
      * @return array of source names
      */
-    public function getApiSourceNamesByDomain($domain) {
+    public function getApiSourceNamesByDomain($domain)
+    {
         $sql = "SELECT source_name
                 FROM api_resource
                 WHERE domain = :domain";
@@ -126,9 +128,10 @@ class htmlContent
      * Updates API source name
      * @param $domain string source of the API content
      * @param $sourceName string source of the API content
-     * @return bool
+     * @return bool true if successful query execution
      */
-    public function updateApiSourceNameByDomain($domain, $sourceName) {
+    public function updateApiSourceNameByDomain($domain, $sourceName)
+    {
         $sql = "UPDATE api_resource
                 SET source_name = :sourceName
                 WHERE domain = :domain
@@ -148,7 +151,8 @@ class htmlContent
      * @param $sourceName string source of the API content
      * @return boolean true if insert was successful
      */
-    public function addApiSourceName($domain, $sourceName) {
+    public function addApiSourceName($domain, $sourceName)
+    {
         $sql = "INSERT INTO api_resource (domain, source_name)
                 VALUES (:domain, :sourceName)";
 
@@ -163,11 +167,12 @@ class htmlContent
 
     /**
      * Checks if API source exists in the database
-     * @param $domain C
+     * @param $domain string domain name of the website that has the api
      * @param $sourceName string source of the API content
      * @return bool true if API source exists in the db
      */
-    public function apiSourceNameDoesExist($domain, $sourceName) {
+    public function apiSourceNameDoesExist($domain, $sourceName)
+    {
         $sql = "SELECT EXISTS(
                     SELECT api_resource_id
                     FROM api_resource
@@ -185,10 +190,11 @@ class htmlContent
 
     /**
      * Checks if email exists in login table
-     * @param $email email to check if exists
+     * @param $email string email to check if exists
      * @return bool true if is found
      */
-    public function emailDoesExist($email) {
+    public function emailDoesExist($email)
+    {
         $sql = "SELECT EXISTS(
                     SELECT login_id
                     FROM login
@@ -209,7 +215,8 @@ class htmlContent
      * @param $sourceName string source of the API content
      * @return boolean true if delete was successful
      */
-    public function deleteApiSourceName($domain, $sourceName) {
+    public function deleteApiSourceName($domain, $sourceName)
+    {
         $sql = 'DELETE FROM api_resource
                 WHERE domain = :domain AND source_name = :sourceName';
 
