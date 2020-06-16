@@ -75,6 +75,9 @@ class Controller
         if ($result = $this->_htmlContentDb->getContent('site', 'logo')) {
             $f3->set('logoType', $result[0]['html']);
         }
+
+        $siteContent = $this->_htmlContentDb->getAllPageContent('site');
+        $this->_f3->set('site', $siteContent);
     }
 
 
@@ -271,6 +274,7 @@ class Controller
 		$meetupHeader = $this->_htmlContentDb->getContent('events', 'events');
 		$internshipsHeader = $this->_htmlContentDb->getContent('internships', 'Internships');
 
+
         $blogSourceName = $this->getBlogSourceName();
         $meetupGroupsList = $this->_htmlContentDb->getApiSourceNamesByDomain(self::MEETUP_DOMAIN);
 
@@ -281,6 +285,7 @@ class Controller
         $this->_f3->set('resourcesContent', $resourcesContent);
         $this->_f3->set('blogSourceName', $blogSourceName);
         $this->_f3->set('meetupGroupsList', $meetupGroupsList);
+
 
         echo Template::instance()->render('views/adminPage.php');
     }

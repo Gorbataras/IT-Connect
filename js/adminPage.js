@@ -565,6 +565,12 @@ $('#site-title-submit').on('click', function() {
     postHtmlContent(htmlContent);
 });
 
+//Website nav link AJAX
+$('#site-nav-link-submit').on('click', function() {
+    let htmlContent = {page: 'site', contentName: 'linkEdit', html: $('#nav-link').val(), isShown: $('#link-is-shown').prop('checked')};
+    postHtmlContent(htmlContent);
+});
+
 // Events title AJAX
 $('#events-submit').on('click', function() {
 	let htmlContent = {page: 'events', contentName: 'events', html: $('#events-intro').val(), isShown: 'true'};

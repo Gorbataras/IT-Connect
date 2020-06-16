@@ -25,13 +25,16 @@
                 <a class="nav-link" href="upcoming-events">Upcoming Events<span class="sr-only">(current)</span></a>
             </li>
         </ul>
+        <check if="{{ @site['linkEdit']['isShown'] == 1 }}">
         <ul class="navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" id="education"
-                   href="https://www.greenriver.edu/students/academics/degrees-programs/bachelor-of-applied-science/bachelors-in-software-development/"
-                   target="_blank">
-                    Earn your Bachelor’s at Green River </a>
+            <li class="nav-item" id="education">
+                {{ @site['linkEdit']['html'] | raw }}
+<!--                <a class="nav-link" id="education"-->
+<!--                   href="https://www.greenriver.edu/students/academics/degrees-programs/bachelor-of-applied-science/bachelors-in-software-development/"-->
+<!--                   target="_blank">-->
+<!--                    Earn your Bachelor’s at Green River </a>-->
             </li>
         </ul>
+        </check>
     </div>
 </nav>
