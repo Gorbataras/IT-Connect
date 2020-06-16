@@ -62,6 +62,8 @@ SOFTWARE.
 
     <title>{{ @siteTabTitle }}: A resource for technology students.</title>
 
+    <!--site css-->
+    <link rel="stylesheet" type="text/css" media="all" href="css/site.css">
     <!--header css-->
     <link rel="stylesheet" type="text/css" media="all" href="css/header.css">
     <!--footer css-->

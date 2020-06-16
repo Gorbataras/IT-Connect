@@ -178,7 +178,7 @@ SOFTWARE.
                         <a class="collapsed no-decoration expand-toggle" data-toggle="collapse" href="#posts-body"
                            role="button" aria-expanded="false" aria-controls="posts-body">
                             <div class="card-header text-center" id="posts-heading">
-                                <h3>Posts</h3>
+                                <h3>Blog Posts</h3>
                             </div>
                         </a>
 

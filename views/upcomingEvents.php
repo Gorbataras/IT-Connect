@@ -25,7 +25,7 @@
 						<li class="list-group-item">
 							<a class="meetup-group-link no-decoration" href="https://www.meetup.com/{{@group.source_name}}"
                                     target="_blank">
-								{{ str_replace('-',' ',@group.source_name) }}
+								{{ ucwords(str_replace('-',' ',@group.source_name)) }}
 							</a>
 						</li>
 					</F3:repeat>

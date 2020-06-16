@@ -7,6 +7,10 @@ html,body {
     opacity: unset;
 }
 
+#internshipsTable {
+    background-color: white;
+}
+
 .modal-backdrop{
     background-color: rgba(255, 255, 255, .15)
 }
@@ -24,6 +28,10 @@ html,body {
      overflow-y: auto;
     border-style: solid;
     border-width: 2px;
+}
+
+.fixed-table-container:not(.fixed-table-body) {
+    background-color: white;
 }
 
 /* large desktops and up ----------- */
