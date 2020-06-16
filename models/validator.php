@@ -32,7 +32,8 @@ class Validator
      * @param $url string URL to validate
      * @return bool true if link is valid ie HTTP status is in 200s
      */
-    public function isValidUrl($url) {
+    public function isValidUrl($url)
+    {
         $handle = curl_init($url);
         curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
 
@@ -60,7 +61,8 @@ class Validator
      * @return bool - true if image meets all requirements
      *                false if image fails any case
      */
-    public function validPhoto($imageIn, $imageFileType, $picPath) {
+    public function validPhoto($imageIn, $imageFileType, $picPath)
+    {
 
         if (empty($imageIn['tmp_name'])) {
             echo 'Error: No photo chosen.';
@@ -100,7 +102,8 @@ class Validator
      * @param $email string user entered email
      * @return bool
      */
-    public function validEmail($email){
+    public function validEmail($email)
+    {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
@@ -113,7 +116,8 @@ class Validator
      * @param $password string user entered password
      * @return bool
      */
-    public function validPassword($password){
+    public function validPassword($password)
+    {
         $uppercase = preg_match('@[A-Z]@', $password);
         $lowercase = preg_match('@[a-z]@', $password);
         $number    = preg_match('@[0-9]@', $password);

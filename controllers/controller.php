@@ -387,7 +387,11 @@ class Controller
         exit;
     }
 
-    function updateApiSource() {
+    /**
+     * Updates the api source for data such as Medium blogs.
+     */
+    function updateApiSource()
+    {
         if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
             return;
         }
@@ -410,6 +414,9 @@ class Controller
     }
 
 
+    /**
+     * Saves editable HTML content to the database.
+     */
     function editHtmlContent()
     {
         if (!$_SESSION["validUser"] || $_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -564,6 +571,10 @@ class Controller
         }
     }
 
+
+    /**
+     * Adds an administrator to the database
+     */
     function addUser()
     {
         // Preconditions

@@ -20,6 +20,7 @@ for (i = 0; i < close.length; i++) {
     }
 }
 
+// To show modal to apply for email type internships
 $('#postModal').on('shown.bs.modal', function () {
     $('#postModal #').trigger('focus')
-})
+});
