@@ -84,22 +84,28 @@ SOFTWARE.
                              data-parent="#home-accordion">
 
                                 <ul id="internships" class="list-group list-group-flush">
-                                    <F3:repeat group="{{ @posts }}" value="{{ @post }}" counter="{{ @i }}">
+                                    <F3:repeat group="{{ @posts }}" value="{{ @post }}">
                                         <li class="list-group-item">
                                             <check if="{{ empty(@post->url) }}">
                                                 <true><a href="" data-toggle="modal" data-target="#postModal" class="no-decoration"></true>
                                                 <false><a href="{{@post->url}}" target="_blank" class="no-decoration"></false> <!-- Url column-->
                                             </check>
 
-                                                <span id="company{{@i}}" class="company-name h4">{{@post->company}}</span> <!-- Company column -->
+                                                <span class="company-name h4">{{@post->company}}</span>
                                                 <br>
-                                                <span id="title{{@i}}" class="h6">{{@post->title}}</span>
+                                                <span class="h6 title"
+                                                        data-hours="{{@post->hours}}"
+                                                        data-qualifications="{{@post->qualifications}}"
+                                                        data-email="{{@post->email}}">
+                                                    {{@post->title}}
+                                                </span>
                                                 <br>
-                                                <span id="location{{@i}}">{{@post->location}}</span>
+                                                <span class="location">{{@post->location}}</span>
                                                 <br>
-                                                <span id="date{{@i}}">Posted: {{@post->post_date}}</span>
+                                                <span class="date">Posted: {{@post->post_date}}</span>
                                                 <br>
-                                                <p id="description{{@i}}" class="card-subtitle mb-2 text-muted"> <!-- Description column -->
+                                                <div class="card-subtitle mb-2 text-muted description"
+                                                     data-description="{{ @post->description }}">
                                                     <check if="{{empty(@post->description)}}">
                                                         <true>No description available</true>
                                                         <false>{{substr(@post->description, 0, 150) | raw}}... </false>
@@ -107,7 +113,7 @@ SOFTWARE.
                                                     <small class="card-subtitle mb-2 text-muted">
                                                         <br><strong>Apply Now!</strong>
                                                     </small>
-                                                </p>
+                                                </div>
                                             </a>
                                         </li>
                                     </F3:repeat>

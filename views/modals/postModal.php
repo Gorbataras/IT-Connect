@@ -40,9 +40,6 @@ SOFTWARE.
             </div>
             <div class="modal-body">
                 <div class="row">
-
-                </div>
-                <div class="row">
                     <div class="col-xs-12">
                         <h4>Company</h4>
                         <p id="company"></p>
@@ -75,7 +72,7 @@ SOFTWARE.
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                <a href="#" target="_blank" id="apply_link" class="btn btn-success">Apply</a>
+                <a href="#" id="apply_link" class="btn btn-success">Apply</a>
             </div>
         </div>
     </div>
