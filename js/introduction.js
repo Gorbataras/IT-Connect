@@ -21,5 +21,5 @@ for (i = 0; i < close.length; i++) {
 }
 
 $('#postModal').on('shown.bs.modal', function () {
-    $('#postModal #').trigger('focus')
+    $('#title').html('focus')
 });
