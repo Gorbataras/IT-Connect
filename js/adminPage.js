@@ -335,11 +335,11 @@ $closeAlertBtn.click(function() {
 // Common WYSIWYG plugins and toolbar items
 const PLUGINS = [
     'advlist autolink lists link print preview searchreplace',
-    'insertdatetime table contextmenu paste'
+    'insertdatetime table contextmenu paste textcolor colorpicker image'
 ];
 
-const TOOLBAR = 'undo redo | styleselect | fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify |'
-        + ' bullist, numlist | link';
+const TOOLBAR = 'undo redo | styleselect | fontsizeselect fontselect | forecolor backcolor | bold italic underline | alignleft aligncenter alignright alignjustify |'
+        + ' indent outdent | bullist, numlist | link | image';
 
 
 // Small height WYSIWYG initialization
